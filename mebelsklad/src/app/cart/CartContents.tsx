@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { Product, ProductSet } from '@/types';
 import { formatPrice } from '@/lib/utils/format';
@@ -14,6 +15,7 @@ interface CartContentsProps {
 }
 
 export default function CartContents({ products, sets }: CartContentsProps) {
+  const router = useRouter();
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
   const [subtotal, setSubtotal] = useState(0);
   
@@ -32,10 +34,19 @@ export default function CartContents({ products, sets }: CartContentsProps) {
       }
       
       if (set) {
-        const price = set.discount
-          ? set.basePrice - set.discount
-          : set.basePrice;
-        return sum + (price * item.quantity);
+        // For sets, calculate based on products they contain
+        const setPrice = set.items.reduce((setSum, setItem) => {
+          const setProduct = products.find(p => p.id === setItem.productId);
+          if (!setProduct) return setSum;
+          
+          const productPrice = setProduct.discount 
+            ? setProduct.price - setProduct.discount
+            : setProduct.price;
+            
+          return setSum + (productPrice * setItem.defaultQuantity);
+        }, 0);
+        
+        return sum + (setPrice * item.quantity);
       }
       
       return sum;
@@ -55,9 +66,23 @@ export default function CartContents({ products, sets }: CartContentsProps) {
     return null;
   };
   
+  // Calculate price for a specific set
+  const calculateSetPrice = (set: ProductSet) => {
+    return set.items.reduce((sum, item) => {
+      const product = products.find(p => p.id === item.productId);
+      if (!product) return sum;
+      
+      const productPrice = product.discount 
+        ? product.price - product.discount
+        : product.price;
+        
+      return sum + (productPrice * item.defaultQuantity);
+    }, 0);
+  };
+  
   // Handle checkout
   const handleCheckout = () => {
-    alert('Checkout functionality would be implemented here');
+    router.push('/checkout');
   };
   
   // Empty cart view
@@ -121,13 +146,16 @@ export default function CartContents({ products, sets }: CartContentsProps) {
                 if (!details) return null;
                 
                 const { type, item: cartItem } = details;
-                const price = type === 'product' 
-                  ? (cartItem as Product).discount 
+                
+                // Calculate the price based on item type
+                let price = 0;
+                if (type === 'product') {
+                  price = (cartItem as Product).discount 
                     ? (cartItem as Product).price - (cartItem as Product).discount
-                    : (cartItem as Product).price
-                  : (cartItem as ProductSet).discount
-                    ? (cartItem as ProductSet).basePrice - (cartItem as ProductSet).discount
-                    : (cartItem as ProductSet).basePrice;
+                    : (cartItem as Product).price;
+                } else if (type === 'set') {
+                  price = calculateSetPrice(cartItem as ProductSet);
+                }
                 
                 const totalPrice = price * item.quantity;
                 const image = cartItem.images && cartItem.images.length > 0 
@@ -150,7 +178,7 @@ export default function CartContents({ products, sets }: CartContentsProps) {
                             {cartItem.name}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {type === 'set' ? 'Set' : 'Product'}
+                            {type === 'set' ? 'Collection' : 'Product'}
                           </div>
                         </div>
                       </div>
@@ -248,7 +276,7 @@ export default function CartContents({ products, sets }: CartContentsProps) {
           
           <button
             onClick={handleCheckout}
-            className="w-full bg-blue-600 text-white py-3 rounded-md font-medium hover:bg-blue-700 transition-colors"
+            className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 transition-colors"
           >
             Proceed to Checkout
           </button>

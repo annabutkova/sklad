@@ -107,6 +107,54 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         return [...sets].sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
         return [...sets].sort((a, b) => b.name.localeCompare(a.name));
+      case 'price-asc':
+        return [...sets].sort((a, b) => {
+          // Calculate total price for set A
+          const aTotalPrice = a.items.reduce((sum, item) => {
+            const product = allProducts.find(p => p.id === item.productId);
+            if (!product) return sum;
+            const productPrice = product.discount 
+              ? product.price - product.discount 
+              : product.price;
+            return sum + (productPrice * item.defaultQuantity);
+          }, 0);
+          
+          // Calculate total price for set B
+          const bTotalPrice = b.items.reduce((sum, item) => {
+            const product = allProducts.find(p => p.id === item.productId);
+            if (!product) return sum;
+            const productPrice = product.discount 
+              ? product.price - product.discount 
+              : product.price;
+            return sum + (productPrice * item.defaultQuantity);
+          }, 0);
+          
+          return aTotalPrice - bTotalPrice;
+        });
+      case 'price-desc':
+        return [...sets].sort((a, b) => {
+          // Calculate total price for set A
+          const aTotalPrice = a.items.reduce((sum, item) => {
+            const product = allProducts.find(p => p.id === item.productId);
+            if (!product) return sum;
+            const productPrice = product.discount 
+              ? product.price - product.discount 
+              : product.price;
+            return sum + (productPrice * item.defaultQuantity);
+          }, 0);
+          
+          // Calculate total price for set B
+          const bTotalPrice = b.items.reduce((sum, item) => {
+            const product = allProducts.find(p => p.id === item.productId);
+            if (!product) return sum;
+            const productPrice = product.discount 
+              ? product.price - product.discount 
+              : product.price;
+            return sum + (productPrice * item.defaultQuantity);
+          }, 0);
+          
+          return bTotalPrice - aTotalPrice;
+        });
       default:
         return sets;
     }
