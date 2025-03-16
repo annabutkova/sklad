@@ -1,0 +1,51 @@
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 308px;
+  width: 100%;
+  //border: 1px solid var(--gray);
+  border-radius: 10px;
+}
+
+.product-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.product-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 2px;
+  color: var(--white);
+}
+
+.product-discount-label {
+  top: 9px;
+  right: 8px;
+  min-width: 55px;
+  background: var(--red);
+  padding: 5px 8px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.product-inStock-label {
+  top: 9px;
+  left: 8px;
+  background: var(--green);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.product-title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+}

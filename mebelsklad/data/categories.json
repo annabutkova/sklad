@@ -1,0 +1,40 @@
+[{
+    "id": "CAT001",
+    "name": "Мебель",
+    "slug": "mebel",
+    "description": "Вся мебель для дома",
+    "imageUrl": "/images/categories/furniture.jpg"
+  },
+  {
+    "id": "CAT002",
+    "name": "Спальня",
+    "slug": "spalnya",
+    "parentId": "CAT001",
+    "description": "Мебель для спальни",
+    "imageUrl": "/images/categories/bedroom.jpg"
+  },
+  {
+    "id": "CAT003",
+    "name": "Кровати",
+    "slug": "krovati",
+    "parentId": "CAT002",
+    "description": "Комфортные кровати",
+    "imageUrl": "/images/categories/beds.jpg"
+  },
+  {
+    "id": "CAT004",
+    "name": "Шкафы",
+    "slug": "shkafy",
+    "parentId": "CAT002",
+    "description": "Вместительные шкафы",
+    "imageUrl": "/images/categories/wardrobes.jpg"
+  },
+  {
+    "id": "CAT005",
+    "name": "Гостиная",
+    "slug": "gostinaya",
+    "parentId": "CAT001",
+    "description": "Мебель для гостиной",
+    "imageUrl": "/images/categories/livingroom.jpg"
+  }
+]

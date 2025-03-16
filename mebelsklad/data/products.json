@@ -1,0 +1,104 @@
+[
+  {
+    "id": "BED001",
+    "name": "Кровать \"Александрия\"",
+    "slug": "krovat-alexandria",
+    "categoryId": "CAT003",
+    "price": 5500000,
+    "discount": 500000,
+    "dimensions": {
+      "width": 190,
+      "height": 108,
+      "depth": 206
+    },
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "features": [
+      "Прочный каркас из натурального дерева",
+      "Ортопедическое основание",
+      "Удобное изголовье с мягкой обивкой"
+    ],
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": true
+      }
+    ],
+    "specifications": {
+      "material": "Дерево, ЛДСП",
+      "color": "Бежевый",
+      "style": "Классический",
+      "warranty": "18 месяцев"
+    },
+    "inStock": true,
+    "relatedProductIds": [
+      "WARD001"
+    ]
+  },
+  {
+    "id": "WARD001",
+    "name": "Шкаф \"Александрия\"",
+    "slug": "shkaf-alexandria",
+    "categoryId": "CAT004",
+    "price": 7800000,
+    "dimensions": {
+      "width": 180,
+      "height": 220,
+      "depth": 60
+    },
+    "description": "Вместительный шкаф в классическом стиле, с множеством отделений для хранения.",
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Шкаф Александрия",
+        "isMain": true
+      }
+    ],
+    "specifications": {
+      "material": "ЛДСП",
+      "color": "Бежевый",
+      "style": "Классический",
+      "warranty": "18 месяцев"
+    },
+    "inStock": true,
+    "relatedProductIds": [
+      "BED001"
+    ]
+  },
+  {
+    "id": "PRODm7qkabz644A8U",
+    "name": "Кровать \"Александрия\" (Copy)",
+    "slug": "krovat-alexandria-copy",
+    "categoryId": "CAT003",
+    "price": 5500000,
+    "discount": 500000,
+    "dimensions": {
+      "width": 190,
+      "height": 108,
+      "depth": 206
+    },
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "features": [
+      "Прочный каркас из натурального дерева",
+      "Ортопедическое основание",
+      "Удобное изголовье с мягкой обивкой"
+    ],
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": true
+      }
+    ],
+    "specifications": {
+      "material": "Дерево, ЛДСП",
+      "color": "Бежевый",
+      "style": "Классический",
+      "warranty": "18 месяцев"
+    },
+    "inStock": true,
+    "relatedProductIds": [
+      "WARD001"
+    ]
+  }
+]

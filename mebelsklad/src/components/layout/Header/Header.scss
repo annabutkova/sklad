@@ -1,0 +1,126 @@
+.header {
+  background: var(--white);
+  padding: 20px calc((100% - var(--maxWidth)) / 2);
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-logo {
+  width: 155px;
+  height: 50px;
+  background-image: url("/icons/svg/logo.svg");
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  max-width: 410px;
+  height: 50px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid var(--blue);
+  padding: 16px 18px;
+}
+
+.search-button {
+  position: relative;
+  width: 130px;
+  height: 50px;
+  background-color: var(--blue);
+  color: white;
+  padding: 12px 20px 12px 50px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.search-button:before {
+  content: "";
+  background-image: url("/icons/svg/search.svg");
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+}
+
+.cart-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+  height: 50px;
+  background-color: var(--blue);
+  color: white;
+  padding: 10px 10px 10px 50px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cart-button::before {
+  content: "";
+  position: absolute;
+  background-image: url("/icons/svg/cart.svg");
+  background-repeat: no-repeat;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+}
+
+.cart-button-quantity {
+    position: absolute;
+    top: 5px;
+    left: 25px;
+    background: var(--red);
+    border-radius: 50%;
+    padding: 3px;
+    font-size: 12px;
+    color: var(--white);
+}
+
+.header-catalog-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 145px;
+    height: 50px;
+    background-color: var(--blue);
+    color: white;
+    padding: 12px 20px 12px 50px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.header-catalog-btn::before {
+    content: "";
+    position: absolute;
+    background-image: url("/icons/svg/catalog.svg");
+    background-repeat: no-repeat;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+}

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --gray: #ADADAD; /* card border */
+  --light-gray: #F1F1F1;
+  --black: #000000; /* font */
+  --white: #FFFFFF;
+  
+  --blue: #0056A3;
+  --red: #E20413;
+  --green: #04C704;
+  
+  --maxWidth: 1280px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", serif;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--black);
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+a, a:link, a:visited  {
+  text-decoration: none;
+}
+
+a:hover  {
+  text-decoration: none;
+}
+
+
+/* /////////////////// */
+
+.main {
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+}
+
+.products-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
