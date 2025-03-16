@@ -2,10 +2,26 @@
 import Link from "next/link";
 import { jsonDataService } from "@/lib/api/jsonDataService";
 import { formatPrice } from "@/lib/utils/format";
+import { Product, ProductSet } from "@/types";
+
+// Helper function to calculate set price from items
+const calculateSetPrice = (set: ProductSet, products: Product[]) => {
+  return set.items.reduce((sum: number, item: { productId: string; defaultQuantity: number; }) => {
+    const product = products.find((p: { id: string; }) => p.id === item.productId);
+    if (!product) return sum;
+    
+    const productPrice = product.discount 
+      ? product.price - product.discount
+      : product.price;
+      
+    return sum + (productPrice * item.defaultQuantity);
+  }, 0);
+};
 
 export default async function AdminSetsPage() {
   const sets = await jsonDataService.getAllProductSets();
   const categories = await jsonDataService.getAllCategories();
+  const products = await jsonDataService.getAllProducts();
 
   // Create a map of category IDs to names for easy lookup
   const categoryMap = categories.reduce((map, category) => {
@@ -62,74 +78,68 @@ export default async function AdminSetsPage() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {sets.map((set) => (
-              <tr key={set.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 flex-shrink-0">
-                      {set.images && set.images.length > 0 ? (
-                        <img
-                          className="h-10 w-10 rounded object-cover"
-                          src={set.images[0].url}
-                          alt={set.name}
-                        />
-                      ) : (
-                        <div className="h-10 w-10 rounded bg-gray-200"></div>
-                      )}
-                    </div>
-                    <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {set.name}
+            {sets.map((set) => {
+              // Calculate the total price of the set based on its items
+              const totalPrice = calculateSetPrice(set, products);
+              
+              return (
+                <tr key={set.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 flex-shrink-0">
+                        {set.images && set.images.length > 0 ? (
+                          <img
+                            className="h-10 w-10 rounded object-cover"
+                            src={set.images[0].url}
+                            alt={set.name}
+                          />
+                        ) : (
+                          <div className="h-10 w-10 rounded bg-gray-200"></div>
+                        )}
                       </div>
-                      <div className="text-sm text-gray-500">{set.id}</div>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    {categoryMap[set.categoryId] || "Unknown"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {set.discount ? (
-                    <div>
-                      <div className="text-sm text-gray-500 line-through">
-                        {formatPrice(set.basePrice)}
-                      </div>
-                      <div className="text-sm font-medium text-gray-900">
-                        {formatPrice(set.basePrice - set.discount)}
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {set.name}
+                        </div>
+                        <div className="text-sm text-gray-500">{set.id}</div>
                       </div>
                     </div>
-                  ) : (
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
-                      {formatPrice(set.basePrice)}
+                      {categoryMap[set.categoryId] || "Unknown"}
                     </div>
-                  )}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    {set.items.length} items
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <Link
-                    href={`/admin/sets/${set.id}`}
-                    className="text-blue-600 hover:text-blue-900 mr-4"
-                  >
-                    Edit
-                  </Link>
-                  <Link
-                    href={`/admin/sets/duplicate/${set.id}`}
-                    className="text-green-600 hover:text-green-900 mr-4"
-                  >
-                    Duplicate
-                  </Link>
-                  <button className="text-red-600 hover:text-red-900">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">
+                      {formatPrice(totalPrice)}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">
+                      {set.items.length} items
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <Link
+                      href={`/admin/sets/${set.id}`}
+                      className="text-blue-600 hover:text-blue-900 mr-4"
+                    >
+                      Edit
+                    </Link>
+                    <Link
+                      href={`/admin/sets/duplicate/${set.id}`}
+                      className="text-green-600 hover:text-green-900 mr-4"
+                    >
+                      Duplicate
+                    </Link>
+                    <button className="text-red-600 hover:text-red-900">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

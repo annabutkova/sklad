@@ -45,8 +45,6 @@ export interface ProductSet {
   longDescription?: string;
   images: ProductImage[];
   items: SetItem[];
-  basePrice: number;
-  discount?: number;
   specifications?: Record<string, string | number>;
 }
 

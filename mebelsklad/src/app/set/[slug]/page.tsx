@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { jsonDataService } from '@/lib/api/jsonDataService';
-import SetDetail from './SetDetail';
+import SetDetail, { SetDetailProps } from './SetDetail';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const set = await jsonDataService.getProductSetBySlug(params.slug);
@@ -46,5 +46,5 @@ export default async function SetPage({ params }: { params: { slug: string } }) 
     })
     .filter(Boolean);
   
-  return <SetDetail set={set} setProducts={setProducts} />;
+  return <SetDetail set={set} setProducts={setProducts.filter(Boolean) as SetDetailProps['setProducts']} />;
 }

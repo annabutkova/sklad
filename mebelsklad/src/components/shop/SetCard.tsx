@@ -2,15 +2,36 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ProductSet } from '@/types';
+import { useEffect, useState } from 'react';
+import { ProductSet, Product } from '@/types';
 import { formatPrice } from '@/lib/utils/format';
 
 interface SetCardProps {
   set: ProductSet;
+  allProducts?: Product[]; // We need this to calculate the price
 }
 
-export default function SetCard({ set }: SetCardProps) {
+export default function SetCard({ set, allProducts = [] }: SetCardProps) {
   const mainImage = set.images.find(img => img.isMain) || set.images[0];
+  const [totalPrice, setTotalPrice] = useState(0);
+  
+  // Calculate the total price based on the products and their quantities
+  useEffect(() => {
+    if (allProducts.length === 0) return;
+    
+    const price = set.items.reduce((sum, item) => {
+      const product = allProducts.find(p => p.id === item.productId);
+      if (!product) return sum;
+      
+      const productPrice = product.discount 
+        ? product.price - product.discount 
+        : product.price;
+        
+      return sum + (productPrice * item.defaultQuantity);
+    }, 0);
+    
+    setTotalPrice(price);
+  }, [set.items, allProducts]);
   
   return (
     <div className="group relative border rounded-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -28,13 +49,6 @@ export default function SetCard({ set }: SetCardProps) {
         <div className="absolute top-2 left-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">
           Комплект
         </div>
-        
-        {/* Discount badge */}
-        {set.discount && set.discount > 0 && (
-          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-            -{Math.round((set.discount / set.basePrice) * 100)}%
-          </div>
-        )}
       </div>
       
       {/* Set info */}
@@ -50,21 +64,10 @@ export default function SetCard({ set }: SetCardProps) {
         </div>
         
         {/* Price */}
-        <div className="mt-2 flex items-baseline gap-2">
-          {set.discount && set.discount > 0 ? (
-            <>
-              <span className="text-gray-500 line-through text-sm">
-                {formatPrice(set.basePrice)}
-              </span>
-              <span className="font-bold text-lg">
-                {formatPrice(set.basePrice - set.discount)}
-              </span>
-            </>
-          ) : (
-            <span className="font-bold text-lg">
-              {formatPrice(set.basePrice)}
-            </span>
-          )}
+        <div className="mt-2">
+          <span className="font-bold text-lg">
+            {formatPrice(totalPrice)}
+          </span>
         </div>
         
         {/* View set button */}

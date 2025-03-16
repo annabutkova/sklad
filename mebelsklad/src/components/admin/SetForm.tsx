@@ -17,8 +17,6 @@ const productSetSchema = z.object({
   categoryId: z.string().min(1, "Category is required"),
   description: z.string().min(10, "Description is required"),
   longDescription: z.string().optional(),
-  basePrice: z.number().min(0, "Base price must be positive"),
-  discount: z.number().min(0, "Discount must be positive").optional(),
 });
 
 type ProductSetFormValues = z.infer<typeof productSetSchema>;
@@ -49,14 +47,11 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       ...productSet,
     } : {
       id: generateId('SET'),
-      basePrice: 0,
-      discount: 0,
     }
   });
   
   // Watch values for auto-calculations
   const name = watch('name');
-  const basePrice = watch('basePrice');
   
   // Auto-generate slug when name changes (for new sets)
   useEffect(() => {
@@ -80,13 +75,10 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       }, 0);
       
       setCalculatedPrice(total);
-      
-      // Only auto-set base price for new sets
-      if (!productSet) {
-        setValue('basePrice', total);
-      }
+    } else {
+      setCalculatedPrice(0);
     }
-  }, [selectedItems, products, setValue, productSet]);
+  }, [selectedItems, products]);
 
   // Handle adding a product to the set
   const addProductToSet = (productId: string) => {
@@ -275,50 +267,19 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
               <p className="mt-1 text-sm text-red-600">{errors.categoryId.message}</p>
             )}
           </div>
-
-          {/* Base Price */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Base Price
-            </label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <input
-                type="number"
-                {...register('basePrice', { valueAsNumber: true })}
-                className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-              {calculatedPrice > 0 && calculatedPrice !== basePrice && (
-                <div className="mt-1 text-sm text-gray-500">
-                  Calculated value: {formatPrice(calculatedPrice)}{' '}
-                  <button
-                    type="button"
-                    onClick={() => setValue('basePrice', calculatedPrice)}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    Use this
-                  </button>
-                </div>
-              )}
-            </div>
-            {errors.basePrice && (
-              <p className="mt-1 text-sm text-red-600">{errors.basePrice.message}</p>
-            )}
+        </div>
+        
+        {/* Calculated Price (for information only) */}
+        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium text-gray-700">
+              Calculated Price (based on selected products):
+            </span>
+            <span className="font-bold">{formatPrice(calculatedPrice)}</span>
           </div>
-
-          {/* Discount */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Discount
-            </label>
-            <input
-              type="number"
-              {...register('discount', { valueAsNumber: true })}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            />
-            {errors.discount && (
-              <p className="mt-1 text-sm text-red-600">{errors.discount.message}</p>
-            )}
-          </div>
+          <p className="text-xs text-gray-500 mt-1">
+            The final price of the set will be calculated based on the products included.
+          </p>
         </div>
       </div>
 
@@ -418,6 +379,9 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                       Default Quantity
                     </th>
                     <th scope="col" className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Price
+                    </th>
+                    <th scope="col" className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Required
                     </th>
                     <th scope="col" className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -488,6 +452,11 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                           </div>
                         </td>
                         <td className="px-3 py-2 whitespace-nowrap text-center">
+                          <div className="text-sm font-medium">
+                            {formatPrice((product.discount ? product.price - product.discount : product.price) * item.defaultQuantity)}
+                          </div>
+                        </td>
+                        <td className="px-3 py-2 whitespace-nowrap text-center">
                           <input 
                             type="checkbox" 
                             checked={item.required}
@@ -507,6 +476,15 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                       </tr>
                     ) : null;
                   })}
+                  <tr className="bg-gray-50">
+                    <td colSpan={2} className="px-3 py-2 text-right font-medium">
+                      Total Price:
+                    </td>
+                    <td className="px-3 py-2 text-center font-bold">
+                      {formatPrice(calculatedPrice)}
+                    </td>
+                    <td colSpan={2}></td>
+                  </tr>
                 </tbody>
               </table>
             </div>

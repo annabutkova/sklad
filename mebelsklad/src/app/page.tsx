@@ -66,7 +66,7 @@ export default async function Home() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {sets.slice(0, 2).map(set => (
-            <SetCard key={set.id} set={set} />
+            <SetCard key={set.id} set={set} allProducts={products} />
           ))}
         </div>
       </section>
