@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ProductSet, Product, SetItem } from "@/types";
+import { ProductSet, Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/utils/format";
 
@@ -63,19 +63,43 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
     setTotalPrice(total);
   }, [selectedQuantities, setProducts]);
 
-  // Handle quantity change for a product
-  const handleQuantityChange = (
-    productId: string,
-    quantity: number,
-    min: number,
-    max: number
-  ) => {
-    // Ensure quantity is within min-max range
-    const validQuantity = Math.min(Math.max(quantity, min), max);
+  // Handle quantity decrease (minus button)
+  const decreaseQuantity = (productId: string) => {
+    setSelectedQuantities((prev) => {
+      const currentQuantity = prev[productId] || 0;
+      if (currentQuantity <= 0) return prev; // Already at minimum
+      
+      return {
+        ...prev,
+        [productId]: currentQuantity - 1
+      };
+    });
+  };
 
+  // Handle quantity increase (plus button)
+  const increaseQuantity = (productId: string, maxQuantity: number) => {
+    setSelectedQuantities((prev) => {
+      const currentQuantity = prev[productId] || 0;
+      if (currentQuantity >= maxQuantity) return prev; // Already at maximum
+      
+      return {
+        ...prev,
+        [productId]: currentQuantity + 1
+      };
+    });
+  };
+
+  // Handle direct input change
+  const handleInputChange = (productId: string, inputValue: string, maxQuantity: number) => {
+    // Parse the input value as a number, default to 0 if invalid
+    const newQuantity = parseInt(inputValue) || 0;
+    
+    // Ensure the value is between 0 and maxQuantity
+    const validQuantity = Math.min(Math.max(newQuantity, 0), maxQuantity);
+    
     setSelectedQuantities((prev) => ({
       ...prev,
-      [productId]: validQuantity,
+      [productId]: validQuantity
     }));
   };
 
@@ -258,108 +282,88 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
                 minQuantity,
                 maxQuantity,
                 required,
-              }) => (
-                <div
-                  key={product.id}
-                  className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4"
-                >
-                  {/* Product info */}
-                  <div className="flex items-center flex-1">
-                    <div className="h-16 w-16 flex-shrink-0 mr-4">
-                      {product.images && product.images.length > 0 ? (
-                        <img
-                          src={product.images[0].url}
-                          alt={product.name}
-                          className="h-16 w-16 rounded-md object-cover"
-                        />
-                      ) : (
-                        <div className="h-16 w-16 rounded-md bg-gray-200"></div>
-                      )}
-                    </div>
-                    <div>
-                      <Link
-                        href={`/product/${product.slug}`}
-                        className="text-lg font-medium text-blue-600 hover:underline"
-                      >
-                        {product.name}
-                      </Link>
-                      <div className="flex items-center mt-1">
-                        <span className="font-medium">
-                          {formatPrice(
-                            product.discount
-                              ? product.price - product.discount
-                              : product.price
-                          )}
-                        </span>
-                        {required && (
-                          <span className="ml-2 bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                            Required
-                          </span>
+              }) => {
+                // Get the current quantity from state, or use default if not yet set
+                const currentQuantity = selectedQuantities[product.id] !== undefined 
+                  ? selectedQuantities[product.id] 
+                  : defaultQuantity;
+                
+                return (
+                  <div
+                    key={product.id}
+                    className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4"
+                  >
+                    {/* Product info */}
+                    <div className="flex items-center flex-1">
+                      <div className="h-16 w-16 flex-shrink-0 mr-4">
+                        {product.images && product.images.length > 0 ? (
+                          <img
+                            src={product.images[0].url}
+                            alt={product.name}
+                            className="h-16 w-16 rounded-md object-cover"
+                          />
+                        ) : (
+                          <div className="h-16 w-16 rounded-md bg-gray-200"></div>
                         )}
                       </div>
+                      <div>
+                        <Link
+                          href={`/product/${product.slug}`}
+                          className="text-lg font-medium text-blue-600 hover:underline"
+                        >
+                          {product.name}
+                        </Link>
+                        <div className="flex items-center mt-1">
+                          <span className="font-medium">
+                            {formatPrice(
+                              product.discount
+                                ? product.price - product.discount
+                                : product.price
+                            )}
+                          </span>
+                          {required && (
+                            <span className="ml-2 bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                              Required
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quantity selector */}
+                    <div className="flex items-center">
+                      <button
+                        onClick={() => decreaseQuantity(product.id)}
+                        className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75 border border-gray-300 rounded-l-md"
+                        disabled={currentQuantity <= 0}
+                      >
+                        -
+                      </button>
+
+                      <input
+                        type="number"
+                        value={currentQuantity}
+                        onChange={(e) => handleInputChange(
+                          product.id,
+                          e.target.value,
+                          maxQuantity
+                        )}
+                        className="h-10 w-16 border-t border-b border-gray-300 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                        min={0}
+                        max={maxQuantity}
+                      />
+
+                      <button
+                        onClick={() => increaseQuantity(product.id, maxQuantity)}
+                        className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75 border border-gray-300 rounded-r-md"
+                        disabled={currentQuantity >= maxQuantity}
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
-
-                  {/* Quantity selector */}
-                  <div className="flex items-center">
-                    <button
-                      onClick={() =>
-                        handleQuantityChange(
-                          product.id,
-                          (selectedQuantities[product.id] || defaultQuantity) -
-                            1,
-                          minQuantity,
-                          maxQuantity
-                        )
-                      }
-                      className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75 border border-gray-300 rounded-l-md"
-                      disabled={
-                        required &&
-                        minQuantity > 0 &&
-                        (selectedQuantities[product.id] || defaultQuantity) <=
-                          minQuantity
-                      }
-                    >
-                      -
-                    </button>
-
-                    <input
-                      type="number"
-                      value={selectedQuantities[product.id] || defaultQuantity}
-                      onChange={(e) =>
-                        handleQuantityChange(
-                          product.id,
-                          parseInt(e.target.value) || 0,
-                          minQuantity,
-                          maxQuantity
-                        )
-                      }
-                      className="h-10 w-16 border-t border-b border-gray-300 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                      min={required ? Math.max(1, minQuantity) : minQuantity}
-                      max={maxQuantity}
-                    />
-
-                    <button
-                      onClick={() =>
-                        handleQuantityChange(
-                          product.id,
-                          (selectedQuantities[product.id] || defaultQuantity) +
-                            1,
-                          minQuantity,
-                          maxQuantity
-                        )
-                      }
-                      className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75 border border-gray-300 rounded-r-md"
-                      disabled={
-                        (selectedQuantities[product.id] || defaultQuantity) >=
-                        maxQuantity
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              )
+                );
+              }
             )}
           </div>
         </div>
