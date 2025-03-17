@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import "./Header.scss";
-import contactData from '@/data/contactData';
+import contactData from "@/data/contactData";
 
 export default function Header() {
   const pathname = usePathname();
@@ -52,9 +52,21 @@ export default function Header() {
           </form>
         </div>
 
-        <Link href={contactData.phoneNumbers.link} className="header-tg-btn">
-          Каталог
-        </Link>
+        <div className="header-contacts">
+          <Link
+            href={contactData.socialMedia.telegram}
+            className="header-tg-btn"
+          ></Link>
+
+          <div className="header-info">
+            <span className="header-worktime">
+              {contactData.info.workDays} {contactData.info.workTime}
+            </span>
+            <a href={contactData.phoneNumbers.link} className="header-phone">
+              {contactData.phoneNumbers.text}
+            </a>
+          </div>
+        </div>
 
         {/* Cart and Mobile Menu Button */}
         <Link href="/cart" className="cart-button">

@@ -56,6 +56,47 @@
   height: 26px;
 }
 
+.header-contacts {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0 auto;
+}
+
+.header-tg-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: var(--tg-blue);
+  background-image: url("/icons/svg/tg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-worktime {
+  //font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.header-phone {
+  //font-family: Murs Gothic;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 100%;
+  cursor: pointer;
+}
+
 .cart-button {
   position: relative;
   display: flex;
@@ -86,41 +127,46 @@
 }
 
 .cart-button-quantity {
-    position: absolute;
-    top: 5px;
-    left: 25px;
-    background: var(--red);
-    border-radius: 50%;
-    padding: 3px;
-    font-size: 12px;
-    color: var(--white);
+  position: absolute;
+  top: 5px;
+  left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background: var(--red);
+  border-radius: 50%;
+  padding: 3px;
+  font-size: 12px;
+  color: var(--white);
 }
 
 .header-catalog-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-width: 145px;
-    height: 50px;
-    background-color: var(--blue);
-    color: white;
-    padding: 12px 20px 12px 50px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1;
-    text-transform: uppercase;
-    cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 145px;
+  height: 50px;
+  background-color: var(--blue);
+  color: white;
+  padding: 12px 20px 12px 50px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .header-catalog-btn::before {
-    content: "";
-    position: absolute;
-    background-image: url("/icons/svg/catalog.svg");
-    background-repeat: no-repeat;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
+  content: "";
+  position: absolute;
+  background-image: url("/icons/svg/catalog.svg");
+  background-repeat: no-repeat;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
 }

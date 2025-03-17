@@ -17,6 +17,12 @@ const contactData = {
     info: "info@yourcompany.com",
     support: "support@yourcompany.com",
     careers: "careers@yourcompany.com"
+  },
+  
+  info: {
+    address: "Ташкент, Сергели, улица Файзли 5",
+    workTime: "с 10:00 до 20:00",
+    workDays: "Ежедневно",
   }
 };
 

@@ -8,6 +8,7 @@
   --white: #FFFFFF;
   
   --blue: #0056A3;
+  --tg-blue: #039BE5;
   --red: #E20413;
   --green: #04C704;
   
@@ -50,7 +51,7 @@ a:hover  {
 
 .main {
   max-width: var(--maxWidth);
-  margin: 0 auto;
+  margin: 80px auto 0;
 }
 
 .products-wrapper {
