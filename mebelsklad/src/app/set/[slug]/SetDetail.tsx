@@ -116,7 +116,8 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
 
     // Only proceed if there are items in the configuration
     if (productsToAdd.length > 0) {
-      // Now we use the new addProductsFromSet method
+      // Now we use the addProductsFromSet method to add individual products
+      // but keep track of which set they came from
       addProductsFromSet(set.id, productsToAdd);
       
       // Show success feedback

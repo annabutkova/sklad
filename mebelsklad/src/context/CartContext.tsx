@@ -9,12 +9,13 @@ export interface CartItem {
   quantity: number;
   type: 'product'; // All cart items are products, even if they came from sets
   setId?: string; // Optional reference to the set this product was part of
+  configuration?: Array<{productId: string, quantity: number}>; // For configurable sets
 }
 
 // Define the cart context type
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (productId: string, quantity?: number, productType?: 'product' | 'set') => void;
+  addToCart: (productId: string, quantity?: number) => void;
   addProductsFromSet: (setId: string, products: Array<{productId: string, quantity: number}>) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -52,13 +53,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [cartItems]);
 
   // Add item to cart (for individual products)
-  const addToCart = (productId: string, quantity = 1, productType: 'product' | 'set' = 'product') => {
-    // If it's a set, we don't add it directly (this should be handled by addProductsFromSet)
-    if (productType === 'set') {
-      console.warn('Sets should be added using addProductsFromSet');
-      return;
-    }
-    
+  const addToCart = (productId: string, quantity = 1) => {
     setCartItems(prev => {
       const existingItemIndex = prev.findIndex(item => item.id === productId);
       
@@ -127,7 +122,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     setCartItems(prev => {
       return prev.map(item => 
-        item.id === productId ? { ...item, quantity, type: 'product' } : item
+        item.id === productId ? { ...item, quantity } : item
       );
     });
   };
