@@ -20,12 +20,13 @@ export interface SetDetailProps {
 }
 
 export default function SetDetail({ set, setProducts }: SetDetailProps) {
-  const { addToCart } = useCart();
+  const { addProductsFromSet } = useCart();
   const [selectedQuantities, setSelectedQuantities] = useState<
     Record<string, number>
   >({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [defaultPrice, setDefaultPrice] = useState(0);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   // Initialize selected quantities with default values
   useEffect(() => {
@@ -106,7 +107,7 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
   // Handle adding the customized set to cart
   const handleAddToCart = () => {
     // Create configuration based on selected quantities
-    const configuration = Object.entries(selectedQuantities)
+    const productsToAdd = Object.entries(selectedQuantities)
       .filter(([_, quantity]) => quantity > 0)
       .map(([productId, quantity]) => ({
         productId,
@@ -114,13 +115,13 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
       }));
 
     // Only proceed if there are items in the configuration
-    if (configuration.length > 0) {
-      // For simplicity, we'll add individual products instead of the set
-      configuration.forEach((item) => {
-        addToCart(item.productId, item.quantity);
-      });
-
-      alert("Set added to cart!");
+    if (productsToAdd.length > 0) {
+      // Now we use the new addProductsFromSet method
+      addProductsFromSet(set.id, productsToAdd);
+      
+      // Show success feedback
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 2000);
     } else {
       alert("Please select at least one item from the set.");
     }
@@ -256,9 +257,14 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
           <div className="mb-8">
             <button
               onClick={handleAddToCart}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md transition-all"
+              disabled={addedToCart}
+              className={`w-full py-3 px-6 rounded-md transition-all ${
+                addedToCart 
+                  ? "bg-green-600 text-white" 
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
+              }`}
             >
-              Add Set to Cart
+              {addedToCart ? "✓ Added to Cart" : "Add Set to Cart"}
             </button>
           </div>
         </div>
