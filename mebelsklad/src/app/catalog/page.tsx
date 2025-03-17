@@ -11,7 +11,7 @@ interface CatalogPageProps {
   searchParams: {
     category?: string;
     sort?: string;
-    type?: string; // New parameter to filter by type (products/sets)
+    type?: string; // Parameter to filter by type (products/sets)
   };
 }
 
@@ -27,6 +27,10 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   const allProducts = await jsonDataService.getAllProducts();
   const allSets = await jsonDataService.getAllProductSets();
   
+  // Verify that products and sets have the correct type field
+  const typedProducts = allProducts.filter(p => p.type === 'product');
+  const typedSets = allSets.filter(s => s.type === 'set');
+  
   let products: Product[] = [];
   let sets: ProductSet[] = [];
   let activeCategory: Category | null = null;
@@ -37,10 +41,10 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
     
     if (activeCategory) {
       // Check if this category has any sets
-      const categorySets = allSets.filter(set => set.categoryId === activeCategory!.id);
+      const categorySets = typedSets.filter(set => set.categoryId === activeCategory!.id);
       
       // Check if this category has any individual products
-      const categoryProducts = allProducts.filter(product => product.categoryId === activeCategory!.id);
+      const categoryProducts = typedProducts.filter(product => product.categoryId === activeCategory!.id);
       
       // Determine what content to show based on available items and content type filter
       if (contentType === 'products' || (contentType === 'all' && categoryProducts.length > 0)) {
@@ -60,19 +64,19 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
     } else {
       // Category not found - get all products and sets based on content type
       if (contentType === 'all' || contentType === 'products') {
-        products = allProducts;
+        products = typedProducts;
       }
       if (contentType === 'all' || contentType === 'sets') {
-        sets = allSets;
+        sets = typedSets;
       }
     }
   } else {
     // No category selected - get all products and sets based on content type
     if (contentType === 'all' || contentType === 'products') {
-      products = allProducts;
+      products = typedProducts;
     }
     if (contentType === 'all' || contentType === 'sets') {
-      sets = allSets;
+      sets = typedSets;
     }
   }
   
@@ -111,7 +115,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         return [...sets].sort((a, b) => {
           // Calculate total price for set A
           const aTotalPrice = a.items.reduce((sum, item) => {
-            const product = allProducts.find(p => p.id === item.productId);
+            const product = typedProducts.find(p => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount 
               ? product.price - product.discount 
@@ -121,7 +125,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
           
           // Calculate total price for set B
           const bTotalPrice = b.items.reduce((sum, item) => {
-            const product = allProducts.find(p => p.id === item.productId);
+            const product = typedProducts.find(p => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount 
               ? product.price - product.discount 
@@ -135,7 +139,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         return [...sets].sort((a, b) => {
           // Calculate total price for set A
           const aTotalPrice = a.items.reduce((sum, item) => {
-            const product = allProducts.find(p => p.id === item.productId);
+            const product = typedProducts.find(p => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount 
               ? product.price - product.discount 
@@ -145,7 +149,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
           
           // Calculate total price for set B
           const bTotalPrice = b.items.reduce((sum, item) => {
-            const product = allProducts.find(p => p.id === item.productId);
+            const product = typedProducts.find(p => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount 
               ? product.price - product.discount 
@@ -195,8 +199,8 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             </div>
             <div className="flex items-center gap-4">
               {/* Content type filter - only show if this category has both types */}
-              {activeCategory && allProducts.some(p => p.categoryId === activeCategory?.id) && 
-                allSets.some(s => s.categoryId === activeCategory?.id) && (
+              {activeCategory && typedProducts.some(p => p.categoryId === activeCategory?.id) && 
+                typedSets.some(s => s.categoryId === activeCategory?.id) && (
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-gray-600">Show:</span>
                   <select
@@ -232,7 +236,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
               {!showingSetsOnly && <h2 className="text-xl font-semibold mb-4">Collections</h2>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {sortedSets.map(set => (
-                  <SetCard key={set.id} set={set} allProducts={allProducts} />
+                  <SetCard key={set.id} set={set} allProducts={typedProducts} />
                 ))}
               </div>
             </div>
