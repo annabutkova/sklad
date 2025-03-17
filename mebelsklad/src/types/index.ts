@@ -2,6 +2,7 @@
 // Product related types
 export interface Product {
   id: string;
+  type: 'product'; // New type field
   name: string;
   slug: string;
   categoryId: string;
@@ -38,6 +39,7 @@ export interface ProductVariant {
 // Product set types
 export interface ProductSet {
   id: string;
+  type: 'set'; // New type field
   name: string;
   slug: string;
   categoryId: string;
@@ -69,7 +71,6 @@ export interface Category {
 
 // For the shopping cart
 export interface CartItem {
-  type: "product" | "set";
   id: string;
   quantity: number;
   // For sets with custom configuration

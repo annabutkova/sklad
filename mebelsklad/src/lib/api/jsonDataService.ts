@@ -42,7 +42,12 @@ export class JsonDataService {
 
   // Products
   async getAllProducts(): Promise<Product[]> {
-    return this.loadJsonFile<Product[]>(this.productsPath);
+    const products = await this.loadJsonFile<Product[]>(this.productsPath);
+    // Ensure all products have the 'product' type
+    return products.map(product => ({
+      ...product,
+      type: 'product'
+    }));
   }
 
   async getProductBySlug(slug: string): Promise<Product | null> {
@@ -61,27 +66,38 @@ export class JsonDataService {
   }
   
   async saveProduct(product: Product): Promise<void> {
-    const products = await this.getAllProducts();
+    // Ensure the type field is set
+    const productToSave = {
+      ...product,
+      type: 'product'
+    };
+    
+    const products = await this.loadJsonFile<Product[]>(this.productsPath);
     const index = products.findIndex(p => p.id === product.id);
     
     if (index >= 0) {
-      products[index] = product;
+      products[index] = productToSave;
     } else {
-      products.push(product);
+      products.push(productToSave);
     }
     
     await this.saveJsonFile(this.productsPath, products);
   }
   
   async deleteProduct(id: string): Promise<void> {
-    const products = await this.getAllProducts();
+    const products = await this.loadJsonFile<Product[]>(this.productsPath);
     const updatedProducts = products.filter(p => p.id !== id);
     await this.saveJsonFile(this.productsPath, updatedProducts);
   }
 
   // Product Sets
   async getAllProductSets(): Promise<ProductSet[]> {
-    return this.loadJsonFile<ProductSet[]>(this.productSetsPath);
+    const sets = await this.loadJsonFile<ProductSet[]>(this.productSetsPath);
+    // Ensure all sets have the 'set' type
+    return sets.map(set => ({
+      ...set,
+      type: 'set'
+    }));
   }
 
   async getProductSetBySlug(slug: string): Promise<ProductSet | null> {
@@ -95,22 +111,57 @@ export class JsonDataService {
   }
   
   async saveProductSet(productSet: ProductSet): Promise<void> {
-    const sets = await this.getAllProductSets();
+    // Ensure the type field is set
+    const setToSave = {
+      ...productSet,
+      type: 'set'
+    };
+    
+    const sets = await this.loadJsonFile<ProductSet[]>(this.productSetsPath);
     const index = sets.findIndex(s => s.id === productSet.id);
     
     if (index >= 0) {
-      sets[index] = productSet;
+      sets[index] = setToSave;
     } else {
-      sets.push(productSet);
+      sets.push(setToSave);
     }
     
     await this.saveJsonFile(this.productSetsPath, sets);
   }
   
   async deleteProductSet(id: string): Promise<void> {
-    const sets = await this.getAllProductSets();
+    const sets = await this.loadJsonFile<ProductSet[]>(this.productSetsPath);
     const updatedSets = sets.filter(s => s.id !== id);
     await this.saveJsonFile(this.productSetsPath, updatedSets);
+  }
+
+  // Get all catalog items (products and sets combined)
+  async getAllCatalogItems(): Promise<(Product | ProductSet)[]> {
+    const products = await this.getAllProducts();
+    const sets = await this.getAllProductSets();
+    return [...products, ...sets];
+  }
+
+  // Get catalog item by ID (product or set)
+  async getCatalogItemById(id: string): Promise<Product | ProductSet | null> {
+    const product = await this.getProductById(id);
+    if (product) return product;
+    
+    const set = await this.getProductSetById(id);
+    if (set) return set;
+    
+    return null;
+  }
+
+  // Get catalog item by slug (product or set)
+  async getCatalogItemBySlug(slug: string): Promise<Product | ProductSet | null> {
+    const product = await this.getProductBySlug(slug);
+    if (product) return product;
+    
+    const set = await this.getProductSetBySlug(slug);
+    if (set) return set;
+    
+    return null;
   }
 
   // Categories
