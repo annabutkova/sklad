@@ -12,6 +12,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  // Make sure we're only dealing with items of type 'product'
+  if (product.type !== 'product') {
+    console.warn(`ProductCard received an item that's not a product: ${product.id}`);
+  }
+  
   const mainImage =
     product.images.find((img) => img.isMain) || product.images[0];
 

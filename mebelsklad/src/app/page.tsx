@@ -41,21 +41,25 @@ export default async function Home() {
   const sets = await jsonDataService.getAllProductSets();
   const categories = await jsonDataService.getAllCategories();
 
+  // Verify that the type fields are properly set
+  const productsWithType = products.filter(p => p.type === 'product');
+  const setsWithType = sets.filter(s => s.type === 'set');
+
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
   const setCategories = categories.filter(cat => 
     cat.parentId === "CAT001" && 
-    sets.some(set => set.categoryId === cat.id)
+    setsWithType.some(set => set.categoryId === cat.id)
   );
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
   const productCategories = categories.filter(cat => 
     cat.parentId && 
     !setCategories.some(sc => sc.id === cat.id) &&
-    products.some(product => product.categoryId === cat.id)
+    productsWithType.some(product => product.categoryId === cat.id)
   );
 
   // Get featured products (with discount or marked as featured)
-  const featuredProducts = products.filter(p => p.discount).slice(0, 4);
+  const featuredProducts = productsWithType.filter(p => p.discount).slice(0, 4);
 
   return (
     <>
@@ -103,8 +107,8 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {sets.slice(0, 2).map((set) => (
-              <SetCard key={set.id} set={set} allProducts={products} />
+            {setsWithType.slice(0, 2).map((set) => (
+              <SetCard key={set.id} set={set} allProducts={productsWithType} />
             ))}
           </div>
         </section>

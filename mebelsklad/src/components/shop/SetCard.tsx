@@ -12,6 +12,11 @@ interface SetCardProps {
 }
 
 export default function SetCard({ set, allProducts = [] }: SetCardProps) {
+  // Make sure we're only dealing with items of type 'set'
+  if (set.type !== 'set') {
+    console.warn(`SetCard received an item that's not a set: ${set.id}`);
+  }
+  
   const mainImage = set.images.find(img => img.isMain) || set.images[0];
   const [totalPrice, setTotalPrice] = useState(0);
   
