@@ -55,6 +55,7 @@ export default function Header() {
         <div className="header-contacts">
           <Link
             href={contactData.socialMedia.telegram}
+            target="_blank"
             className="header-tg-btn"
           ></Link>
 

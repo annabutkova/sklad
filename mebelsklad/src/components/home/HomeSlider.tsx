@@ -88,9 +88,9 @@ export default function HomeSlider({
             <path
               d="M10 18L1.51472 9.51472L10 1.02944"
               stroke="#0056A3"
-              stroke-width="2"
+              strokeWidth="2"
               stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
@@ -110,9 +110,9 @@ export default function HomeSlider({
             <path
               d="M1 1L9.48528 9.48528L1 17.9706"
               stroke="#0056A3"
-              stroke-width="2"
+              strokeWidth="2"
               stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
