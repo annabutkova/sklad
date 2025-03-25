@@ -2,16 +2,18 @@
 @import "tailwindcss";
 
 :root {
-  --gray: #ADADAD; /* card border */
+  --gray: #ADADAD;
+  /* card border */
   --light-gray: #F1F1F1;
-  --black: #000000; /* font */
+  --black: #000000;
+  /* font */
   --white: #FFFFFF;
-  
+
   --blue: #0056A3;
   --tg-blue: #039BE5;
   --red: #E20413;
   --green: #04C704;
-  
+
   --maxWidth: 1280px;
 }
 
@@ -25,24 +27,39 @@
   color: var(--black);
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
-a, a:link, a:visited  {
+a,
+a:link,
+a:visited {
   text-decoration: none;
 }
 
-a:hover  {
+a:hover {
   text-decoration: none;
 }
 
@@ -50,12 +67,39 @@ a:hover  {
 /* /////////////////// */
 
 .main {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
   max-width: var(--maxWidth);
-  margin: 80px auto 0;
+  margin: 60px auto 160px;
+}
+
+.products-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.set-wrapper,
+.items-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.set-wrapper {
+  gap: 20px;
 }
 
 .products-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
+}
+
+.products-header {
+  //font-family: Roboto Condensed;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1;
 }

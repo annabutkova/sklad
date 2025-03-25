@@ -46,14 +46,13 @@ export default async function Home() {
   const setsWithType = sets.filter(s => s.type === 'set');
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
-  const setCategories = categories.filter(cat => 
-    cat.parentId === "CAT001" && 
+  const setCategories = categories.filter(cat =>
     setsWithType.some(set => set.categoryId === cat.id)
   );
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
-  const productCategories = categories.filter(cat => 
-    cat.parentId && 
+  const productCategories = categories.filter(cat =>
+    cat.parentId &&
     !setCategories.some(sc => sc.id === cat.id) &&
     productsWithType.some(product => product.categoryId === cat.id)
   );
@@ -64,18 +63,14 @@ export default async function Home() {
   return (
     <>
       <HomeSlider slides={sliderData} />
-      
+
       <main className="main">
         {/* Categories of Sets (Bedrooms, Child rooms) */}
-        <section className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Категории Гарнитуров</h2>
-            <Link href="/catalog" className="text-blue-600 hover:underline">
-              Все категории →
-            </Link>
-          </div>
+        <section className="products-section">
+          <h2 className="products-header">Готовые комплекты</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div className="set-wrapper">
             {setCategories.map((category) => (
               <Link
                 key={category.id}
@@ -85,9 +80,9 @@ export default async function Home() {
                 <img
                   src={category.imageUrl || "/images/placeholder.jpg"}
                   alt={category.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  className=" "
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                <div className="absolute   ">
                   <h3 className="text-xl font-bold text-white">
                     {category.name}
                   </h3>
@@ -97,32 +92,11 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Product Collections */}
-        <section className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Наши коллекции</h2>
-            <Link href="/sets" className="text-blue-600 hover:underline">
-              Все коллекции →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {setsWithType.slice(0, 2).map((set) => (
-              <SetCard key={set.id} set={set} allProducts={productsWithType} />
-            ))}
-          </div>
-        </section>
-
         {/* Product-specific Categories (Beds, Wardrobes) */}
-        <section className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Категории Товаров</h2>
-            <Link href="/catalog" className="text-blue-600 hover:underline">
-              Все товары →
-            </Link>
-          </div>
+        <section className="products-section">
+          <h2 className="products-header">Предметы мебели</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="items-wrapper">
             {productCategories.map((category) => (
               <Link
                 key={category.id}
@@ -132,9 +106,9 @@ export default async function Home() {
                 <img
                   src={category.imageUrl || "/images/placeholder.jpg"}
                   alt={category.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  className=" "
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                <div className="absolute   ">
                   <h3 className="text-lg font-bold text-white">
                     {category.name}
                   </h3>
@@ -145,15 +119,10 @@ export default async function Home() {
         </section>
 
         {/* Featured products */}
-        <section className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Популярные товары</h2>
-            <Link href="/catalog" className="text-blue-600 hover:underline">
-              Все товары →
-            </Link>
-          </div>
+        <section className="products-section">
+          <h2 className="products-header">Популярные модели</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="products-wrapper">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

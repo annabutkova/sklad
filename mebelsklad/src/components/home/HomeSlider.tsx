@@ -89,7 +89,7 @@ export default function HomeSlider({
               d="M10 18L1.51472 9.51472L10 1.02944"
               stroke="#0056A3"
               strokeWidth="2"
-              stroke-linecap="round"
+              strokeLinecap="round"
               strokeLinejoin="round"
             />
           </svg>
@@ -111,7 +111,7 @@ export default function HomeSlider({
               d="M1 1L9.48528 9.48528L1 17.9706"
               stroke="#0056A3"
               strokeWidth="2"
-              stroke-linecap="round"
+              strokeLinecap="round"
               strokeLinejoin="round"
             />
           </svg>
@@ -124,9 +124,8 @@ export default function HomeSlider({
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`slide-nav-btn ${
-              currentSlide === index ? "active" : ""
-            }`}
+            className={`slide-nav-btn ${currentSlide === index ? "active" : ""
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
