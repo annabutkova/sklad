@@ -12,7 +12,8 @@
     "@hookform/resolvers": "^4.1.2",
     "dotenv": "^16.4.7",
     "jotai": "^2.12.1",
-    "next": "15.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
