@@ -1,18 +1,18 @@
 @use "tailwindcss" as *;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  --gray: #ADADAD;
+  --gray: #adadad;
   /* card border */
-  --light-gray: #F1F1F1;
+  --light-gray: #f1f1f1;
   --black: #000000;
   /* font */
-  --white: #FFFFFF;
+  --white: #ffffff;
 
-  --blue: #0056A3;
-  --tg-blue: #039BE5;
-  --red: #E20413;
-  --green: #04C704;
+  --blue: #0056a3;
+  --tg-blue: #039be5;
+  --red: #e20413;
+  --green: #04c704;
 
   --maxWidth: 1280px;
 }
@@ -63,7 +63,6 @@ a:hover {
   text-decoration: none;
 }
 
-
 /* /////////////////// */
 
 .main {
@@ -92,7 +91,7 @@ a:hover {
 
 .set-category {
   position: relative;
-  width: calc((100% - 80px)/6);
+  width: calc((100% - 80px) / 6);
   max-width: 200px;
 }
 
@@ -121,5 +120,78 @@ a:hover {
   //font-family: Roboto Condensed;
   font-weight: 500;
   font-size: 36px;
+  line-height: 1;
+}
+
+.items-wrapper {
+  gap: 15px;
+}
+
+.items-wrapper {
+  gap: 15px;
+}
+
+.item-category {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: calc((100% - 90px) / 7);
+  height: 190px;
+  background: #e2e2e2;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.item-category-title {
+  //font-family: Roboto Condensed;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+}
+
+.advantages {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.advantage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: calc(100% / 4);
+  max-width: 284px;
+  text-align: center;
+}
+
+.advantage-img {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 20px;
+}
+
+.advantage-title {
+  //font-family: Roboto Condensed;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--blue);
+}
+
+.advantage:nth-child(2n) .advantage-title {
+  color: var(--red);
+}
+
+.advantage-text {
+  font-weight: 400;
+  font-size: 10px;
   line-height: 1;
 }

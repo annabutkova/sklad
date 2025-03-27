@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { jsonDataService } from "@/lib/api/jsonDataService";
 import ProductCard from "@/components/shop/ProductCard/ProductCard";
-import SetCard from "@/components/shop/SetCard";
+import SetCard from "@/components/shop/SetCard/SetCard";
 import HomeSlider from "@/components/home/HomeSlider";
 
 export const metadata: Metadata = {
@@ -36,29 +36,55 @@ const sliderData = [
   },
 ];
 
+const advantages = [
+  {
+    image: "/images/advantages/1.svg",
+    title: "экологичная мебель",
+    text: "Наша мебель соответствует российским и европейским стандартам безопасности",
+  },
+  {
+    image: "/images/advantages/2.svg",
+    title: "широкий ассортимент",
+    text: "Подберём мебель под любой интерьер",
+  },
+  {
+    image: "/images/advantages/3.svg",
+    title: "профессиональная сборка",
+    text: "Наши специалисты собирают мебель быстро и аккуратно",
+  },
+  {
+    image: "/images/advantages/4.svg",
+    title: "доставка по узбекистану",
+    text: "Доставим в любую точку Узбекистана в короткие сроки",
+  },
+];
+
 export default async function Home() {
   const products = await jsonDataService.getAllProducts();
   const sets = await jsonDataService.getAllProductSets();
   const categories = await jsonDataService.getAllCategories();
 
   // Verify that the type fields are properly set
-  const productsWithType = products.filter(p => p.type === 'product');
-  const setsWithType = sets.filter(s => s.type === 'set');
+  const productsWithType = products.filter((p) => p.type === "product");
+  const setsWithType = sets.filter((s) => s.type === "set");
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
-  const setCategories = categories.filter(cat =>
-    setsWithType.some(set => set.categoryId === cat.id)
+  const setCategories = categories.filter((cat) =>
+    setsWithType.some((set) => set.categoryId === cat.id)
   );
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
-  const productCategories = categories.filter(cat =>
-    cat.parentId &&
-    !setCategories.some(sc => sc.id === cat.id) &&
-    productsWithType.some(product => product.categoryId === cat.id)
+  const productCategories = categories.filter(
+    (cat) =>
+      cat.parentId &&
+      !setCategories.some((sc) => sc.id === cat.id) &&
+      productsWithType.some((product) => product.categoryId === cat.id)
   );
 
   // Get featured products (with discount or marked as featured)
-  const featuredProducts = productsWithType.filter(p => p.discount).slice(0, 4);
+  const featuredProducts = productsWithType
+    .filter((p) => p.discount)
+    .slice(0, 4);
 
   return (
     <>
@@ -68,7 +94,6 @@ export default async function Home() {
         {/* Categories of Sets (Bedrooms, Child rooms) */}
         <section className="products-section">
           <h2 className="products-header">Готовые комплекты</h2>
-
 
           <div className="set-wrapper">
             {setCategories.map((category) => (
@@ -82,9 +107,7 @@ export default async function Home() {
                   alt={category.name}
                   className="set-category-image"
                 />
-                <h3 className="set-category-title">
-                  {category.name}
-                </h3>
+                <h3 className="set-category-title">{category.name}</h3>
               </Link>
             ))}
           </div>
@@ -99,18 +122,14 @@ export default async function Home() {
               <Link
                 key={category.id}
                 href={`/catalog?category=${category.slug}`}
-                className="group relative h-40 rounded-lg overflow-hidden"
+                className="item-category"
               >
                 <img
                   src={category.imageUrl || "/images/placeholder.jpg"}
                   alt={category.name}
-                  className=" "
+                  className="item-category-image"
                 />
-                <div className="absolute   ">
-                  <h3 className="text-lg font-bold text-white">
-                    {category.name}
-                  </h3>
-                </div>
+                <h3 className="item-category-title">{category.name}</h3>
               </Link>
             ))}
           </div>
@@ -125,6 +144,24 @@ export default async function Home() {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+        </section>
+
+        <section className="banner">
+          <img src="./images/banner/banner-o-nas.png" alt="" />
+        </section>
+
+        <section className="advantages">
+          {advantages.map((advantage, index) => (
+            <div className="advantage" key={index}>
+              <img
+                src={advantage.image}
+                alt={advantage.title}
+                className="advantage-img"
+              />
+              <h4 className="advantage-title">{advantage.title}</h4>
+              <p className="advantage-text">{advantage.text}</p>
+            </div>
+          ))}
         </section>
       </main>
     </>

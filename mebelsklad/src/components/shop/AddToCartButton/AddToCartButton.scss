@@ -1,4 +1,7 @@
 .add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 50px;
   background: var(--blue);
@@ -9,8 +12,9 @@
   color: var(--white);
   text-transform: uppercase;
   cursor: pointer;
+  margin: auto 0 0;
 }
 
 .add-button--added {
-    background: var(--green);
+  background: var(--green);
 }

@@ -1,0 +1,43 @@
+.catalog-page_header {
+  //font-family: Roboto Condensed;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1;
+}
+
+.catalog-page-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.catalog-page-sidebar {
+  min-width: 200px;
+}
+
+.catalog-page-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.catalog-page-sorting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.catalog-page-found-count {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.catalog-page-result:nth-child(2n) {
+  margin-top: 80px;
+}
+
+.catalog-page-result-category {
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 24px;
+}

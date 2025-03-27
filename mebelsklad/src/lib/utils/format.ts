@@ -7,7 +7,7 @@ export function formatPrice(price: number): string {
   }).format(price);
 
   // Replace the standard currency symbol with "сум"
-  return formattedPrice.replace("UZS", " сум");
+  return formattedPrice.replace("UZS", "сум");
 }
 
 // Generate a slug from a string

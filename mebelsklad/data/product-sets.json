@@ -1,74 +1,74 @@
 [
-    {
-      "id": "SET001",
-      "name": "Спальня \"Александрия\"",
-      "slug": "spalnya-alexandria",
-      "categoryId": "CAT002",
-      "description": "Полный комплект для спальни в классическом стиле",
-      "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
-      "images": [
-        {
-          "url": "/images/spalni/alexandria/01/1.jpg",
-          "alt": "Спальня Александрия",
-          "isMain": true
-        }
-      ],
-      "items": [
-        {
-          "productId": "BED001",
-          "defaultQuantity": 1,
-          "minQuantity": 0,
-          "maxQuantity": 2,
-          "required": true
-        },
-        {
-          "productId": "WARD001",
-          "defaultQuantity": 2,
-          "minQuantity": 0,
-          "maxQuantity": 4,
-          "required": false
-        }
-      ],
-      "specifications": {
-        "style": "Классический",
-        "mainColor": "Бежевый",
-        "roomSize": "от 16 м²"
+  {
+    "id": "SET001",
+    "name": "Спальня \"Александрия\"",
+    "slug": "spalnya-alexandria",
+    "categoryId": "CAT002",
+    "description": "Полный комплект для спальни в классическом стиле",
+    "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/image.jpg",
+        "alt": "Спальня Александрия",
+        "isMain": true
       }
-    },
-    {
-      "id": "SET002",
-      "name": "Спальня \"Александрия 222\"",
-      "slug": "spalnya-alexandria",
-      "categoryId": "CAT002",
-      "description": "Полный комплект для спальни в классическом стиле",
-      "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
-      "images": [
-        {
-          "url": "/images/spalni/alexandria/01/1.jpg",
-          "alt": "Спальня Александрия",
-          "isMain": true
-        }
-      ],
-      "items": [
-        {
-          "productId": "BED001",
-          "defaultQuantity": 2,
-          "minQuantity": 0,
-          "maxQuantity": 2,
-          "required": true
-        },
-        {
-          "productId": "WARD001",
-          "defaultQuantity": 4,
-          "minQuantity": 0,
-          "maxQuantity": 4,
-          "required": false
-        }
-      ],
-      "specifications": {
-        "style": "Классический",
-        "mainColor": "Бежевый",
-        "roomSize": "от 16 м²"
+    ],
+    "items": [
+      {
+        "productId": "BED001",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 2,
+        "required": true
+      },
+      {
+        "productId": "WARD001",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 4,
+        "required": false
       }
+    ],
+    "specifications": {
+      "style": "Классический",
+      "mainColor": "Бежевый",
+      "roomSize": "от 16 м²"
     }
-  ]
+  },
+  {
+    "id": "SET002",
+    "name": "Спальня \"Александрия 222\"",
+    "slug": "spalnya-alexandria",
+    "categoryId": "CAT002",
+    "description": "Полный комплект для спальни в классическом стиле",
+    "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/image.jpg",
+        "alt": "Спальня Александрия",
+        "isMain": true
+      }
+    ],
+    "items": [
+      {
+        "productId": "BED001",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 2,
+        "required": true
+      },
+      {
+        "productId": "WARD001",
+        "defaultQuantity": 4,
+        "minQuantity": 0,
+        "maxQuantity": 4,
+        "required": false
+      }
+    ],
+    "specifications": {
+      "style": "Классический",
+      "mainColor": "Бежевый",
+      "roomSize": "от 16 м²"
+    }
+  }
+]

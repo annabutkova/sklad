@@ -13,10 +13,12 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   // Make sure we're only dealing with items of type 'product'
-  if (product.type !== 'product') {
-    console.warn(`ProductCard received an item that's not a product: ${product.id}`);
+  if (product.type !== "product") {
+    console.warn(
+      `ProductCard received an item that's not a product: ${product.id}`
+    );
   }
-  
+
   const mainImage =
     product.images.find((img) => img.isMain) || product.images[0];
 
@@ -43,26 +45,18 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
         <h3 className="product-title">{product.name}</h3>
 
-        <div className="p-4">
-          <h3 className="text-lg font-semibold truncate"></h3>
-
-          <div className="mt-2 flex items-baseline gap-2">
-            {product.discount && product.discount > 0 ? (
-              <>
-                <span className="text-gray-500 line-through text-sm">
-                  {formatPrice(product.price)}
-                </span>
-                <span className="font-bold text-lg">
-                  {formatPrice(product.price - product.discount)}
-                </span>
-              </>
-            ) : (
-              <span className="font-bold text-lg">
-                {formatPrice(product.price)}
-              </span>
-            )}
+        {product.discount && product.discount > 0 ? (
+          <div className="price-wrapper">
+            <span className="product--old-price">
+              {formatPrice(product.price)}
+            </span>
+            <span className="product-price product--new-price">
+              {formatPrice(product.price - product.discount)}
+            </span>
           </div>
-        </div>
+        ) : (
+          <span className="product-price">{formatPrice(product.price)}</span>
+        )}
       </Link>
       <AddToCartButton productId={product.id} />
     </div>
