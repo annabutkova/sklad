@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": "CAT001",
     "name": "Мебель",
     "slug": "mebel",
@@ -11,7 +12,8 @@
     "slug": "spalnya",
     "parentId": "CAT001",
     "description": "Мебель для спальни",
-    "imageUrl": "/images/categories/bedroom.jpg"
+    "imageUrl": "/images/categories/bedroom.jpg",
+    "type": "set"
   },
   {
     "id": "CAT003",

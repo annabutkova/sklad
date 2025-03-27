@@ -75,18 +75,16 @@ export default async function Home() {
               <Link
                 key={category.id}
                 href={`/catalog?category=${category.slug}`}
-                className="group relative h-48 rounded-lg overflow-hidden"
+                className="set-category"
               >
                 <img
                   src={category.imageUrl || "/images/placeholder.jpg"}
                   alt={category.name}
-                  className=" "
+                  className="set-category-image"
                 />
-                <div className="absolute   ">
-                  <h3 className="text-xl font-bold text-white">
-                    {category.name}
-                  </h3>
-                </div>
+                <h3 className="set-category-title">
+                  {category.name}
+                </h3>
               </Link>
             ))}
           </div>

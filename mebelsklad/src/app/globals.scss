@@ -1,5 +1,5 @@
+@use "tailwindcss" as *;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import "tailwindcss";
 
 :root {
   --gray: #ADADAD;
@@ -84,11 +84,31 @@ a:hover {
 .items-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
 }
 
 .set-wrapper {
-  gap: 20px;
+  gap: 16px;
+}
+
+.set-category {
+  position: relative;
+  width: calc((100% - 80px)/6);
+  max-width: 200px;
+}
+
+.set-category-image {
+  border-radius: 10px;
+}
+
+.set-category-title {
+  //font-family: Roboto Condensed;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--white);
 }
 
 .products-wrapper {

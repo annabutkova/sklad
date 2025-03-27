@@ -6,7 +6,7 @@ import { sign } from 'jsonwebtoken';
 // and users would be stored in a database
 const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'password123';
-const JWT_SECRET = 'your-secret-key-change-this-in-production';
+const JWT_SECRET = 'aswedsa';
 
 export async function POST(request: NextRequest) {
     try {

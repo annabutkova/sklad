@@ -1,45 +1,51 @@
+// src/middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verify } from 'jsonwebtoken';
+import { jwtVerify } from 'jose'; // jose is Edge-compatible
 
-// In a real app, this would be stored in environment variables
-const JWT_SECRET = 'your-secret-key-change-this-in-production';
+// Environment variables
+const JWT_SECRET = process.env.JWT_SECRET || 'aswedsa';
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-    // Check if this is an admin route
-    if (request.nextUrl.pathname.startsWith('/admin')) {
-        // Skip authentication for the login route
-        if (request.nextUrl.pathname === '/admin/login') {
-            return NextResponse.next();
-        }
+export async function middleware(request: NextRequest) {
+    // Get the token from the cookies or Authorization header
+    const token = request.cookies.get('token')?.value ||
+        request.headers.get('Authorization')?.split(' ')[1];
 
-        // Get the token from the cookies
-        const token = request.cookies.get('admin-token')?.value;
+    // If there's no token and the path starts with /api/admin
+    if (!token && request.nextUrl.pathname.startsWith('/api/admin')) {
+        return NextResponse.json(
+            { success: false, message: 'Authentication required' },
+            { status: 401 }
+        );
+    }
 
-        if (!token) {
-            // Redirect to login if no token found
-            return NextResponse.redirect(new URL('/admin/login', request.url));
-        }
-
+    // For paths that require authentication
+    if (request.nextUrl.pathname.startsWith('/api/admin')) {
         try {
-            // Verify the token
-            verify(token, JWT_SECRET);
+            // Verify the token with jose library (Edge compatible)
+            await jwtVerify(
+                token!,
+                new TextEncoder().encode(JWT_SECRET)
+            );
 
             // Token is valid, allow access
             return NextResponse.next();
         } catch (error) {
-            // Token is invalid or expired, redirect to login
             console.error('Token verification failed:', error);
-            return NextResponse.redirect(new URL('/admin/login', request.url));
+
+            // Return a JSON response for API routes
+            return NextResponse.json(
+                { success: false, message: 'Invalid authentication token' },
+                { status: 401 }
+            );
         }
     }
 
-    // Not an admin route, allow access
+    // For non-authenticated routes
     return NextResponse.next();
 }
 
-// Only run middleware on admin routes
+// Configure which paths this middleware runs on
 export const config = {
-    matcher: '/admin/:path*',
+    matcher: ['/api/admin/:path*', '/admin/:path*'],
 };
