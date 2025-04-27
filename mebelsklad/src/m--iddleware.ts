@@ -7,8 +7,8 @@ import { jwtVerify } from 'jose'; // jose is Edge-compatible
 const JWT_SECRET = process.env.JWT_SECRET || 'aswedsa';
 
 export async function middleware(request: NextRequest) {
-    // Get the token from the cookies or Authorization header
-    const token = request.cookies.get('token')?.value ||
+    // Look for 'admin-token' to match the name used in the login API
+    const token = request.cookies.get('admin-token')?.value ||
         request.headers.get('Authorization')?.split(' ')[1];
 
     // If there's no token and the path starts with /api/admin
@@ -20,19 +20,18 @@ export async function middleware(request: NextRequest) {
     }
 
     // For paths that require authentication
-    if (request.nextUrl.pathname.startsWith('/api/admin')) {
+    if (request.nextUrl.pathname.startsWith('/api/admin') &&
+        !request.nextUrl.pathname.startsWith('/api/admin/auth/login')) {
         try {
             // Verify the token with jose library (Edge compatible)
             await jwtVerify(
                 token!,
                 new TextEncoder().encode(JWT_SECRET)
             );
-
             // Token is valid, allow access
             return NextResponse.next();
         } catch (error) {
             console.error('Token verification failed:', error);
-
             // Return a JSON response for API routes
             return NextResponse.json(
                 { success: false, message: 'Invalid authentication token' },
@@ -47,5 +46,9 @@ export async function middleware(request: NextRequest) {
 
 // Configure which paths this middleware runs on
 export const config = {
-    matcher: ['/api/admin/:path*', '/admin/:path*'],
+    matcher: [
+        '/api/admin/:path*',
+        '/admin/:path*',
+        '/((?!api/admin/auth/login).*)',
+    ],
 };

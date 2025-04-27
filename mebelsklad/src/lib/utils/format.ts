@@ -26,3 +26,22 @@ export function generateId(prefix: string): string {
   const randomChars = Math.random().toString(36).substring(2, 7).toUpperCase();
   return `${prefix}${timestamp}${randomChars}`;
 }
+
+export function getProductsEnding(count: number) {
+  const lastDigit = count % 10;
+  const lastTwoDigits = count % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+    return "товаров найдено";
+  }
+
+  if (lastDigit === 1) {
+    return "товар найден";
+  }
+
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return "товара найдено";
+  }
+
+  return "товаров найдено";
+}

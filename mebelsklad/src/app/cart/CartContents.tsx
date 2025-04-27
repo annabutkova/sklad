@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { Product, ProductSet } from '@/types';
 import { formatPrice } from '@/lib/utils/format';
+import "./style.scss";
 
 interface CartContentsProps {
   products: Product[];
@@ -18,270 +19,215 @@ export default function CartContents({ products, sets }: CartContentsProps) {
   const router = useRouter();
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
   const [subtotal, setSubtotal] = useState(0);
-  
+
   // Calculate subtotal whenever cart items change
   useEffect(() => {
     const total = cartItems.reduce((sum, item) => {
       // Find the product or set
       const product = products.find(p => p.id === item.id);
       const set = sets.find(s => s.id === item.id);
-      
+
       if (product) {
-        const price = product.discount 
+        const price = product.discount
           ? product.price - product.discount
           : product.price;
         return sum + (price * item.quantity);
       }
-      
+
       if (set) {
         // For sets, calculate based on products they contain
         const setPrice = set.items.reduce((setSum, setItem) => {
           const setProduct = products.find(p => p.id === setItem.productId);
           if (!setProduct) return setSum;
-          
-          const productPrice = setProduct.discount 
+
+          const productPrice = setProduct.discount
             ? setProduct.price - setProduct.discount
             : setProduct.price;
-            
+
           return setSum + (productPrice * setItem.defaultQuantity);
         }, 0);
-        
+
         return sum + (setPrice * item.quantity);
       }
-      
+
       return sum;
     }, 0);
-    
+
     setSubtotal(total);
   }, [cartItems, products, sets]);
-  
+
   // Find full details of a cart item
   const getItemDetails = (id: string) => {
     const product = products.find(p => p.id === id);
     if (product) return { type: 'product', item: product };
-    
+
     const set = sets.find(s => s.id === id);
     if (set) return { type: 'set', item: set };
-    
+
     return null;
   };
-  
+
   // Calculate price for a specific set
   const calculateSetPrice = (set: ProductSet) => {
     return set.items.reduce((sum, item) => {
       const product = products.find(p => p.id === item.productId);
       if (!product) return sum;
-      
-      const productPrice = product.discount 
+
+      const productPrice = product.discount
         ? product.price - product.discount
         : product.price;
-        
+
       return sum + (productPrice * item.defaultQuantity);
     }, 0);
   };
-  
+
   // Handle checkout
   const handleCheckout = () => {
     router.push('/checkout');
   };
-  
+
   // Empty cart view
   if (cartItems.length === 0) {
     return (
-      <div className="text-center py-16 bg-gray-50 rounded-lg">
-        <svg 
-          className="w-16 h-16 mx-auto text-gray-400 mb-4" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24" 
-          xmlns="http://www.w3.org/2000/svg"
+      <div className="cart-page">
+        <h2 className="">Ваша корзина пуста</h2>
+        <p>
+          Добавьте товары в корзину, чтобы увидеть их здесь
+        </p>
+        <Link
+          href="/catalog"
+          className="btn btn--primary"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={1.5}
-            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-          />
-        </svg>
-        <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
-        <p className="text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
-        <Link 
-          href="/catalog" 
-          className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
-        >
-          Continue Shopping
+          Перейти в каталог
         </Link>
       </div>
     );
   }
-  
+
   return (
-    <div className="flex flex-col lg:flex-row gap-8">
+    <div className="cart-page">
       {/* Cart items */}
-      <div className="lg:w-2/3">
-        <div className="bg-white rounded-lg shadow overflow-hidden mb-6">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Product
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Quantity
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Total
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Action
-                </th>
+      <table className="cart-page_table">
+        <thead className="cart-page_table-head">
+          <tr className="cart-page_table-item">
+            <th scope="col" className="cart-page_table-header">
+            </th>
+            <th scope="col" className="cart-page_table-header">
+              Цена
+            </th>
+            <th scope="col" className="cart-page_table-header cart-page_table-data--input">
+              Количество
+            </th>
+            <th scope="col" className="cart-page_table-header">
+              Сумма
+            </th>
+            <th scope="col" className="cart-page_table-header cart-page_table-data--remove">
+              Удалить
+            </th>
+          </tr>
+        </thead>
+        <tbody className="cart-page_table-body">
+          {cartItems.map(item => {
+            const details = getItemDetails(item.id);
+            if (!details) return null;
+
+            const { type, item: cartItem } = details;
+
+            // Calculate the price based on item type
+            let price = 0;
+            if (type === 'product') {
+              price = (cartItem as Product).discount
+                ? (cartItem as Product).price - ((cartItem as Product).discount ?? 0)
+                : (cartItem as Product).price;
+            } else if (type === 'set') {
+              price = calculateSetPrice(cartItem as ProductSet);
+            }
+
+            const totalPrice = price * item.quantity;
+            const image = cartItem.images && cartItem.images.length > 0
+              ? cartItem.images[0].url
+              : '/images/placeholder.jpg';
+
+            return (
+              <tr key={item.id} className="cart-page_table-item ">
+                <td className="cart-page_table-data">
+                  <div className="cart-page_table-data-links">
+                    <Link
+                      href={`/product/${cartItem.slug}`}>
+                      <img
+                        src={image}
+                        alt={cartItem.name}
+                        className="cart-page_table-data-image"
+                      />
+                    </Link>
+                    <Link
+                      href={`/product/${cartItem.slug}`} className="cart-page_table-data-title">
+                      {cartItem.name}
+                    </Link>
+                  </div>
+                </td>
+                <td className="cart-page_table-data">
+                  {formatPrice(price)}
+                </td>
+                <td className="cart-page_table-data cart-page_table-data--input">
+                  <button
+                    onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                    className="button-input button-input--left"
+                  >
+                    —
+                  </button>
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) => updateQuantity(item.id, Math.max(1, parseInt(e.target.value) || 1))}
+                    className="number-input"
+                  />
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    className="button-input button-input--right "
+                  >
+                    +
+                  </button>
+                </td>
+                <td className="cart-page_table-data">
+                  {formatPrice(totalPrice)}
+                </td>
+                <td className="cart-page_table-data cart-page_table-data--remove">
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="cart-page_table-data_remove-btn"
+                  >
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 8H7M7 8H23M7 8L7 22C7 22.5304 7.21071 23.0391 7.58579 23.4142C7.96086 23.7893 8.46957 24 9 24H19C19.5304 24 20.0391 23.7893 20.4142 23.4142C20.7893 23.0391 21 22.5304 21 22V8M10 8V6C10 5.46957 10.2107 4.96086 10.5858 4.58579C10.9609 4.21071 11.4696 4 12 4H16C16.5304 4 17.0391 4.21071 17.4142 4.58579C17.7893 4.96086 18 5.46957 18 6V8M12 13V19M16 13V19" stroke="#4D4D4D" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {cartItems.map(item => {
-                const details = getItemDetails(item.id);
-                if (!details) return null;
-                
-                const { type, item: cartItem } = details;
-                
-                // Calculate the price based on item type
-                let price = 0;
-                if (type === 'product') {
-                  price = (cartItem as Product).discount 
-                    ? (cartItem as Product).price - (cartItem as Product).discount
-                    : (cartItem as Product).price;
-                } else if (type === 'set') {
-                  price = calculateSetPrice(cartItem as ProductSet);
-                }
-                
-                const totalPrice = price * item.quantity;
-                const image = cartItem.images && cartItem.images.length > 0 
-                  ? cartItem.images[0].url
-                  : '/images/placeholder.jpg';
-                
-                return (
-                  <tr key={item.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="h-16 w-16 flex-shrink-0 mr-4">
-                          <img 
-                            src={image} 
-                            alt={cartItem.name} 
-                            className="h-16 w-16 rounded-md object-cover"
-                          />
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">
-                            {cartItem.name}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {type === 'set' ? 'Collection' : 'Product'}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
-                        {formatPrice(price)}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <button
-                          onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                          className="p-1 border border-gray-300 rounded-l-md"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          min="1"
-                          value={item.quantity}
-                          onChange={(e) => updateQuantity(item.id, Math.max(1, parseInt(e.target.value) || 1))}
-                          className="w-12 p-1 text-center border-t border-b border-gray-300"
-                        />
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="p-1 border border-gray-300 rounded-r-md"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
-                        {formatPrice(totalPrice)}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        Remove
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        
-        <div className="flex justify-between">
-          <Link 
-            href="/catalog" 
-            className="text-blue-600 hover:text-blue-800"
-          >
-            ← Continue Shopping
-          </Link>
-          <button 
-            onClick={clearCart}
-            className="text-red-600 hover:text-red-800"
-          >
-            Clear Cart
-          </button>
-        </div>
+            );
+          })}
+        </tbody>
+      </table>
+      <div className="cart-page_total">
+        <span>Итого</span>
+        <span className="cart-page_total-sum">{formatPrice(subtotal)}</span>
       </div>
-      
-      {/* Order summary */}
-      <div className="lg:w-1/3">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-medium mb-6">Order Summary</h2>
-          
-          <div className="border-t border-gray-200 pt-4 mb-4">
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-600">Subtotal</span>
-              <span className="font-medium">{formatPrice(subtotal)}</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-600">Shipping</span>
-              <span>Calculated at checkout</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-600">Tax</span>
-              <span>Calculated at checkout</span>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-200 pt-4 mb-6">
-            <div className="flex justify-between text-lg font-medium">
-              <span>Total</span>
-              <span>{formatPrice(subtotal)}</span>
-            </div>
-          </div>
-          
-          <button
-            onClick={handleCheckout}
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 transition-colors"
-          >
-            Proceed to Checkout
-          </button>
-        </div>
+
+      <div className="cart-page_buttons">
+        <button
+          onClick={clearCart}
+          className="btn btn--secondary"
+        >
+          Очистить корзину
+        </button>
+        <button
+          onClick={handleCheckout}
+          className="btn btn--primary"
+        >
+          Оформить заказ
+        </button>
       </div>
-    </div>
+
+    </div >
   );
 }

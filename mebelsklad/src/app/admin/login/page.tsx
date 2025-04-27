@@ -2,35 +2,31 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-
-// Define validation schema for login
-const loginSchema = z.object({
-    username: z.string().min(3, "Username is required"),
-    password: z.string().min(1, "Password is required")
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function AdminLogin() {
     const router = useRouter();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
-        resolver: zodResolver(loginSchema),
-        defaultValues: {
-            username: '',
-            password: ''
-        }
-    });
-
-    const onSubmit = async (data: LoginFormValues) => {
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
         setIsLoading(true);
         setError(null);
+
+        // Basic validation
+        if (!username || username.length < 3) {
+            setError('Username is required (min 3 characters)');
+            setIsLoading(false);
+            return;
+        }
+
+        if (!password) {
+            setError('Password is required');
+            setIsLoading(false);
+            return;
+        }
 
         try {
             const response = await fetch('/api/admin/auth/login', {
@@ -38,7 +34,7 @@ export default function AdminLogin() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ username, password }),
             });
 
             const result = await response.json();
@@ -72,7 +68,7 @@ export default function AdminLogin() {
                     </div>
                 )}
 
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div className="mb-4">
                             <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
@@ -81,13 +77,11 @@ export default function AdminLogin() {
                             <input
                                 id="username"
                                 type="text"
-                                {...register('username')}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                                 placeholder="Username"
                             />
-                            {errors.username && (
-                                <p className="mt-1 text-sm text-red-600">{errors.username.message}</p>
-                            )}
                         </div>
 
                         <div>
@@ -97,13 +91,11 @@ export default function AdminLogin() {
                             <input
                                 id="password"
                                 type="password"
-                                {...register('password')}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                                 placeholder="Password"
                             />
-                            {errors.password && (
-                                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-                            )}
                         </div>
                     </div>
 

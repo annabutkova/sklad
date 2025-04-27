@@ -1,14 +1,15 @@
 // src/app/admin/categories/page.tsx
 import Link from 'next/link';
 import { jsonDataService } from '@/lib/api/jsonDataService';
+import { Category } from '@/types';
 
 // Helper function to render a category with indentation based on depth
-function CategoryRow({ 
-  category, 
+function CategoryRow({
+  category,
   depth = 0,
   categoryMap
-}: { 
-  category: any; 
+}: {
+  category: any;
   depth?: number;
   categoryMap: Record<string, string>;
 }) {
@@ -30,8 +31,8 @@ function CategoryRow({
           <div className="text-sm text-gray-500">{category.parentId ? categoryMap[category.parentId] : 'None'}</div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <Link 
-            href={`/admin/categories/${category.id}`} 
+          <Link
+            href={`/admin/categories/${category.id}`}
             className="text-blue-600 hover:text-blue-900 mr-4"
           >
             Edit
@@ -42,10 +43,10 @@ function CategoryRow({
         </td>
       </tr>
       {category.children && category.children.length > 0 && (
-        category.children.map(child => (
-          <CategoryRow 
-            key={child.id} 
-            category={child} 
+        category.children.map((child: Category) => (
+          <CategoryRow
+            key={child.id}
+            category={child}
             depth={depth + 1}
             categoryMap={categoryMap}
           />
@@ -97,8 +98,8 @@ export default async function AdminCategoriesPage() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {categories.map(category => (
-              <CategoryRow 
-                key={category.id} 
+              <CategoryRow
+                key={category.id}
                 category={category}
                 categoryMap={categoryMap}
               />

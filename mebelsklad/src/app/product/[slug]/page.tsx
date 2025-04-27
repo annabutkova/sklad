@@ -6,16 +6,20 @@ import { jsonDataService } from '@/lib/api/jsonDataService';
 import { formatPrice } from '@/lib/utils/format';
 import AddToCartButton from '@/components/shop/AddToCartButton/AddToCartButton';
 import ProductCard from '@/components/shop/ProductCard/ProductCard';
+import './style.scss';
+import SpecificationRow from '@/components/SpecificationRow';
+import ImageGallery from 'react-image-gallery';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const product = await jsonDataService.getProductBySlug(params.slug);
-  
+  const paramsData = await params;
+  const product = await jsonDataService.getProductBySlug(paramsData.slug);
+
   if (!product) {
     return {
       title: 'Product Not Found',
     };
   }
-  
+
   return {
     title: `${product.name} | Furniture Shop`,
     description: product.description || `Buy ${product.name} from our furniture shop.`,
@@ -23,27 +27,34 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
-  const product = await jsonDataService.getProductBySlug(params.slug);
-  
+  const paramsData = await params;
+  const product = await jsonDataService.getProductBySlug(paramsData.slug);
+
   if (!product) {
     notFound();
   }
-  
+
   // Get category information
   const categories = await jsonDataService.getAllCategories();
   const category = categories.find(c => c.id === product.categoryId);
-  
+
   // Get related products
   const relatedProducts = await jsonDataService.getProductsByCategory(product.categoryId);
   const filteredRelatedProducts = relatedProducts
     .filter(p => p.id !== product.id)
     .slice(0, 4);
-  
+
   // Get main image
   const mainImage = product.images.find(img => img.isMain) || product.images[0];
-  
+  const images = product.images.map(image => ({
+    original: image.url,
+    thumbnail: image.url,
+    originalAlt: image.alt || product.name,
+    thumbnailAlt: image.alt || product.name
+  }));
+
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="main">
       {/* Breadcrumbs */}
       <nav className="mb-8">
         <ol className="flex text-sm">
@@ -54,8 +65,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </svg>
           </li>
           <li className="flex items-center">
-            <Link 
-              href="/catalog" 
+            <Link
+              href="/catalog"
               className="text-gray-500 hover:text-gray-900"
             >
               Catalog
@@ -66,8 +77,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
           </li>
           {category && (
             <li className="flex items-center">
-              <Link 
-                href={`/catalog?category=${category.slug}`} 
+              <Link
+                href={`/catalog?category=${category.slug}`}
                 className="text-gray-500 hover:text-gray-900"
               >
                 {category.name}
@@ -80,27 +91,25 @@ export default async function ProductPage({ params }: { params: { slug: string }
           <li className="text-gray-900 font-medium">{product.name}</li>
         </ol>
       </nav>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+      <div className="product-page">
         {/* Product images */}
-        <div>
-          <div className="rounded-lg overflow-hidden mb-4">
-            <Image
-              src={mainImage.url}
-              alt={mainImage.alt || product.name}
-              width={600}
-              height={600}
-              className="w-full h-auto object-cover"
-              priority
-            />
-          </div>
-          
-          {/* Thumbnail gallery */}
+        {/* <div className="product-page_images-wrapper">
+          <Image
+            src={mainImage.url}
+            alt={mainImage.alt || product.name}
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }}
+            className="product-page_image"
+            priority
+          />
+
           {product.images.length > 1 && (
-            <div className="grid grid-cols-5 gap-2">
+            <div className="product-page_thumbnails">
               {product.images.map((image, index) => (
                 <div key={index} className={`
-                  rounded-md overflow-hidden cursor-pointer
                   ${image.isMain ? 'ring-2 ring-blue-500' : 'border border-gray-200'}
                 `}>
                   <Image
@@ -114,95 +123,163 @@ export default async function ProductPage({ params }: { params: { slug: string }
               ))}
             </div>
           )}
-        </div>
-        
+        </div> */}
+
+
+
+        <ImageGallery
+          items={images}
+          showPlayButton={false}
+          showFullscreenButton={true}
+          useBrowserFullscreen={false}
+          showNav={true}
+        />
+
+
+
         {/* Product info */}
-        <div>
-          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          
+        <div className="product-page_info">
+          <h1 className="product-page_title">{product.name}</h1>
+
+          <ul className="product-page_list">
+
+
+            {product.specifications?.color && (
+              <li className="product-page_list-item">
+                <span className="product-page_list-option">цвет</span>
+                <span className="product-page_list-value">{product.specifications?.color} </span>
+              </li>
+            )}
+
+
+            {product.specifications?.dimensions && Object.values(product.specifications.dimensions).some(v => v) && (
+              <>
+                {product.specifications?.dimensions?.width && product.specifications?.dimensions?.height && product.specifications?.dimensions?.depth && (
+                  <li className="product-page_list-item">
+                    <span className="product-page_list-option">габариты (Ш×В×Г), см</span>
+                    <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.depth} </span>
+                  </li>
+                )}
+              </>
+            )}
+
+            {product.specifications?.material && (
+              <li className="product-page_list-item">
+                <span className="product-page_list-option">материал</span>
+                <span className="product-page_list-value">{String(product.specifications?.material)} </span>
+              </li>
+            )}
+
+            <a href="#harakteristiki" className="product-page_link">Все характеристики</a>
+
+
+          </ul>
+
           {/* Price */}
-          <div className="mb-6">
+          <div className="product-page_price-wrapper">
             {product.discount && product.discount > 0 ? (
-              <div className="flex items-center gap-2">
-                <span className="text-3xl font-bold">
-                  {formatPrice(product.price - product.discount)}
-                </span>
-                <span className="text-xl text-gray-500 line-through">
+              <>
+                <span className="product-page_old-price">
                   {formatPrice(product.price)}
                 </span>
-                <span className="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                <span className="product-page_new-price">
+                  {formatPrice(product.price - product.discount)}
+                </span>
+                <span className="product-page_discount">
                   -{Math.round((product.discount / product.price) * 100)}%
                 </span>
-              </div>
+              </>
             ) : (
-              <span className="text-3xl font-bold">
+              <span className="product-page_price">
                 {formatPrice(product.price)}
               </span>
             )}
           </div>
-          
+
           {/* Add to cart */}
-          <div className="mb-8">
+          <div>
             <AddToCartButton productId={product.id} />
           </div>
-          
-          {/* Description */}
-          {product.description && (
-            <div className="mb-8">
-              <h2 className="text-lg font-semibold mb-2">Description</h2>
-              <p className="text-gray-700">{product.description}</p>
-            </div>
-          )}
-          
-          {/* Specifications */}
-          {product.specifications && Object.keys(product.specifications).length > 0 && (
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Specifications</h2>
-              <div className="border-t border-gray-200">
-                {Object.entries(product.specifications).map(([key, value]) => (
-                  <div key={key} className="py-3 flex justify-between border-b border-gray-200">
-                    <span className="text-gray-500">{key}</span>
-                    <span className="font-medium">{value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {/* Dimensions */}
-          {product.dimensions && Object.values(product.dimensions).some(v => v) && (
-            <div className="mt-8">
-              <h2 className="text-lg font-semibold mb-2">Dimensions</h2>
-              <div className="border-t border-gray-200">
-                {product.dimensions.width && (
-                  <div className="py-3 flex justify-between border-b border-gray-200">
-                    <span className="text-gray-500">Width</span>
-                    <span className="font-medium">{product.dimensions.width} cm</span>
-                  </div>
-                )}
-                {product.dimensions.height && (
-                  <div className="py-3 flex justify-between border-b border-gray-200">
-                    <span className="text-gray-500">Height</span>
-                    <span className="font-medium">{product.dimensions.height} cm</span>
-                  </div>
-                )}
-                {product.dimensions.depth && (
-                  <div className="py-3 flex justify-between border-b border-gray-200">
-                    <span className="text-gray-500">Depth</span>
-                    <span className="font-medium">{product.dimensions.depth} cm</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
-      
+      <div id="#harakteristiki" className="product-page">
+        {/* Description */}
+        {product.description && (
+          <div className="product-page_description">
+            <h2 className="product-page_subheader">Характеристики товара</h2>
+            <p className="text-gray-700">{product.description}</p>
+          </div>
+        )}
+
+        {/* Specifications */}
+        {product.specifications && (
+          <div className="product-page_table">
+            <h2 className="product-page_subheader">Характеристики товара</h2>
+
+            {/* Материалы */}
+            {product.specifications.material?.karkas && (
+              <SpecificationRow label="Материал каркаса" value={product.specifications.material.karkas} />
+            )}
+            {product.specifications.material?.fasad && (
+              <SpecificationRow label="Материал фасада" value={product.specifications.material.fasad} />
+            )}
+            {product.specifications.material?.obivka && (
+              <SpecificationRow label="Обивка" value={product.specifications.material.obivka} />
+            )}
+
+            {/* Стиль и цвета */}
+            {product.specifications.style?.style && (
+              <SpecificationRow label="Стиль" value={product.specifications.style.style} />
+            )}
+            {product.specifications.style?.color?.karkas && (
+              <SpecificationRow label="Цвет каркаса" value={product.specifications.style.color.karkas} />
+            )}
+            {product.specifications.style?.color?.fasad && (
+              <SpecificationRow label="Цвет фасада" value={product.specifications.style.color.fasad} />
+            )}
+            {product.specifications.style?.color?.obivka && (
+              <SpecificationRow label="Цвет обивки" value={product.specifications.style.color.obivka} />
+            )}
+
+            {/* Размеры */}
+            {product.specifications.dimensions && (
+              <SpecificationRow
+                label="Габариты (Ш×В×Г), см"
+                value={`${product.specifications.dimensions.width ?? '-'} × ${product.specifications.dimensions.height ?? '-'} × ${product.specifications.dimensions.depth ?? '-'}`}
+              />
+            )}
+            {product.specifications.bedSize && (
+              <SpecificationRow label="Спальное место" value={product.specifications.bedSize} />
+            )}
+
+            {/* Наполнение */}
+            {product.specifications.content?.polki !== undefined && (
+              <SpecificationRow label="Полки" value={product.specifications.content.polki} />
+            )}
+            {product.specifications.content?.yashiki !== undefined && (
+              <SpecificationRow label="Ящики" value={product.specifications.content.yashiki} />
+            )}
+
+
+            {/* Гарантия */}
+            {product.specifications.warranty?.duration && (
+              <SpecificationRow label="Гарантия" value={`${product.specifications.warranty.duration} мес.`} />
+            )}
+            {product.specifications.warranty?.production && (
+              <SpecificationRow label="Производитель" value={product.specifications.warranty.production} />
+            )}
+            {product.specifications.warranty?.lifetime && (
+              <SpecificationRow label="Срок службы" value={product.specifications.warranty.lifetime} />
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Related products */}
       {filteredRelatedProducts.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold mb-6">You might also like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="product-page_subheader">Товары из серии</h2>
+          <div className="products-wrapper">
             {filteredRelatedProducts.map(relatedProduct => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}

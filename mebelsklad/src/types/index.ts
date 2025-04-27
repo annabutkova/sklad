@@ -2,24 +2,84 @@
 // Product related types
 export interface Product {
   id: string;
-  type: 'product'; // New type field
   name: string;
   slug: string;
   categoryId: string;
   price: number;
   discount?: number;
-  dimensions?: {
-    width?: number;
-    height?: number;
-    depth?: number;
-  };
+  inStock: boolean;
+  images: ProductImage[];
+
   description?: string;
   features?: string[];
-  images: ProductImage[];
-  variants?: ProductVariant[];
-  specifications?: Record<string, string | number>;
-  inStock: boolean;
+  specifications?: Specification;
+
+  variants?: string[];
   relatedProductIds?: string[];
+
+  collection: Collection;
+}
+
+export enum Collection {
+  Alexandria = "Александрия",
+  Bora = "Бора",
+  Milan = "Милан",
+}
+
+
+export type Specification = {
+  color?: string;
+  style?: Style;
+  material?: Material;
+  dimensions?: Dimensions;
+  bedSize?: BedSize;
+  content?: Content;
+  warranty?: Warranty;
+}
+
+export enum BedSize {
+  Size180 = "180x200",
+  Size160 = "160x200",
+  Size140 = "140x200",
+  Size120 = "120x200",
+  Size90 = "90x200",
+}
+
+
+export type Material = {
+  karkas?: string;
+  fasad?: string;
+  ruchki?: string;
+  obivka?: string;
+}
+
+export type Style = {
+  style?: string;
+  color?: {
+    karkas?: string;
+    fasad?: string;
+    ruchki?: string;
+    obivka?: string;
+  };
+}
+
+export type Content = {
+  yashiki?: number;
+  polki?: number;
+  shtanga?: number;
+}
+
+export type Dimensions = {
+  width?: number;
+  height?: number;
+  depth?: number;
+  length?: number;
+}
+
+export type Warranty = {
+  duration?: number;
+  lifetime?: number;
+  production?: string;
 }
 
 export interface ProductImage {
@@ -28,26 +88,9 @@ export interface ProductImage {
   isMain?: boolean;
 }
 
-export interface ProductVariant {
-  id: string;
-  name: string;
-  colorCode?: string;
-  imageUrl?: string;
-  inStock: boolean;
-}
-
 // Product set types
-export interface ProductSet {
-  id: string;
-  type: 'set'; // New type field
-  name: string;
-  slug: string;
-  categoryId: string;
-  description: string;
-  longDescription?: string;
-  images: ProductImage[];
+export interface ProductSet extends Omit<Product, 'price'> {
   items: SetItem[];
-  specifications?: Record<string, string | number>;
 }
 
 export interface SetItem {
@@ -73,9 +116,4 @@ export interface Category {
 export interface CartItem {
   id: string;
   quantity: number;
-  // For sets with custom configuration
-  configuration?: {
-    productId: string;
-    quantity: number;
-  }[];
 }

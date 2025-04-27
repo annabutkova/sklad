@@ -64,13 +64,12 @@ export default async function Home() {
   const sets = await jsonDataService.getAllProductSets();
   const categories = await jsonDataService.getAllCategories();
 
-  // Verify that the type fields are properly set
-  const productsWithType = products.filter((p) => p.type === "product");
-  const setsWithType = sets.filter((s) => s.type === "set");
+  // No need to filter by type since the getAllProducts and getAllProductSets
+  // already return the correct data types
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
   const setCategories = categories.filter((cat) =>
-    setsWithType.some((set) => set.categoryId === cat.id)
+    sets.some((set) => set.categoryId === cat.id)
   );
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
@@ -78,11 +77,11 @@ export default async function Home() {
     (cat) =>
       cat.parentId &&
       !setCategories.some((sc) => sc.id === cat.id) &&
-      productsWithType.some((product) => product.categoryId === cat.id)
+      products.some((product) => product.categoryId === cat.id)
   );
 
   // Get featured products (with discount or marked as featured)
-  const featuredProducts = productsWithType
+  const featuredProducts = products
     .filter((p) => p.discount)
     .slice(0, 4);
 

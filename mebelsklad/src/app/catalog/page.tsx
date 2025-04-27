@@ -7,6 +7,7 @@ import CategorySidebar from "@/components/shop/CategorySidebar/CategorySidebar";
 import SortSelector from "@/components/shop/SortSelector/SortSelector";
 import SetCard from "@/components/shop/SetCard/SetCard";
 import "./catalog.scss";
+import { getProductsEnding } from "@/lib/utils/format";
 
 interface CatalogPageProps {
   searchParams: {
@@ -18,8 +19,9 @@ interface CatalogPageProps {
 
 export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   // Create a local copy of the search params
-  const params = { ...searchParams };
+  const params = { ...(await searchParams) };
   const categorySlug = params.category;
+
   const sortOption = params.sort || "name-asc";
   const contentType = params.type || "all"; // 'all', 'products', or 'sets'
 
@@ -28,9 +30,8 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   const allProducts = await jsonDataService.getAllProducts();
   const allSets = await jsonDataService.getAllProductSets();
 
-  // Verify that products and sets have the correct type field
-  const typedProducts = allProducts.filter((p) => p.type === "product");
-  const typedSets = allSets.filter((s) => s.type === "set");
+  // No need to filter by type property anymore - we'll use the API functions
+  // that already return the correct data types
 
   let products: Product[] = [];
   let sets: ProductSet[] = [];
@@ -42,12 +43,12 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
     if (activeCategory) {
       // Check if this category has any sets
-      const categorySets = typedSets.filter(
+      const categorySets = allSets.filter(
         (set) => set.categoryId === activeCategory!.id
       );
 
       // Check if this category has any individual products
-      const categoryProducts = typedProducts.filter(
+      const categoryProducts = allProducts.filter(
         (product) => product.categoryId === activeCategory!.id
       );
 
@@ -79,19 +80,19 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
     } else {
       // Category not found - get all products and sets based on content type
       if (contentType === "all" || contentType === "products") {
-        products = typedProducts;
+        products = allProducts;
       }
       if (contentType === "all" || contentType === "sets") {
-        sets = typedSets;
+        sets = allSets;
       }
     }
   } else {
     // No category selected - get all products and sets based on content type
     if (contentType === "all" || contentType === "products") {
-      products = typedProducts;
+      products = allProducts;
     }
     if (contentType === "all" || contentType === "sets") {
-      sets = typedSets;
+      sets = allSets;
     }
   }
 
@@ -130,7 +131,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         return [...sets].sort((a, b) => {
           // Calculate total price for set A
           const aTotalPrice = a.items.reduce((sum, item) => {
-            const product = typedProducts.find((p) => p.id === item.productId);
+            const product = allProducts.find((p) => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount
               ? product.price - product.discount
@@ -140,7 +141,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
           // Calculate total price for set B
           const bTotalPrice = b.items.reduce((sum, item) => {
-            const product = typedProducts.find((p) => p.id === item.productId);
+            const product = allProducts.find((p) => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount
               ? product.price - product.discount
@@ -154,7 +155,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         return [...sets].sort((a, b) => {
           // Calculate total price for set A
           const aTotalPrice = a.items.reduce((sum, item) => {
-            const product = typedProducts.find((p) => p.id === item.productId);
+            const product = allProducts.find((p) => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount
               ? product.price - product.discount
@@ -164,7 +165,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
           // Calculate total price for set B
           const bTotalPrice = b.items.reduce((sum, item) => {
-            const product = typedProducts.find((p) => p.id === item.productId);
+            const product = allProducts.find((p) => p.id === item.productId);
             if (!product) return sum;
             const productPrice = product.discount
               ? product.price - product.discount
@@ -203,21 +204,21 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
         {/* Product grid */}
         <div className="catalog-page-grid">
-          <h1 className="catalog-page_header">
+          <h1 className="page-header">
             {activeCategory ? activeCategory.name : "Каталог"}
           </h1>
           {/* Sort and filter options */}
           <div className="catalog-page-sorting">
             <span className="catalog-page-found-count">
-              {totalItems} {totalItems === 1 ? "товар" : "товара"} найдено
+              {totalItems} {getProductsEnding(totalItems)}
             </span>
             <div className="flex items-center gap-4">
               {/* Content type filter - only show if this category has both types */}
               {activeCategory &&
-                typedProducts.some(
+                allProducts.some(
                   (p) => p.categoryId === activeCategory?.id
                 ) &&
-                typedSets.some((s) => s.categoryId === activeCategory?.id) && (
+                allSets.some((s) => s.categoryId === activeCategory?.id) && (
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-gray-600">Show:</span>
                     <select
@@ -262,7 +263,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
               )}
               <div className="products-wrapper">
                 {sortedSets.map((set) => (
-                  <SetCard key={set.id} set={set} allProducts={typedProducts} />
+                  <SetCard key={set.id} set={set} allProducts={allProducts} />
                 ))}
               </div>
             </div>

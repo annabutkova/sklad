@@ -3,16 +3,19 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { jsonDataService } from '@/lib/api/jsonDataService';
 import SetDetail, { SetDetailProps } from './SetDetail';
+import "./style.scss";
+
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const set = await jsonDataService.getProductSetBySlug(params.slug);
-  
+  const paramsData = await params;
+  const set = await jsonDataService.getProductSetBySlug(paramsData.slug);
+
   if (!set) {
     return {
       title: 'Set Not Found',
     };
   }
-  
+
   return {
     title: `${set.name} | Furniture Shop`,
     description: set.description || `Buy ${set.name} collection from our furniture shop.`,
@@ -20,15 +23,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function SetPage({ params }: { params: { slug: string } }) {
-  const set = await jsonDataService.getProductSetBySlug(params.slug);
-  
+  const paramsData = await params;
+  const set = await jsonDataService.getProductSetBySlug(paramsData.slug);
+
   if (!set) {
     notFound();
   }
-  
+
   // Get all products to have full product details
   const products = await jsonDataService.getAllProducts();
-  
+
   // Filter products to only include those in the set
   const setProducts = set.items
     .map(item => {
@@ -45,6 +49,6 @@ export default async function SetPage({ params }: { params: { slug: string } }) 
       return null;
     })
     .filter(Boolean);
-  
+
   return <SetDetail set={set} setProducts={setProducts.filter(Boolean) as SetDetailProps['setProducts']} />;
 }

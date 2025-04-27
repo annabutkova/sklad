@@ -20,7 +20,7 @@ export function generateMetadata({ searchParams }: SearchPageProps): Metadata {
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const searchTerm = searchParams.q || '';
-  
+
   // If no search term provided, show empty state
   if (!searchTerm) {
     return (
@@ -36,11 +36,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       </div>
     );
   }
-  
+
   // Get all products
   const products = await jsonDataService.getAllProducts();
   const sets = await jsonDataService.getAllProductSets();
-  
+
   // Search in products
   const matchingProducts = products.filter(product => {
     const searchLower = searchTerm.toLowerCase();
@@ -49,26 +49,25 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       (product.description && product.description.toLowerCase().includes(searchLower))
     );
   });
-  
+
   // Search in sets
   const matchingSets = sets.filter(set => {
     const searchLower = searchTerm.toLowerCase();
     return (
       set.name.toLowerCase().includes(searchLower) ||
-      (set.description && set.description.toLowerCase().includes(searchLower)) ||
-      (set.longDescription && set.longDescription.toLowerCase().includes(searchLower))
+      (set.description && set.description.toLowerCase().includes(searchLower))
     );
   });
-  
+
   const totalResults = matchingProducts.length + matchingSets.length;
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Search Results</h1>
       <p className="text-gray-600 mb-8">
         Found {totalResults} result{totalResults !== 1 ? 's' : ''} for "{searchTerm}"
       </p>
-      
+
       {totalResults === 0 ? (
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <h2 className="text-xl font-semibold mb-4">No products found</h2>
@@ -90,7 +89,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               </div>
             </div>
           )}
-          
+
           {/* Sets section */}
           {matchingSets.length > 0 && (
             <div>
@@ -101,9 +100,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     <Link href={`/set/${set.slug}`} className="block">
                       {set.images && set.images.length > 0 ? (
                         <div className="aspect-video relative">
-                          <img 
-                            src={set.images[0].url} 
-                            alt={set.name} 
+                          <img
+                            src={set.images[0].url}
+                            alt={set.name}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded">

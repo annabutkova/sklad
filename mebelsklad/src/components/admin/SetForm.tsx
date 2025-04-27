@@ -6,8 +6,9 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Product, ProductSet, Category, ProductImage, SetItem } from '@/types';
+import { Product, ProductSet, Category, ProductImage, SetItem, Collection } from '@/types';
 import { generateSlug, generateId, formatPrice } from '@/lib/utils/format';
+
 
 // Define validation schema for product sets
 const productSetSchema = z.object({
@@ -15,8 +16,31 @@ const productSetSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   slug: z.string().min(3, "Slug is required"),
   categoryId: z.string().min(1, "Category is required"),
-  description: z.string().min(10, "Description is required"),
-  longDescription: z.string().optional(),
+  description: z.string().optional(),
+  collection: z.string(),
+  inStock: z.boolean().default(true),
+  specifications: z.object({
+    material: z.object({
+      karkas: z.string().optional(),
+      fasad: z.string().optional(),
+      ruchki: z.string().optional(),
+      obivka: z.string().optional(),
+    }).optional(),
+    style: z.object({
+      style: z.string().optional(),
+      color: z.object({
+        karkas: z.string().optional(),
+        fasad: z.string().optional(),
+        ruchki: z.string().optional(),
+        obivka: z.string().optional(),
+      }).optional(),
+    }).optional(),
+    warranty: z.object({
+      duration: z.number().optional(),
+      lifetime: z.number().optional(),
+      production: z.string().optional(),
+    }).optional(),
+  })
 });
 
 type ProductSetFormValues = z.infer<typeof productSetSchema>;
@@ -31,12 +55,18 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
   const router = useRouter();
   const [images, setImages] = useState<ProductImage[]>(productSet?.images || []);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // State for managing set items
   const [selectedItems, setSelectedItems] = useState<SetItem[]>(
     productSet?.items || []
   );
-  
+
+  // Search functionality
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Collection filter
+  const [selectedCollection, setSelectedCollection] = useState<string>('');
+
   // Calculate total price based on selected items and quantities
   const [calculatedPrice, setCalculatedPrice] = useState<number>(0);
 
@@ -47,33 +77,82 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       ...productSet,
     } : {
       id: generateId('SET'),
+      inStock: true,
+      collection: '' as Collection,
+      specifications: {
+        material: {
+          karkas: '',
+          fasad: '',
+          ruchki: '',
+          obivka: '',
+        },
+        style: {
+          style: '',
+          color: {
+            karkas: '',
+            fasad: '',
+            ruchki: '',
+            obivka: '',
+          }
+        },
+        warranty: {
+          duration: 0,
+          lifetime: 0,
+          production: 'Россия',
+        }
+      },
     }
   });
-  
+
   // Watch values for auto-calculations
   const name = watch('name');
-  
+  const categoryId = watch('categoryId');
+  const collection = watch('collection');
+
   // Auto-generate slug when name changes (for new sets)
   useEffect(() => {
     if (name && !productSet) {
       setValue('slug', generateSlug(name));
     }
   }, [name, setValue, productSet]);
-  
+
+  // Pre-select all products from the same collection when collection changes
+  useEffect(() => {
+    if (selectedCollection && !productSet) {
+      // Assuming products have a collection property
+      const productsInCollection = products.filter(p => p.collection === selectedCollection);
+
+      // Add all products in the selected collection that aren't already selected
+      const newItems = productsInCollection
+        .filter(product => !selectedItems.some(item => item.productId === product.id))
+        .map(product => ({
+          productId: product.id,
+          defaultQuantity: 1,
+          minQuantity: 0,
+          maxQuantity: 10,
+          required: false
+        }));
+
+      if (newItems.length > 0) {
+        setSelectedItems([...selectedItems, ...newItems]);
+      }
+    }
+  }, [selectedCollection, products, selectedItems, productSet]);
+
   // Calculate price based on selected items
   useEffect(() => {
     if (selectedItems.length > 0) {
       const total = selectedItems.reduce((sum, item) => {
         const product = products.find(p => p.id === item.productId);
         if (product) {
-          const productPrice = product.discount 
-            ? product.price - product.discount 
+          const productPrice = product.discount
+            ? product.price - product.discount
             : product.price;
           return sum + (productPrice * item.defaultQuantity);
         }
         return sum;
       }, 0);
-      
+
       setCalculatedPrice(total);
     } else {
       setCalculatedPrice(0);
@@ -86,7 +165,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
     if (selectedItems.some(item => item.productId === productId)) {
       return;
     }
-    
+
     setSelectedItems([
       ...selectedItems,
       {
@@ -98,34 +177,42 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       }
     ]);
   };
-  
+
   // Handle removing a product from the set
   const removeProductFromSet = (productId: string) => {
     setSelectedItems(selectedItems.filter(item => item.productId !== productId));
   };
-  
+
   // Handle changing a product's quantity in the set
   const updateProductQuantity = (productId: string, quantity: number) => {
-    setSelectedItems(selectedItems.map(item => 
-      item.productId === productId 
-        ? { ...item, defaultQuantity: quantity } 
+    setSelectedItems(selectedItems.map(item =>
+      item.productId === productId
+        ? { ...item, defaultQuantity: quantity }
         : item
     ));
   };
-  
+
   // Handle toggling a product's "required" status
   const toggleProductRequired = (productId: string) => {
-    setSelectedItems(selectedItems.map(item => 
-      item.productId === productId 
-        ? { ...item, required: !item.required } 
+    setSelectedItems(selectedItems.map(item =>
+      item.productId === productId
+        ? { ...item, required: !item.required }
         : item
     ));
   };
-  
+
+  // Handle collection selection
+  const handleCollectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCollection(e.target.value);
+  };
+
+  // Get all Collection enum values for the select dropdown
+  const collectionOptions = Object.values(Collection);
+
   // Handle form submission
   const onSubmit = async (data: ProductSetFormValues) => {
     setIsSubmitting(true);
-    
+
     try {
       // Check if there are any items in the set
       if (selectedItems.length === 0) {
@@ -133,19 +220,21 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         setIsSubmitting(false);
         return;
       }
-      
+
       // Create the complete product set object
       const completeSet: ProductSet = {
         ...data,
         images: images,
         items: selectedItems,
         specifications: productSet?.specifications || {},
+        inStock: true,
+        collection: data.collection as Collection, // Cast collection to the correct type
       };
 
       // Save to API
       const response = await fetch(
-        productSet 
-          ? `/api/admin/sets/${productSet.id}` 
+        productSet
+          ? `/api/admin/sets/${productSet.id}`
           : '/api/admin/sets',
         {
           method: productSet ? 'PUT' : 'POST',
@@ -170,12 +259,12 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       setIsSubmitting(false);
     }
   };
-  
+
   // Handle image upload
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    
+
     const newImages: ProductImage[] = Array.from(files).map((file, index) => ({
       url: URL.createObjectURL(file),
       alt: file.name,
@@ -189,17 +278,29 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
   const getProductById = (productId: string) => {
     return products.find(p => p.id === productId);
   };
-  
+
   // Get products that aren't already in the set
-  const availableProducts = products.filter(product => 
+  const availableProducts = products.filter(product =>
     !selectedItems.some(item => item.productId === product.id)
   );
+
+  // Filter available products based on search query and collection
+  const filteredAvailableProducts = availableProducts.filter(product => {
+    const matchesSearch = searchQuery.trim() === '' ||
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.id.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCollection = selectedCollection === '' ||
+      product.collection === selectedCollection;
+
+    return matchesSearch && matchesCollection;
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Basic Information</h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Set Name */}
           <div>
@@ -267,26 +368,45 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
               <p className="mt-1 text-sm text-red-600">{errors.categoryId.message}</p>
             )}
           </div>
-        </div>
-        
-        {/* Calculated Price (for information only) */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-700">
-              Calculated Price (based on selected products):
-            </span>
-            <span className="font-bold">{formatPrice(calculatedPrice)}</span>
+
+          {/* Collection */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Collection
+            </label>
+            <select
+              {...register('collection')}
+              onChange={handleCollectionChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select a collection</option>
+              {collectionOptions.map(collection => (
+                <option key={collection} value={collection}>
+                  {collection}
+                </option>
+              ))}
+            </select>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
-            The final price of the set will be calculated based on the products included.
-          </p>
+
+          {/* In Stock */}
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="inStock"
+              {...register('inStock')}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+            <label htmlFor="inStock" className="ml-2 block text-sm text-gray-900">
+              In Stock
+            </label>
+          </div>
         </div>
       </div>
 
       {/* Description */}
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Description</h2>
-        
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Short Description
@@ -301,24 +421,131 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
           )}
         </div>
-        
+      </div>
+
+      {/* Material Specifications */}
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-lg font-medium mb-4">Material</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Karkas</label>
+            <input
+              type="text"
+              {...register("specifications.material.karkas")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Fasad</label>
+            <input
+              type="text"
+              {...register("specifications.material.fasad")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Ruchki</label>
+            <input
+              type="text"
+              {...register("specifications.material.ruchki")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Obivka</label>
+            <input
+              type="text"
+              {...register("specifications.material.obivka")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Style Specifications */}
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-lg font-medium mb-4">Style</h2>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Long Description (Optional)
-          </label>
-          <textarea
-            {...register('longDescription')}
-            rows={5}
-            className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Detailed description of the set..."
-          ></textarea>
+          <label className="block text-sm font-medium text-gray-700">Style</label>
+          <input
+            type="text"
+            {...register("specifications.style.style")}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+          />
+        </div>
+
+        <h3 className="text-md font-medium mt-4 mb-2">Colors</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Karkas Color</label>
+            <input
+              type="text"
+              {...register("specifications.style.color.karkas")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Fasad Color</label>
+            <input
+              type="text"
+              {...register("specifications.style.color.fasad")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Ruchki Color</label>
+            <input
+              type="text"
+              {...register("specifications.style.color.ruchki")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Obivka Color</label>
+            <input
+              type="text"
+              {...register("specifications.style.color.obivka")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Warranty Specifications */}
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-lg font-medium mb-4">Warranty</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Duration (months)</label>
+            <input
+              type="number"
+              {...register("specifications.warranty.duration", { valueAsNumber: true })}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Lifetime (years)</label>
+            <input
+              type="number"
+              {...register("specifications.warranty.lifetime", { valueAsNumber: true })}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Production</label>
+            <input
+              type="text"
+              {...register("specifications.warranty.production")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            />
+          </div>
         </div>
       </div>
 
       {/* Images */}
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Images</h2>
-        
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Upload Images
@@ -331,15 +558,15 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
         </div>
-        
+
         {/* Image preview */}
         {images.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             {images.map((image, index) => (
               <div key={index} className="relative">
-                <img 
-                  src={image.url} 
-                  alt={image.alt || 'Set image'} 
+                <img
+                  src={image.url}
+                  alt={image.alt || 'Set image'}
                   className="h-24 w-full object-cover rounded-md"
                 />
                 {image.isMain && (
@@ -363,7 +590,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       {/* Products in the Set */}
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Products in the Set</h2>
-        
+
         {/* Selected products */}
         {selectedItems.length > 0 ? (
           <div className="mb-6">
@@ -398,17 +625,17 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                           <div className="flex items-center">
                             <div className="h-8 w-8 flex-shrink-0">
                               {product.images && product.images.length > 0 ? (
-                                <img 
-                                  className="h-8 w-8 rounded object-cover" 
-                                  src={product.images[0].url} 
-                                  alt={product.name} 
+                                <img
+                                  className="h-8 w-8 rounded object-cover"
+                                  src={product.images[0].url}
+                                  alt={product.name}
                                 />
                               ) : (
                                 <div className="h-8 w-8 rounded bg-gray-200"></div>
                               )}
                             </div>
                             <div className="ml-3">
-                            <div className="text-sm font-medium text-gray-900">
+                              <div className="text-sm font-medium text-gray-900">
                                 {product.name}
                               </div>
                               <div className="text-xs text-gray-500">
@@ -422,7 +649,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                             <button
                               type="button"
                               onClick={() => updateProductQuantity(
-                                item.productId, 
+                                item.productId,
                                 Math.max(0, item.defaultQuantity - 1)
                               )}
                               className="px-2 py-1 bg-gray-100 rounded-l"
@@ -434,7 +661,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                               min="0"
                               value={item.defaultQuantity}
                               onChange={(e) => updateProductQuantity(
-                                item.productId, 
+                                item.productId,
                                 Math.max(0, parseInt(e.target.value) || 0)
                               )}
                               className="w-12 text-center border-t border-b border-gray-300 py-1"
@@ -442,7 +669,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                             <button
                               type="button"
                               onClick={() => updateProductQuantity(
-                                item.productId, 
+                                item.productId,
                                 item.defaultQuantity + 1
                               )}
                               className="px-2 py-1 bg-gray-100 rounded-r"
@@ -457,8 +684,8 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                           </div>
                         </td>
                         <td className="px-3 py-2 whitespace-nowrap text-center">
-                          <input 
-                            type="checkbox" 
+                          <input
+                            type="checkbox"
                             checked={item.required}
                             onChange={() => toggleProductRequired(item.productId)}
                             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
@@ -505,24 +732,60 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             </div>
           </div>
         )}
-        
+
         {/* Add products */}
         <div>
           <h3 className="text-md font-medium mb-2">Add Products</h3>
+
+          {/* Search and collection filter section */}
+          <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Search field */}
+            <div className="relative rounded-md shadow-sm">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for products..."
+                className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Collection filter */}
+            <div>
+              <select
+                value={selectedCollection}
+                onChange={handleCollectionChange}
+                className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">All Collections</option>
+                {collectionOptions.map(collection => (
+                  <option key={collection} value={collection}>
+                    {collection}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {availableProducts.length > 0 ? (
-              availableProducts.map(product => (
-                <div 
-                  key={product.id} 
+            {filteredAvailableProducts.length > 0 ? (
+              filteredAvailableProducts.map(product => (
+                <div
+                  key={product.id}
                   className="border rounded-lg p-3 flex justify-between items-center hover:bg-gray-50"
                 >
                   <div className="flex items-center">
                     <div className="h-10 w-10 flex-shrink-0">
                       {product.images && product.images.length > 0 ? (
-                        <img 
-                          className="h-10 w-10 rounded object-cover" 
-                          src={product.images[0].url} 
-                          alt={product.name} 
+                        <img
+                          className="h-10 w-10 rounded object-cover"
+                          src={product.images[0].url}
+                          alt={product.name}
                         />
                       ) : (
                         <div className="h-10 w-10 rounded bg-gray-200"></div>
@@ -532,6 +795,11 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
                       <div className="text-sm font-medium text-gray-900">{product.name}</div>
                       <div className="text-xs text-gray-500">
                         {formatPrice(product.discount ? product.price - product.discount : product.price)}
+                        {product.collection && (
+                          <span className="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded">
+                            {product.collection}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -546,7 +814,9 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
               ))
             ) : (
               <div className="col-span-full text-center py-4 text-gray-500">
-                All available products have been added to the set.
+                {searchQuery.trim() !== '' || selectedCollection !== ''
+                  ? "No products found matching your filters."
+                  : "All available products have been added to the set."}
               </div>
             )}
           </div>

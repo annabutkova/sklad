@@ -48,6 +48,7 @@
   content: "";
   background-image: url("/icons/svg/search.svg");
   background-repeat: no-repeat;
+  background-size: cover;
   position: absolute;
   left: 12px;
   top: 50%;
@@ -119,6 +120,7 @@
   position: absolute;
   background-image: url("/icons/svg/cart.svg");
   background-repeat: no-repeat;
+  background-size: cover;
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
@@ -164,6 +166,8 @@
   position: absolute;
   background-image: url("/icons/svg/catalog.svg");
   background-repeat: no-repeat;
+  background-size: cover;
+
   left: 12px;
   top: 50%;
   transform: translateY(-50%);

@@ -1,0 +1,133 @@
+.product-page {
+    display: flex;
+    gap: 24px;
+}
+
+.product-page_images-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 40px;
+    width: 60%;
+}
+
+.product-page_thumbnails {
+    display: flex;
+    gap: 20px;
+}
+
+.product-page_info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 40%;
+}
+
+.product-page_title {
+    //font-family: Roboto Condensed;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1;
+}
+
+.product-page_list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.product-page_list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.product-page_list-option {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.product-page_list-value {
+    //font-family: Roboto Condensed;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+}
+
+a.product-page_link {
+    //font-family: Roboto Condensed;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.product-page_price-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-page_old-price {
+    //font-family: Roboto Condensed;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    text-decoration: line-through;
+    color: var(--gray);
+}
+
+.product-page_new-price {
+    //font-family: Roboto Condensed;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--red);
+}
+
+.product-page_discount {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-width: 60px;
+    background: var(--red);
+    padding: 8px 12px;
+    border-radius: 10px;
+    //font-family: Roboto Condensed;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--white);
+}
+
+.product-page_price {
+    //font-family: Roboto Condensed;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1;
+}
+
+.product-page_subheader {
+    //font-family: Roboto Condensed;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.product-page_description,
+.product-page_table {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+.product-page_table {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    border-radius: 8px;
+    background: var(--light-gray);
+}

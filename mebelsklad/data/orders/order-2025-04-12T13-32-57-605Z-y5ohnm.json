@@ -1,0 +1,28 @@
+{
+  "customer": {
+    "name": "test",
+    "phone": "455768789",
+    "address": "hmmggh"
+  },
+  "items": [
+    {
+      "id": "BED001",
+      "name": "Кровать \"Александрия\"",
+      "type": "product",
+      "quantity": 2,
+      "price": 5000000,
+      "configuration": null
+    },
+    {
+      "id": "WARD001",
+      "name": "Шкаф \"Александрия\"",
+      "type": "product",
+      "quantity": 2,
+      "price": 7800000,
+      "configuration": null
+    }
+  ],
+  "subtotal": 25600000,
+  "notes": "",
+  "createdAt": "2025-04-12T13:32:57.416Z"
+}

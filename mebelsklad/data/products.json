@@ -4,14 +4,45 @@
     "name": "Кровать \"Александрия\"",
     "slug": "krovat-alexandria",
     "categoryId": "CAT003",
+    "collection": "Александрия",
     "price": 5500000,
     "discount": 500000,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
     "dimensions": {
       "width": 190,
       "height": 108,
-      "depth": 206
+      "depth": 206,
+      "length": 0
     },
-    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "specifications": {
+      "material": {
+        "karkas": "",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "",
+        "color": {
+          "karkas": "",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "bedSize": "180x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 0,
+        "lifetime": 0,
+        "production": ""
+      }
+    },
     "features": [
       "Прочный каркас из натурального дерева",
       "Ортопедическое основание",
@@ -23,16 +54,6 @@
         "alt": "Кровать Александрия",
         "isMain": true
       }
-    ],
-    "specifications": {
-      "material": "Дерево, ЛДСП",
-      "color": "Бежевый",
-      "style": "Классический",
-      "warranty": "18 месяцев"
-    },
-    "inStock": true,
-    "relatedProductIds": [
-      "WARD001"
     ]
   },
   {
@@ -88,6 +109,16 @@
         "url": "/images/spalni/alexandria/01/1.jpg",
         "alt": "Кровать Александрия",
         "isMain": true
+      },
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": false
+      },
+      {
+        "url": "/images/spalni/alexandria/02/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": false
       }
     ],
     "specifications": {
@@ -99,6 +130,85 @@
     "inStock": true,
     "relatedProductIds": [
       "WARD001"
+    ]
+  },
+  {
+    "id": "PRODm9lntb8uPMO80",
+    "name": "Кровать \"Александрия\" (Copy) (Copy)",
+    "slug": "krovat-alexandria-copy-copy",
+    "categoryId": "CAT003",
+    "price": 5500000,
+    "discount": 500000,
+    "dimensions": {
+      "width": 190,
+      "height": 108,
+      "depth": 206
+    },
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "features": [
+      "Прочный каркас из натурального дерева",
+      "Ортопедическое основание",
+      "Удобное изголовье с мягкой обивкой"
+    ],
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": true
+      },
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": false
+      },
+      {
+        "url": "/images/spalni/alexandria/02/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": false
+      }
+    ],
+    "specifications": {
+      "material": "Дерево, ЛДСП",
+      "color": "Бежевый",
+      "style": "Классический",
+      "warranty": "18 месяцев"
+    },
+    "inStock": true,
+    "relatedProductIds": [
+      "WARD001"
+    ]
+  },
+  {
+    "id": "PRODm9zgd2137VO9Z",
+    "name": "Кровать \"Александрия\" eeee",
+    "slug": "krovat-alexandria-copy",
+    "categoryId": "CAT003",
+    "price": 5500000,
+    "discount": 500000,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "dimensions": {
+      "width": 190,
+      "height": 108,
+      "depth": 206
+    },
+    "specifications": {
+      "material": "Дерево, ЛДСП",
+      "color": "Бежевый",
+      "style": "Классический",
+      "warranty": "18 месяцев"
+    },
+    "features": [
+      "Прочный каркас из натурального дерева",
+      "Ортопедическое основание",
+      "Удобное изголовье с мягкой обивкой"
+    ],
+    "images": [
+      {
+        "url": "/images/spalni/alexandria/01/1.jpg",
+        "alt": "Кровать Александрия",
+        "isMain": true
+      }
     ]
   }
 ]
