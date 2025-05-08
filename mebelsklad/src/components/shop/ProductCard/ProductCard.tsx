@@ -12,12 +12,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  // Make sure we're only dealing with items of type 'product'
-  if (product.type !== "product") {
-    console.warn(
-      `ProductCard received an item that's not a product: ${product.id}`
-    );
-  }
 
   const mainImage =
     product.images.find((img) => img.isMain) || product.images[0];
@@ -25,9 +19,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="product-card">
       <Link href={`/product/${product.slug}`} className="product-link">
-        {product.discount && product.discount > 0 && (
+        {product.discount !== 0 && (
           <div className="product-label product-discount-label">
-            -{Math.round((product.discount / product.price) * 100)}%
+            -{Math.round(((product.discount ?? 0) / product.price) * 100)}%
           </div>
         )}
         {product.inStock && (

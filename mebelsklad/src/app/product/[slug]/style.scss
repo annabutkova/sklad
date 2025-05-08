@@ -3,17 +3,28 @@
     gap: 24px;
 }
 
-.product-page_images-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    gap: 40px;
+.product-gallery {
     width: 60%;
+    margin-bottom: 40px;
 }
 
-.product-page_thumbnails {
-    display: flex;
-    gap: 20px;
+.product-slide {
+    position: relative;
+    aspect-ratio: 3/2;
+
+    img {
+        object-fit: fill;
+    }
+}
+
+.product-thumbnails {
+    position: relative;
+    aspect-ratio: 3/2;
+    width: 100px;
+
+    img {
+        object-fit: fill;
+    }
 }
 
 .product-page_info {

@@ -1,42 +1,13 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Product, Category, ProductImage, BedSize, Collection } from '@/types';
 import { generateSlug, generateId } from '@/lib/utils/format';
-
-// Define the new specification types
-export type Material = {
-  karkas?: string;
-  fasad?: string;
-  ruchki?: string;
-  obivka?: string;
-}
-
-export type Style = {
-  style?: string;
-  color?: {
-    karkas?: string;
-    fasad?: string;
-    ruchki?: string;
-    obivka?: string;
-  };
-}
-
-export type Warranty = {
-  duration?: number;
-  lifetime?: number;
-  production?: string;
-}
-
-export type Content = {
-  yashiki?: number;
-  polki?: number;
-  shtanga?: number;
-}
 
 // Updated product schema with the new types and collection field
 const productSchema = z.object({
@@ -95,8 +66,9 @@ interface ProductFormProps {
 
 export default function ProductForm({ product, categories }: ProductFormProps) {
   const router = useRouter();
-  const [images, setImages] = useState<ProductImage[]>(product?.images || []);
+  const [images, setImages] = useState<ProductImage[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Set up form with react-hook-form
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProductFormValues>({
@@ -174,32 +146,52 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
   });
 
   const collectionOptions = Object.values(Collection);
+  const selectedCollection = watch('collection');
+
 
   // Watch the name field to auto-generate slug
   const name = watch('name');
 
   useEffect(() => {
-    if (name && !product) { // Only auto-generate for new products
+    // Auto-generate slug for new products
+    if (name && !product) {
       setValue('slug', generateSlug(name));
     }
   }, [name, setValue, product]);
 
-  // Handle form submission
+  // Add a new separate useEffect specifically for collection initialization
+  // This should run only once on component mount
+  useEffect(() => {
+    // Initialize collection only if it's not already set
+    if ((!watch('collection') || watch('collection') === '') && collectionOptions.length > 0) {
+      // Set default collection if none is selected
+      setValue('collection', collectionOptions[0]);
+    }
+  }, [collectionOptions, setValue]);
+
   const onSubmit = async (data: ProductFormValues) => {
     setIsSubmitting(true);
 
     try {
+      // Make sure collection is properly set
+      let finalCollection = data.collection;
+      if (!finalCollection && collectionOptions.length > 0) {
+        finalCollection = collectionOptions[0];
+      }
+
       // Create the complete product object
       const completeProduct: Product = {
         ...data,
-        collection: data.collection as Collection,
+        collection: finalCollection as Collection,
         images: images,
         features: product?.features || [],
         specifications: {
           ...data.specifications,
-          bedSize: data.specifications.bedSize as BedSize, // Ensure bedSize is cast to the BedSize enum
+          bedSize: data.specifications.bedSize as BedSize,
         },
       };
+
+      console.log('Saving product with collection:', completeProduct.collection);
 
       // Save to API
       const response = await fetch(
@@ -231,21 +223,50 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
   };
 
   // Handle image upload (simplified for now)
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    // For simplicity, we're not actually uploading files here
-    // In a real app, you would upload to a storage service
-    // and get back URLs to store in your JSON
+    setIsUploading(true);
 
-    const newImages: ProductImage[] = Array.from(files).map((file, index) => ({
-      url: URL.createObjectURL(file),
-      alt: file.name,
-      isMain: index === 0 && images.length === 0
-    }));
+    try {
+      // Create a slug from the collection title
+      const folderSlug = generateSlug(selectedCollection);
 
-    setImages([...images, ...newImages]);
+      // Create FormData to send files
+      const formData = new FormData();
+
+      // Add the folder slug
+      formData.append('folderSlug', folderSlug);
+
+      // Add all files
+      Array.from(files).forEach(file => {
+        formData.append('images', file);
+      });
+
+      // Send to server
+      const response = await axios.post('/api/upload-images', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      // Add the uploaded images to state
+      const newImages: ProductImage[] = response.data.uploadedImages.map(
+        (img: { url: string, filename: string }, index: number) => ({
+          url: img.url,
+          alt: img.filename,
+          isMain: index === 0 && images.length === 0
+        })
+      );
+
+      setImages([...images, ...newImages]);
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      alert('Failed to upload images. Please try again.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -330,12 +351,16 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
               {...register("collection")}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
             >
+              <option value="">Select a collection</option>
               {collectionOptions.map(collection => (
                 <option key={collection} value={collection}>
                   {collection}
                 </option>
               ))}
             </select>
+            {errors.collection && (
+              <p className="mt-1 text-sm text-red-600">{errors.collection.message}</p>
+            )}
           </div>
 
           {/* Price */}
@@ -619,48 +644,35 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* Images */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-lg font-medium mb-4">Images</h2>
+      {/* File upload input */}
+      <div className="form-group">
+        <label htmlFor="image-upload">Product Images</label>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Upload Images
-          </label>
+        {/* File upload input */}
+        <div className="form-group">
+          <label htmlFor="image-upload">Product Images</label>
           <input
             type="file"
-            onChange={handleImageUpload}
+            id="image-upload"
             accept="image/*"
             multiple
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            onChange={handleImageUpload}
+            disabled={isUploading}
           />
+          {isUploading && <span>Uploading...</span>}
         </div>
 
-        {/* Image preview */}
-        {images.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-            {images.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image.url}
-                  alt={image.alt || 'Product image'}
-                  className="h-24 w-full object-cover rounded-md"
-                />
-                {image.isMain && (
-                  <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-md">
-                    Main
-                  </span>
-                )}
-                <button
-                  type="button"
-                  onClick={() => setImages(images.filter((_, i) => i !== index))}
-                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
+        {/* Display uploaded images */}
+        <div className="image-preview">
+          {images.map((image, index) => (
+            <div key={index} className={`image-item ${image.isMain ? 'main-image' : ''}`}>
+              <img src={image.url} alt={image.alt} width="100" />
+              <p>{image.alt}</p>
+              {image.isMain && <span className="main-badge">Main</span>}
+            </div>
+          ))}
+        </div>
+
       </div>
 
       {/* Submit button */}

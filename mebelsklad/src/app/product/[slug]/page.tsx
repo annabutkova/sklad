@@ -1,6 +1,5 @@
 // src/app/product/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { jsonDataService } from '@/lib/api/jsonDataService';
 import { formatPrice } from '@/lib/utils/format';
@@ -8,7 +7,7 @@ import AddToCartButton from '@/components/shop/AddToCartButton/AddToCartButton';
 import ProductCard from '@/components/shop/ProductCard/ProductCard';
 import './style.scss';
 import SpecificationRow from '@/components/SpecificationRow';
-import ImageGallery from 'react-image-gallery';
+import ProductGallery from '@/components/ProductGallery';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const paramsData = await params;
@@ -94,48 +93,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
       <div className="product-page">
         {/* Product images */}
-        {/* <div className="product-page_images-wrapper">
-          <Image
-            src={mainImage.url}
-            alt={mainImage.alt || product.name}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "100%", height: "auto" }}
-            className="product-page_image"
-            priority
-          />
 
-          {product.images.length > 1 && (
-            <div className="product-page_thumbnails">
-              {product.images.map((image, index) => (
-                <div key={index} className={`
-                  ${image.isMain ? 'ring-2 ring-blue-500' : 'border border-gray-200'}
-                `}>
-                  <Image
-                    src={image.url}
-                    alt={image.alt || `${product.name} image ${index + 1}`}
-                    width={100}
-                    height={100}
-                    className="w-full h-20 object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div> */}
-
-
-
-        <ImageGallery
-          items={images}
-          showPlayButton={false}
-          showFullscreenButton={true}
-          useBrowserFullscreen={false}
-          showNav={true}
-        />
-
-
+        <ProductGallery images={product.images} />
 
         {/* Product info */}
         <div className="product-page_info">
@@ -158,6 +117,12 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   <li className="product-page_list-item">
                     <span className="product-page_list-option">габариты (Ш×В×Г), см</span>
                     <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.depth} </span>
+                  </li>
+                )}
+                {product.specifications?.dimensions?.width && product.specifications?.dimensions?.height && product.specifications?.dimensions?.length && (
+                  <li className="product-page_list-item">
+                    <span className="product-page_list-option">габариты (Ш×В×Д), см</span>
+                    <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.length} </span>
                   </li>
                 )}
               </>
