@@ -253,7 +253,8 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         items: selectedItems,
         specifications: data.specifications || {},
         inStock: true,
-        collection: data.collection as Collection, // Cast collection to the correct type
+        collection: data.collection as Collection,
+        categoryIds: []
       };
 
       console.log('Сохраняю набор с изображениями:', completeSet.images);

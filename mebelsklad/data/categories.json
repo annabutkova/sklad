@@ -16,7 +16,7 @@
   },
   {
     "id": "CAT003",
-    "name": "Кровати",
+    "name": "Кровати в спальню",
     "slug": "krovati",
     "parentId": "CAT002",
     "description": "Комфортные кровати",
@@ -24,7 +24,7 @@
   },
   {
     "id": "CAT004",
-    "name": "Шкафы",
+    "name": "Шкафы в спальню",
     "slug": "shkafy",
     "parentId": "CAT002",
     "description": "Вместительные шкафы",
@@ -53,5 +53,37 @@
     "parentId": "CAT002",
     "description": "",
     "imageUrl": "/uploads/categories/komody-1.jpg"
+  },
+  {
+    "id": "CATmags7erjHSG10",
+    "name": "Детская",
+    "slug": "detskaya",
+    "parentId": "CAT001",
+    "description": "",
+    "imageUrl": "/uploads/categories/detskie.jpg"
+  },
+  {
+    "id": "CATmagsb9r62DTMW",
+    "name": "Кровати в детскую",
+    "slug": "detskie-krovati",
+    "parentId": "CATmags7erjHSG10",
+    "description": "",
+    "imageUrl": "/uploads/categories/detskie-krovati.jpg"
+  },
+  {
+    "id": "CATmaguvtt0INCRA",
+    "name": "Письменные столы",
+    "slug": "pismennye-stoly",
+    "parentId": "CATmags7erjHSG10",
+    "description": "",
+    "imageUrl": "/uploads/categories/pismennye-stoly.jpg"
+  },
+  {
+    "id": "CATmaguxb8vCEQNS",
+    "name": "Шкафы в детскую",
+    "slug": "shaky-v-detskuyu",
+    "parentId": "CATmags7erjHSG10",
+    "description": "",
+    "imageUrl": "/uploads/categories/shaky-v-detskuyu.jpg"
   }
 ]

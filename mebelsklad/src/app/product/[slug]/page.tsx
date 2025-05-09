@@ -37,7 +37,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   // Get category information
   const categories = await jsonDataService.getAllCategories();
-  const category = categories.find(c => c.id === product.categoryId);
+  const productCategories = categories.filter(c =>
+    product.categoryIds && product.categoryIds.includes(c.id)
+  );
 
   // Get related products
   const relatedProducts = await jsonDataService.getProductsByCollection(product.collection);
@@ -68,19 +70,22 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
             </svg>
           </li>
-          {category && (
-            <li className="flex items-center">
-              <Link
-                href={`/catalog?category=${category.slug}`}
-                className="text-gray-500 hover:text-gray-900"
-              >
-                {category.name}
-              </Link>
-              <svg className="mx-2 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-              </svg>
-            </li>
-          )}
+          <li className="product-categories mt-2">
+            {productCategories.map((cat, index) => (
+              <span key={cat.id}>
+                <Link
+                  href={`/catalog?category=${cat.slug}`}
+                  className="text-blue-600 hover:underline ml-1 text-sm"
+                >
+                  {cat.name}
+                </Link>
+                {index < productCategories.length - 1 && ", "}
+              </span>
+            ))}
+          </li>
+          <svg className="mx-2 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
           <li className="text-gray-900 font-medium">{product.name}</li>
         </ol>
       </nav>

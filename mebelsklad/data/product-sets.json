@@ -3,7 +3,9 @@
     "id": "SET001",
     "name": "Спальня \"Александрия\"",
     "slug": "spalnya-alexandria",
-    "categoryId": "CAT002",
+    "categoryIds": [
+      "CAT002"
+    ],
     "description": "Полный комплект для спальни в неоклассическом стиле",
     "collection": "Александрия",
     "inStock": true,

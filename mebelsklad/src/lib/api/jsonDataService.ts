@@ -58,7 +58,9 @@ export class JsonDataService {
 
   async getProductsByCategory(categoryId: string): Promise<Product[]> {
     const products = await this.getAllProducts();
-    return products.filter(product => product.categoryId === categoryId);
+    return products.filter(product =>
+      product.categoryIds && product.categoryIds.includes(categoryId)
+    );
   }
 
   async getProductsByCollection(collection: string): Promise<Product[]> {

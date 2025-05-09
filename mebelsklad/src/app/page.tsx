@@ -69,7 +69,7 @@ export default async function Home() {
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
   const setCategories = categories.filter((cat) =>
-    sets.some((set) => set.categoryId === cat.id)
+    sets.some((set) => set.categoryIds.includes(cat.id))
   );
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
@@ -77,7 +77,7 @@ export default async function Home() {
     (cat) =>
       cat.parentId &&
       !setCategories.some((sc) => sc.id === cat.id) &&
-      products.some((product) => product.categoryId === cat.id)
+      products.some((product) => product.categoryIds.includes(cat.id))
   );
 
   // Get featured products (with discount or marked as featured)

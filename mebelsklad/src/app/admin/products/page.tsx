@@ -87,7 +87,7 @@ export default async function AdminProductsPage() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    {categoryMap[product.categoryId] || "Unknown"}
+                    {product.categoryIds.map((id) => categoryMap[id] || "Unknown").join(", ")}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -108,11 +108,10 @@ export default async function AdminProductsPage() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      product.inStock
+                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${product.inStock
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
-                    }`}
+                      }`}
                   >
                     {product.inStock ? "In Stock" : "Out of Stock"}
                   </span>

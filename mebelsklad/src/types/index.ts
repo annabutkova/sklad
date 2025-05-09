@@ -4,7 +4,7 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
-  categoryId: string;
+  categoryIds: string[];
   price: number;
   discount?: number;
   inStock: boolean;

@@ -14,7 +14,7 @@ const productSchema = z.object({
   id: z.string().min(1, "ID is required"),
   name: z.string().min(3, "Name must be at least 3 characters"),
   slug: z.string().min(3, "Slug is required"),
-  categoryId: z.string().min(1, "Category is required"),
+  categoryIds: z.array(z.string()).min(1, "At least one category is required"),
   collection: z.string(),
   price: z.number().min(0, "Price must be positive"),
   discount: z.number().min(0, "Discount must be positive").optional(),
@@ -83,6 +83,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     resolver: zodResolver(productSchema),
     defaultValues: product ? {
       ...product,
+      categoryIds: product.categoryIds || [],
       collection: '',
       price: product.price || 0,
       discount: product.discount || 0,
@@ -123,6 +124,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       }
     } : {
       id: generateId('PROD'),
+      categoryIds: [],
       inStock: true,
       collection: '' as Collection,
       price: 0,
@@ -189,16 +191,19 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     }
   }, [collectionOptions, setValue, product, watch]);
 
-  const categoryId = watch('categoryId');
-  const selectedCategory = categories.find(cat => cat.id === categoryId);
-
   const isBedCategory = () => {
-    // Если категория не выбрана, возвращаем false
-    if (!selectedCategory) return false;
+    // Get selected category IDs
+    const categoryIds = watch('categoryIds') || [];
 
-    // Проверяем slug категории
-    const bedCategorySlugs = ['krovati', 'divany-krovati']; // Замените на реальные slug-и
-    return bedCategorySlugs.includes(selectedCategory.slug);
+    // Check if any of the selected categories match bed categories
+    return categoryIds.some(categoryId => {
+      const category = categories.find(cat => cat.id === categoryId);
+      if (!category) return false;
+
+      // Проверяем slug категории
+      const bedCategorySlugs = ['krovati', 'detskie-krovati'];
+      return bedCategorySlugs.includes(category.slug);
+    });
   };
 
   const onSubmit = async (data: ProductFormValues) => {
@@ -216,6 +221,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       // Create the complete product object
       const completeProduct: Product = {
         ...data,
+        categoryIds: data.categoryIds,
         collection: finalCollection as Collection,
         images: images,
         features: product?.features || [],
@@ -364,24 +370,44 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
             )}
           </div>
 
-          {/* Category */}
+          {/* Category Selection - Multi-select */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Category
+              Categories
             </label>
-            <select
-              {...register('categoryId')}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">Select a category</option>
+            <div className="mt-1">
               {categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
+                <div key={category.id} className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id={`category-${category.id}`}
+                    value={category.id}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      const categoryId = category.id;
+                      const currentCategoryIds = watch('categoryIds') || [];
+
+                      if (checked) {
+                        // Добавляем категорию, если её ещё нет
+                        if (!currentCategoryIds.includes(categoryId)) {
+                          setValue('categoryIds', [...currentCategoryIds, categoryId]);
+                        }
+                      } else {
+                        // Удаляем категорию
+                        setValue('categoryIds', currentCategoryIds.filter(id => id !== categoryId));
+                      }
+                    }}
+                    checked={(watch('categoryIds') || []).includes(category.id)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor={`category-${category.id}`} className="ml-2 block text-sm text-gray-900">
+                    {category.name}
+                  </label>
+                </div>
               ))}
-            </select>
-            {errors.categoryId && (
-              <p className="mt-1 text-sm text-red-600">{errors.categoryId.message}</p>
+            </div>
+            {errors.categoryIds && (
+              <p className="mt-1 text-sm text-red-600">{errors.categoryIds.message}</p>
             )}
           </div>
 

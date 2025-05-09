@@ -44,12 +44,12 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
     if (activeCategory) {
       // Check if this category has any sets
       const categorySets = allSets.filter(
-        (set) => set.categoryId === activeCategory!.id
+        (set) => set.categoryIds.includes(activeCategory!.id)
       );
 
       // Check if this category has any individual products
       const categoryProducts = allProducts.filter(
-        (product) => product.categoryId === activeCategory!.id
+        (product) => product.categoryIds && activeCategory && product.categoryIds.includes(activeCategory.id)
       );
 
       // Determine what content to show based on available items and content type filter
@@ -216,9 +216,9 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
               {/* Content type filter - only show if this category has both types */}
               {activeCategory &&
                 allProducts.some(
-                  (p) => p.categoryId === activeCategory?.id
+                  (p) => p.categoryIds?.includes(activeCategory?.id)
                 ) &&
-                allSets.some((s) => s.categoryId === activeCategory?.id) && (
+                allSets.some((s) => s.categoryIds.includes(activeCategory?.id)) && (
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-gray-600">Show:</span>
                     <select
