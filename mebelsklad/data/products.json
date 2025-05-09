@@ -2,19 +2,13 @@
   {
     "id": "PRODma04c7vb66DZ7",
     "name": "Кровать \"Александрия\" с ПМ (180 см)",
-    "slug": "krovat-alexanriya-s-pm-180-sm",
-    "categoryId": "CAT004",
-    "collection": "Бора",
+    "slug": "krovat-alexandriya-s-pm-180-sm",
+    "categoryId": "CAT003",
+    "collection": "Александрия",
     "price": 6050000,
     "discount": 0,
     "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
     "inStock": true,
-    "dimensions": {
-      "width": 197,
-      "height": 109,
-      "depth": 0,
-      "length": 207
-    },
     "specifications": {
       "material": {
         "karkas": "ЛДСП",
@@ -23,13 +17,19 @@
         "obivka": ""
       },
       "style": {
-        "style": "Современный",
+        "style": "Неоклассика",
         "color": {
-          "karkas": "",
+          "karkas": "Бежевый",
           "fasad": "",
           "ruchki": "",
           "obivka": ""
         }
+      },
+      "dimensions": {
+        "width": 197,
+        "height": 109,
+        "depth": 0,
+        "length": 207
       },
       "bedSize": "180x200",
       "content": {
@@ -44,6 +44,459 @@
       }
     },
     "features": [],
-    "images": []
+    "images": [
+      {
+        "url": "/uploads/Александрия/krovat-alexandriya-s-pm-180-sm.jpg",
+        "alt": "Кровать \"Александрия\" с ПМ (180 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmafpjzjx5XXFR",
+    "name": "Кровать \"Александрия\" с ПМ (160 см)",
+    "slug": "krovat-alexandriya-s-pm-160-sm",
+    "categoryId": "CAT003",
+    "collection": "Александрия",
+    "price": 4890000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 177,
+        "height": 109,
+        "depth": 0,
+        "length": 207
+      },
+      "bedSize": "160x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/krovat-alexandriya-s-pm-160-sm.jpg",
+        "alt": "Кровать \"Александрия\" с ПМ (160 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmafqqpzo5KXI3",
+    "name": "Тумба \"Александрия\"",
+    "slug": "tumba-alexandriya",
+    "categoryId": "CATmafqirdeX729Y",
+    "collection": "Александрия",
+    "price": 930000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 45,
+        "height": 43,
+        "depth": 38,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 2,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/tumba-alexandriya.jpg",
+        "alt": "Тумба \"Александрия\"",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/tumba-alexandriya-1.jpg",
+        "alt": "Тумба \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmafr0q6wIQMLC",
+    "name": "Комод \"Александрия\"",
+    "slug": "komod-alexandriya",
+    "categoryId": "CATmafqlpl0LVNP6",
+    "collection": "Александрия",
+    "price": 2670000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 79,
+        "depth": 47,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 4,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/komod-alexandriya.jpg",
+        "alt": "Комод \"Александрия\"",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/komod-alexandriya-1.jpg",
+        "alt": "Комод \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmafr4ru3F0RRQ",
+    "name": "Шкаф для белья \"Александрия\"",
+    "slug": "shkaf-dlya-belya-alexandriya",
+    "categoryId": "CAT004",
+    "collection": "Александрия",
+    "price": 2590000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 55,
+        "height": 223,
+        "depth": 60,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 2,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-dlya-belya-alexandriya.jpg",
+        "alt": "Шкаф для белья \"Александрия\"",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-dlya-belya-alexandriya-1.jpg",
+        "alt": "Шкаф для белья \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmafranqdTMEFY",
+    "name": "Шкаф для одежды \"Александрия\"",
+    "slug": "shkaf-dlya-odezhdy-alexandriya",
+    "categoryId": "CAT004",
+    "collection": "Александрия",
+    "price": 4840000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 223,
+        "depth": 60,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 1,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-dlya-odezhdy-alexandriya.jpg",
+        "alt": "Шкаф для одежды \"Александрия\"",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-dlya-odezhdy-alexandriya-1.jpg",
+        "alt": "Шкаф для одежды \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmafrf49jKLTY3",
+    "name": "Шкаф угловой \"Александрия\"",
+    "slug": "shkaf-uglovoy-alexandriya",
+    "categoryId": "CAT004",
+    "collection": "Александрия",
+    "price": 3740000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "Металл",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 91,
+        "height": 223,
+        "depth": 91,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 8,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-uglovoy-alexandriya.jpg",
+        "alt": "Шкаф угловой \"Александрия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-uglovoy-alexandriya-1.jpg",
+        "alt": "Шкаф угловой \"Александрия\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmafrj4q3BMPTO",
+    "name": "Стол туалетный \"Александрия\"",
+    "slug": "stol-tualetnyy-alexandriya",
+    "categoryId": "CATmafqlpl0LVNP6",
+    "collection": "Александрия",
+    "price": 2590000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 107,
+        "height": 166,
+        "depth": 46,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 2,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/stol-tualetnyy-alexandriya.jpg",
+        "alt": "Стол туалетный \"Александрия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/stol-tualetnyy-alexandriya-1.jpg",
+        "alt": "Стол туалетный \"Александрия\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmafrnzlaJNXRD",
+    "name": "Зеркало \"Александрия\"",
+    "slug": "zerkalo-alexandriya",
+    "categoryId": "CATmafqlpl0LVNP6",
+    "collection": "Александрия",
+    "price": 730000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "Зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 50,
+        "height": 103,
+        "depth": 2,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/zerkalo-alexandriya.jpg",
+        "alt": "Зеркало \"Александрия\"",
+        "isMain": true
+      }
+    ]
   }
 ]

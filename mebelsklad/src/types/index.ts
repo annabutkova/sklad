@@ -43,6 +43,7 @@ export enum BedSize {
   Size140 = "140x200",
   Size120 = "120x200",
   Size90 = "90x200",
+  None = "",
 }
 
 

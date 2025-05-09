@@ -8,6 +8,12 @@ import { ProductSet, Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/utils/format";
 import "./style.scss";
+import ProductGallery from "@/components/shop/ProductGallery/ProductGallery";
+import SpecificationRow from "@/components/shop/SpecificationsTable/SpecificationRow";
+import ProductCard from "@/components/shop/ProductCard/ProductCard";
+import SpecificationsTable from "@/components/shop/SpecificationsTable/SpecificationsTable";
+import { jsonDataService } from "@/lib/api/jsonDataService";
+import SetCard from "@/components/shop/SetCard/SetCard";
 
 export interface SetDetailProps {
   set: ProductSet;
@@ -18,9 +24,11 @@ export interface SetDetailProps {
     maxQuantity: number;
     required: boolean;
   }>;
+  relatedProducts: Product[];
+  relatedSets: ProductSet[];
 }
 
-export default function SetDetail({ set, setProducts }: SetDetailProps) {
+export default function SetDetail({ set, setProducts, relatedProducts, relatedSets }: SetDetailProps) {
   const { addProductsFromSet } = useCart();
   const [selectedQuantities, setSelectedQuantities] = useState<
     Record<string, number>
@@ -28,6 +36,7 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [defaultPrice, setDefaultPrice] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
+
 
   // Initialize selected quantities with default values
   useEffect(() => {
@@ -129,8 +138,7 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
     }
   };
 
-  // Get main image
-  const mainImage = set.images.find((img) => img.isMain) || set.images[0];
+
 
   return (
     <div className="main">
@@ -175,49 +183,43 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
 
       <div className="product-page">
         {/* Set image */}
-        <div className="product-page_images-wrapper">
-          <Image
-            src={mainImage.url}
-            alt={mainImage.alt || set.name}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "100%", height: "auto" }}
-            className="product-page_image"
-            priority
-          />
-        </div>
-
-        {/* Thumbnail gallery */}
-        {set.images.length > 1 && (
-          <div className="product-page_thumbnails">
-            {set.images.map((image, index) => (
-              <div
-                key={index}
-                className={`
-                  rounded-md overflow-hidden cursor-pointer
-                  ${image.isMain
-                    ? "ring-2 ring-blue-500"
-                    : "border border-gray-200"
-                  }
-                `}
-              >
-                <Image
-                  src={image.url}
-                  alt={image.alt || `${set.name} image ${index + 1}`}
-                  width={100}
-                  height={100}
-                  className="w-full h-20 object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        )}
+        <ProductGallery images={set.images} />
 
 
         {/* Set info */}
         <div className="product-page_info">
           <h1 className="product-page_title">{set.name}</h1>
+
+          <ul className="product-page_list">
+
+            {(set.specifications?.style?.color?.karkas || set.specifications?.style?.color?.fasad) && (
+              <li className="product-page_list-item">
+                <span className="product-page_list-option">цвет</span>
+                <span className="product-page_list-value">
+                  {[
+                    set.specifications.style.color.karkas && `${set.specifications.style.color.karkas}`,
+                    set.specifications.style.color.fasad && `${set.specifications.style.color.fasad}`
+                  ].filter(Boolean).join(', ')}
+                </span>
+              </li>
+            )}
+
+            {(set.specifications?.material?.karkas || set.specifications?.material?.fasad) && (
+              <li className="product-page_list-item">
+                <span className="product-page_list-option">материал</span>
+                <span className="product-page_list-value">
+                  {[
+                    set.specifications.material.karkas && `${set.specifications.material.karkas}`,
+                    set.specifications.material.fasad && `${set.specifications.material.fasad}`,
+                    set.specifications.material.obivka && `${set.specifications.material.obivka}`
+                  ].filter(Boolean).join(', ')}
+                </span>
+              </li>
+            )}
+
+            <a href="#harakteristiki" className="product-page_link">Все характеристики</a>
+
+          </ul>
 
           {/* Product selection */}
           <div className="product-page_set-wrapper">
@@ -245,7 +247,7 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
                       {/* Product info */}
                       <div className="product-page_set-item--left">
                         <Link
-                          href={`/product/${product.slug}`}>
+                          href={`/product/${product.slug}`} className="product-page_set-item-link">
                           {product.images && product.images.length > 0 ? (
                             <img
                               src={product.images[0].url}
@@ -346,17 +348,34 @@ export default function SetDetail({ set, setProducts }: SetDetailProps) {
         )}
 
         {/* Specifications */}
-        {set.specifications && Object.keys(set.specifications).length > 0 && (
-          <div className="product-page_table">
-            {Object.entries(set.specifications).map(([key, value]) => (
-              <div key={key} className="py-3 flex justify-between border-b border-gray-200">
-                <span className="text-gray-500">{key}</span>
-                <span className="font-medium">{value}</span>
-              </div>
-            ))}
-          </div>
+        {set.specifications && (
+          <SpecificationsTable specifications={set.specifications} />
         )}
       </div>
+
+      {/* Related products */}
+      {relatedProducts.length > 0 && (
+        <div>
+          <h2 className="product-page_subheader">Товары из серии</h2>
+          <div className="products-wrapper">
+            {relatedProducts.map(relatedProduct => (
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {relatedSets.length > 0 && (
+        <div>
+          <h2 className="product-page_subheader">Комплекты из серии</h2>
+          <div className="products-wrapper">
+            {relatedSets.map(relatedSet => (
+              <SetCard key={relatedSet.id} set={relatedSet} allProducts={relatedProducts} />
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

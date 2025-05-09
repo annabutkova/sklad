@@ -3,30 +3,6 @@
     gap: 24px;
 }
 
-.product-gallery {
-    width: 60%;
-    margin-bottom: 40px;
-}
-
-.product-slide {
-    position: relative;
-    aspect-ratio: 3/2;
-
-    img {
-        object-fit: fill;
-    }
-}
-
-.product-thumbnails {
-    position: relative;
-    aspect-ratio: 3/2;
-    width: 100px;
-
-    img {
-        object-fit: fill;
-    }
-}
-
 .product-page_info {
     display: flex;
     flex-direction: column;
@@ -39,6 +15,8 @@
     font-weight: 500;
     font-size: 36px;
     line-height: 1;
+    word-break: keep-all;
+
 }
 
 .product-page_list {

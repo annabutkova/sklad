@@ -31,6 +31,7 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(category?.imageUrl || null);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Set up form with react-hook-form
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<CategoryFormValues>({
@@ -44,7 +45,8 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
 
   // Watch the name field to auto-generate slug
   const name = watch('name');
-  
+  const slug = watch('slug');
+
   // Auto-generate slug when name changes (for new categories)
   React.useEffect(() => {
     if (name && !category) {
@@ -55,7 +57,7 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
   // Handle form submission
   const onSubmit = async (data: CategoryFormValues) => {
     setIsSubmitting(true);
-    
+
     try {
       // Create the complete category object
       const completeCategory: Category = {
@@ -65,8 +67,8 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
 
       // Save to API
       const response = await fetch(
-        category 
-          ? `/api/admin/categories/${category.id}` 
+        category
+          ? `/api/admin/categories/${category.id}`
           : '/api/admin/categories',
         {
           method: category ? 'PUT' : 'POST',
@@ -92,17 +94,58 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
     }
   };
 
-  // Handle image upload
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // В компоненте CategoryForm.tsx, функция handleImageUpload:
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    // For simplicity, we're just creating a blob URL for preview
-    // In a real app, you would upload to a storage service
-    setImagePreview(URL.createObjectURL(files[0]));
-    
-    // You would normally get back a URL from your upload service
-    // setValue('imageUrl', uploadedUrl);
+    setIsUploading(true);
+
+    try {
+      // Get the category slug and name
+      const categorySlug = watch('slug') || generateSlug(watch('name') || 'category');
+      const categoryName = watch('name') || 'Category'; // Получаем название категории
+
+      // Create FormData to send the file
+      const formData = new FormData();
+
+      // Add folder info (categories) and slug for filename
+      formData.append('folderSlug', 'categories');
+      formData.append('productSlug', categorySlug);
+
+      // Add the file
+      formData.append('images', files[0]);
+
+      // Send to server
+      const response = await fetch('/api/upload-images', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      if (data.uploadedImages && data.uploadedImages.length > 0) {
+        // Use the URL from the server response and set alt to category name
+        const imageUrl = data.uploadedImages[0].url;
+        setImagePreview(imageUrl);
+
+        // Сохраняем URL изображения и используем название категории для alt
+        setValue('imageUrl', imageUrl);
+
+        // Если хотите сохранить alt отдельно (если ваша модель категории поддерживает это)
+        // setValue('imageAlt', categoryName);
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   // Get all potential parent categories (excluding current category and its children)
@@ -112,7 +155,7 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Category Information</h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Category Name */}
           <div>
@@ -196,7 +239,7 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
       {/* Image */}
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Category Image</h2>
-        
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Upload Image
@@ -205,21 +248,32 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
             type="file"
             onChange={handleImageUpload}
             accept="image/*"
+            disabled={isUploading}
             className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
+          {isUploading && (
+            <p className="mt-2 text-sm text-blue-600">Uploading image...</p>
+          )}
         </div>
-        
+
         {/* Image preview */}
         {imagePreview && (
           <div className="mt-4">
-            <img 
-              src={imagePreview} 
-              alt="Category preview" 
+            <img
+              src={imagePreview}
+              alt="Category preview"
               className="h-40 w-full object-cover rounded-md"
+              onError={(e) => {
+                console.error(`Ошибка загрузки изображения: ${imagePreview}`);
+                e.currentTarget.src = '/images/placeholder.jpg'; // Замените на путь к вашему изображению-заглушке
+              }}
             />
             <button
               type="button"
-              onClick={() => setImagePreview(null)}
+              onClick={() => {
+                setImagePreview(null);
+                setValue('imageUrl', '');
+              }}
               className="mt-2 text-sm text-red-600 hover:text-red-800"
             >
               Remove Image
@@ -227,6 +281,9 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
           </div>
         )}
       </div>
+
+      {/* Hidden input to store the image URL */}
+      <input type="hidden" {...register('imageUrl')} />
 
       {/* Submit button */}
       <div className="flex justify-end">

@@ -61,6 +61,11 @@ export class JsonDataService {
     return products.filter(product => product.categoryId === categoryId);
   }
 
+  async getProductsByCollection(collection: string): Promise<Product[]> {
+    const products = await this.getAllProducts();
+    return products.filter(product => product.collection === collection);
+  }
+
   async saveProduct(product: Product): Promise<void> {
     const products = await this.loadJsonFile<Product[]>(this.productsPath);
     const index = products.findIndex(p => p.id === product.id);
@@ -94,6 +99,11 @@ export class JsonDataService {
   async getProductSetById(id: string): Promise<ProductSet | null> {
     const sets = await this.getAllProductSets();
     return sets.find(set => set.id === id) || null;
+  }
+
+  async getProductSetsByCollection(collection: string): Promise<ProductSet[]> {
+    const sets = await this.getAllProductSets();
+    return sets.filter(set => set.collection === collection);
   }
 
   async saveProductSet(productSet: ProductSet): Promise<void> {

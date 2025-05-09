@@ -6,8 +6,10 @@ import { formatPrice } from '@/lib/utils/format';
 import AddToCartButton from '@/components/shop/AddToCartButton/AddToCartButton';
 import ProductCard from '@/components/shop/ProductCard/ProductCard';
 import './style.scss';
-import SpecificationRow from '@/components/SpecificationRow';
-import ProductGallery from '@/components/ProductGallery';
+import SpecificationRow from '@/components/shop/SpecificationsTable/SpecificationRow';
+import ProductGallery from '@/components/shop/ProductGallery/ProductGallery';
+import SpecificationsTable from '@/components/shop/SpecificationsTable/SpecificationsTable';
+import SetCard from '@/components/shop/SetCard/SetCard';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const paramsData = await params;
@@ -38,19 +40,11 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const category = categories.find(c => c.id === product.categoryId);
 
   // Get related products
-  const relatedProducts = await jsonDataService.getProductsByCategory(product.categoryId);
-  const filteredRelatedProducts = relatedProducts
-    .filter(p => p.id !== product.id)
-    .slice(0, 4);
+  const relatedProducts = await jsonDataService.getProductsByCollection(product.collection);
+  const allProducts = await jsonDataService.getAllProducts();
 
-  // Get main image
-  const mainImage = product.images.find(img => img.isMain) || product.images[0];
-  const images = product.images.map(image => ({
-    original: image.url,
-    thumbnail: image.url,
-    originalAlt: image.alt || product.name,
-    thumbnailAlt: image.alt || product.name
-  }));
+  const relatedSets = await jsonDataService.getProductSetsByCollection(product.collection);
+
 
   return (
     <div className="main">
@@ -103,35 +97,70 @@ export default async function ProductPage({ params }: { params: { slug: string }
           <ul className="product-page_list">
 
 
-            {product.specifications?.color && (
+            {(product.specifications?.style?.color?.karkas || product.specifications?.style?.color?.fasad) && (
               <li className="product-page_list-item">
                 <span className="product-page_list-option">цвет</span>
-                <span className="product-page_list-value">{product.specifications?.color} </span>
+                <span className="product-page_list-value">
+                  {[
+                    product.specifications.style.color.karkas && `${product.specifications.style.color.karkas}`,
+                    product.specifications.style.color.fasad && `${product.specifications.style.color.fasad}`
+                  ].filter(Boolean).join(', ')}
+                </span>
               </li>
             )}
 
 
-            {product.specifications?.dimensions && Object.values(product.specifications.dimensions).some(v => v) && (
+            {product.specifications?.dimensions && Object.values(product.specifications.dimensions).some(v => v && typeof v === 'number' && v > 0) && (
               <>
-                {product.specifications?.dimensions?.width && product.specifications?.dimensions?.height && product.specifications?.dimensions?.depth && (
-                  <li className="product-page_list-item">
-                    <span className="product-page_list-option">габариты (Ш×В×Г), см</span>
-                    <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.depth} </span>
-                  </li>
-                )}
-                {product.specifications?.dimensions?.width && product.specifications?.dimensions?.height && product.specifications?.dimensions?.length && (
-                  <li className="product-page_list-item">
-                    <span className="product-page_list-option">габариты (Ш×В×Д), см</span>
-                    <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.length} </span>
-                  </li>
-                )}
+                {product.specifications?.dimensions?.width != null && product.specifications.dimensions.width > 0 &&
+                  product.specifications.dimensions.height != null && product.specifications.dimensions.height > 0 &&
+                  product.specifications.dimensions.depth != null && product.specifications.dimensions.depth > 0 && (
+                    <li className="product-page_list-item">
+                      <span className="product-page_list-option">габариты (Ш×В×Г), см</span>
+                      <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.depth} </span>
+                    </li>
+                  )}
+                {product.specifications?.dimensions?.width != null && product.specifications.dimensions.width > 0 &&
+                  product.specifications.dimensions.height != null && product.specifications.dimensions.height > 0 &&
+                  product.specifications.dimensions.length != null && product.specifications.dimensions.length > 0 && (
+                    <li className="product-page_list-item">
+                      <span className="product-page_list-option">габариты (Ш×В×Д), см</span>
+                      <span className="product-page_list-value">{product.specifications.dimensions.width} × {product.specifications.dimensions.height} × {product.specifications.dimensions.length} </span>
+                    </li>
+                  )}
               </>
             )}
 
-            {product.specifications?.material && (
+            {(product.specifications?.material?.karkas) && (
               <li className="product-page_list-item">
-                <span className="product-page_list-option">материал</span>
-                <span className="product-page_list-value">{String(product.specifications?.material)} </span>
+                <span className="product-page_list-option">каркас</span>
+                <span className="product-page_list-value">
+                  {
+                    product.specifications.material.karkas
+                  }
+                </span>
+              </li>
+            )}
+
+            {(product.specifications?.material?.fasad) && (
+              <li className="product-page_list-item">
+                <span className="product-page_list-option">фасад</span>
+                <span className="product-page_list-value">
+                  {
+                    product.specifications.material.fasad
+                  }
+                </span>
+              </li>
+            )}
+
+            {(product.specifications?.material?.obivka) && (
+              <li className="product-page_list-item">
+                <span className="product-page_list-option">обивка</span>
+                <span className="product-page_list-value">
+                  {
+                    product.specifications.material.obivka
+                  }
+                </span>
               </li>
             )}
 
@@ -178,75 +207,28 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
         {/* Specifications */}
         {product.specifications && (
-          <div className="product-page_table">
-            <h2 className="product-page_subheader">Характеристики товара</h2>
-
-            {/* Материалы */}
-            {product.specifications.material?.karkas && (
-              <SpecificationRow label="Материал каркаса" value={product.specifications.material.karkas} />
-            )}
-            {product.specifications.material?.fasad && (
-              <SpecificationRow label="Материал фасада" value={product.specifications.material.fasad} />
-            )}
-            {product.specifications.material?.obivka && (
-              <SpecificationRow label="Обивка" value={product.specifications.material.obivka} />
-            )}
-
-            {/* Стиль и цвета */}
-            {product.specifications.style?.style && (
-              <SpecificationRow label="Стиль" value={product.specifications.style.style} />
-            )}
-            {product.specifications.style?.color?.karkas && (
-              <SpecificationRow label="Цвет каркаса" value={product.specifications.style.color.karkas} />
-            )}
-            {product.specifications.style?.color?.fasad && (
-              <SpecificationRow label="Цвет фасада" value={product.specifications.style.color.fasad} />
-            )}
-            {product.specifications.style?.color?.obivka && (
-              <SpecificationRow label="Цвет обивки" value={product.specifications.style.color.obivka} />
-            )}
-
-            {/* Размеры */}
-            {product.specifications.dimensions && (
-              <SpecificationRow
-                label="Габариты (Ш×В×Г), см"
-                value={`${product.specifications.dimensions.width ?? '-'} × ${product.specifications.dimensions.height ?? '-'} × ${product.specifications.dimensions.depth ?? '-'}`}
-              />
-            )}
-            {product.specifications.bedSize && (
-              <SpecificationRow label="Спальное место" value={product.specifications.bedSize} />
-            )}
-
-            {/* Наполнение */}
-            {product.specifications.content?.polki !== undefined && (
-              <SpecificationRow label="Полки" value={product.specifications.content.polki} />
-            )}
-            {product.specifications.content?.yashiki !== undefined && (
-              <SpecificationRow label="Ящики" value={product.specifications.content.yashiki} />
-            )}
-
-
-            {/* Гарантия */}
-            {product.specifications.warranty?.duration && (
-              <SpecificationRow label="Гарантия" value={`${product.specifications.warranty.duration} мес.`} />
-            )}
-            {product.specifications.warranty?.production && (
-              <SpecificationRow label="Производитель" value={product.specifications.warranty.production} />
-            )}
-            {product.specifications.warranty?.lifetime && (
-              <SpecificationRow label="Срок службы" value={product.specifications.warranty.lifetime} />
-            )}
-          </div>
+          <SpecificationsTable specifications={product.specifications} />
         )}
       </div>
 
       {/* Related products */}
-      {filteredRelatedProducts.length > 0 && (
+      {relatedProducts.length > 0 && (
         <div>
           <h2 className="product-page_subheader">Товары из серии</h2>
           <div className="products-wrapper">
-            {filteredRelatedProducts.map(relatedProduct => (
+            {relatedProducts.map(relatedProduct => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {relatedSets.length > 0 && (
+        <div>
+          <h2 className="product-page_subheader">Комплекты из серии</h2>
+          <div className="products-wrapper">
+            {relatedSets.map(relatedSet => (
+              <SetCard key={relatedSet.id} set={relatedSet} allProducts={allProducts} />
             ))}
           </div>
         </div>

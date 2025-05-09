@@ -9,7 +9,6 @@ import * as z from 'zod';
 import { Product, ProductSet, Category, ProductImage, SetItem, Collection } from '@/types';
 import { generateSlug, generateId, formatPrice } from '@/lib/utils/format';
 
-
 // Define validation schema for product sets
 const productSetSchema = z.object({
   id: z.string().min(1, "ID is required"),
@@ -53,7 +52,17 @@ interface SetFormProps {
 
 export default function SetForm({ productSet, categories, products }: SetFormProps) {
   const router = useRouter();
-  const [images, setImages] = useState<ProductImage[]>(productSet?.images || []);
+  // Правильная инициализация состояния images
+  const [images, setImages] = useState<ProductImage[]>(() => {
+    console.log('Инициализация изображений продукта:', productSet?.images);
+    return productSet?.images || [];
+  });
+
+  // После инициализации добавьте useEffect для отладки
+  useEffect(() => {
+    console.log('Текущие изображения:', images);
+  }, [images]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // State for managing set items
@@ -64,8 +73,10 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
   // Search functionality
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Collection filter
-  const [selectedCollection, setSelectedCollection] = useState<string>('');
+  // Collection filter - важно: инициализируем из productSet, если он есть
+  const [selectedCollection, setSelectedCollection] = useState<string>(
+    productSet?.collection || ''
+  );
 
   // Calculate total price based on selected items and quantities
   const [calculatedPrice, setCalculatedPrice] = useState<number>(0);
@@ -108,6 +119,20 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
   const name = watch('name');
   const categoryId = watch('categoryId');
   const collection = watch('collection');
+
+  // Get all Collection enum values for the select dropdown
+  const collectionOptions = Object.values(Collection);
+  // Initialize collection from productSet
+  useEffect(() => {
+    // Initialize collection from existing set if available
+    if (productSet?.collection && (!watch('collection') || watch('collection') === '')) {
+      setValue('collection', productSet.collection);
+      setSelectedCollection(productSet.collection);
+    } else if ((!watch('collection') || watch('collection') === '') && collectionOptions.length > 0) {
+      setValue('collection', collectionOptions[0]);
+      setSelectedCollection(collectionOptions[0]);
+    }
+  }, [collectionOptions, setValue, productSet, watch]);
 
   // Auto-generate slug when name changes (for new sets)
   useEffect(() => {
@@ -203,11 +228,11 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
 
   // Handle collection selection
   const handleCollectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCollection(e.target.value);
+    const value = e.target.value;
+    setSelectedCollection(value);
+    setValue('collection', value);
   };
 
-  // Get all Collection enum values for the select dropdown
-  const collectionOptions = Object.values(Collection);
 
   // Handle form submission
   const onSubmit = async (data: ProductSetFormValues) => {
@@ -226,10 +251,12 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         ...data,
         images: images,
         items: selectedItems,
-        specifications: productSet?.specifications || {},
+        specifications: data.specifications || {},
         inStock: true,
         collection: data.collection as Collection, // Cast collection to the correct type
       };
+
+      console.log('Сохраняю набор с изображениями:', completeSet.images);
 
       // Save to API
       const response = await fetch(
@@ -260,18 +287,55 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
     }
   };
 
-  // Handle image upload
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    const newImages: ProductImage[] = Array.from(files).map((file, index) => ({
-      url: URL.createObjectURL(file),
-      alt: file.name,
-      isMain: index === 0 && images.length === 0
-    }));
+    try {
+      // Get the set slug
+      const setSlug = watch('slug') || generateSlug(watch('name') || 'set');
 
-    setImages([...images, ...newImages]);
+      // Create a slug from the collection title
+      const folderSlug = selectedCollection || 'sets';
+
+      // Create FormData to send files
+      const formData = new FormData();
+
+      // Add the folder slug and set slug
+      formData.append('folderSlug', folderSlug);
+      formData.append('productSlug', setSlug);
+
+      // Add all files
+      Array.from(files).forEach(file => {
+        formData.append('images', file);
+      });
+
+      // Send to server
+      const response = await fetch('/api/upload-images', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Add the uploaded images to state
+      const newImages: ProductImage[] = data.uploadedImages.map(
+        (img: { url: string, filename: string }, index: number) => ({
+          url: img.url,
+          alt: img.filename,
+          isMain: index === 0 && images.length === 0
+        })
+      );
+
+      setImages([...images, ...newImages]);
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      alert('Failed to upload images. Please try again.');
+    }
   };
 
   // Get product details by ID
@@ -377,6 +441,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             <select
               {...register('collection')}
               onChange={handleCollectionChange}
+              value={selectedCollection}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">Select a collection</option>
@@ -560,31 +625,56 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         </div>
 
         {/* Image preview */}
-        {images.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-            {images.map((image, index) => (
+        {/* Отображение загруженных изображений */}
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {images.length > 0 ? (
+            images.map((image, index) => (
               <div key={index} className="relative">
                 <img
                   src={image.url}
-                  alt={image.alt || 'Set image'}
+                  alt={image.alt || 'Изображение продукта'}
                   className="h-24 w-full object-cover rounded-md"
+                  onError={(e) => {
+                    console.error(`Ошибка загрузки изображения: ${image.url}`);
+                    e.currentTarget.src = '/images/placeholder.jpg'; // Замените на путь к вашему изображению-заглушке
+                  }}
                 />
                 {image.isMain && (
                   <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-md">
-                    Main
+                    Основное
                   </span>
                 )}
                 <button
                   type="button"
-                  onClick={() => setImages(images.filter((_, i) => i !== index))}
+                  onClick={() => {
+                    console.log('Удаление изображения:', image);
+                    setImages(images.filter((_, i) => i !== index));
+                  }}
                   className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
                 >
                   ✕
                 </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const updatedImages = images.map((img, i) => ({
+                      ...img,
+                      isMain: i === index,
+                    }));
+                    setImages(updatedImages);
+                  }}
+                  className="absolute bottom-0 left-0 bg-blue-500 text-white p-1 text-xs rounded-tr-md"
+                >
+                  Сделать основным
+                </button>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            <div className="col-span-full text-center py-4 text-gray-500">
+              Нет загруженных изображений
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Products in the Set */}

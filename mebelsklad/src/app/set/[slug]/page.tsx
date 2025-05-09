@@ -33,6 +33,9 @@ export default async function SetPage({ params }: { params: { slug: string } }) 
   // Get all products to have full product details
   const products = await jsonDataService.getAllProducts();
 
+  const relatedProducts = await jsonDataService.getProductsByCollection(set.collection);
+  const relatedSets = await jsonDataService.getProductSetsByCollection(set.collection);
+
   // Filter products to only include those in the set
   const setProducts = set.items
     .map(item => {
@@ -50,5 +53,5 @@ export default async function SetPage({ params }: { params: { slug: string } }) 
     })
     .filter(Boolean);
 
-  return <SetDetail set={set} setProducts={setProducts.filter(Boolean) as SetDetailProps['setProducts']} />;
+  return <SetDetail set={set} setProducts={setProducts.filter(Boolean) as SetDetailProps['setProducts']} relatedSets={relatedSets} relatedProducts={relatedProducts} />;
 }

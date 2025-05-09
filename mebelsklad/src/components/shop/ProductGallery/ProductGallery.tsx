@@ -15,6 +15,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import 'yet-another-react-lightbox/styles.css';
 
+import './ProductGallery.scss';
+
 interface Image {
     url: string | StaticImport;
     alt?: string;

@@ -3,19 +3,6 @@
     gap: 24px;
 }
 
-.product-page_images-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    gap: 40px;
-    width: 60%;
-}
-
-.product-page_thumbnails {
-    display: flex;
-    gap: 20px;
-}
-
 .product-page_info {
     display: flex;
     flex-direction: column;
@@ -28,6 +15,7 @@
     font-weight: 500;
     font-size: 36px;
     line-height: 1;
+    word-break: keep-all;
 }
 
 .product-page_list {
@@ -186,9 +174,13 @@ a.product-page_link {
     gap: 5px;
 }
 
+.product-page_set-item-link {
+    display: flex;
+    flex-shrink: 0;
+}
+
 .product-page_set-item-img {
     width: 80px;
-    flex-shrink: 0;
 }
 
 .product-page_set-item-title {

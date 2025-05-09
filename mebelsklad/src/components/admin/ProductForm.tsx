@@ -20,12 +20,6 @@ const productSchema = z.object({
   discount: z.number().min(0, "Discount must be positive").optional(),
   description: z.string().optional(),
   inStock: z.boolean().default(true),
-  dimensions: z.object({
-    width: z.number().min(0),
-    height: z.number().min(0),
-    depth: z.number().min(0),
-    length: z.number().min(0),
-  }),
   specifications: z.object({
     material: z.object({
       karkas: z.string().optional(),
@@ -42,7 +36,13 @@ const productSchema = z.object({
         obivka: z.string().optional(),
       }).optional(),
     }).optional(),
-    bedSize: z.enum(["180x200", "160x200", "140x200", "120x200", "90x200"]),
+    dimensions: z.object({
+      width: z.number().min(0),
+      height: z.number().min(0),
+      depth: z.number().min(0),
+      length: z.number().min(0),
+    }),
+    bedSize: z.enum(["180x200", "160x200", "140x200", "120x200", "90x200", ""]).optional(),
     content: z.object({
       yashiki: z.number().optional(),
       polki: z.number().optional(),
@@ -66,7 +66,15 @@ interface ProductFormProps {
 
 export default function ProductForm({ product, categories }: ProductFormProps) {
   const router = useRouter();
-  const [images, setImages] = useState<ProductImage[]>([]);
+  // Правильная инициализация состояния images
+  const [images, setImages] = useState<ProductImage[]>(() => {
+    return product?.images || [];
+  });
+
+  // После инициализации добавьте useEffect для отладки
+  useEffect(() => {
+    console.log('Текущие изображения:', images);
+  }, [images]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -94,6 +102,13 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
             obivka: product.specifications?.style?.color?.obivka || '',
           }
         },
+        dimensions: {
+          width: product.specifications?.dimensions?.width || 0,
+          height: product.specifications?.dimensions?.height || 0,
+          depth: product.specifications?.dimensions?.depth || 0,
+          length: product.specifications?.dimensions?.length || 0,
+        },
+
         bedSize: product.specifications?.bedSize,
         content: {
           yashiki: product.specifications?.content?.yashiki || 0,
@@ -112,7 +127,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       collection: '' as Collection,
       price: 0,
       discount: 0,
-      dimensions: { width: 0, height: 0, depth: 0, length: 0 },
       specifications: {
         material: {
           karkas: '',
@@ -129,7 +143,8 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
             obivka: '',
           }
         },
-        bedSize: BedSize.Size160,
+        dimensions: { width: 0, height: 0, depth: 0, length: 0 },
+        bedSize: BedSize.None,
         content: {
           yashiki: 0,
           polki: 0,
@@ -161,15 +176,34 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
 
   // Add a new separate useEffect specifically for collection initialization
   // This should run only once on component mount
+  // In ProductForm.tsx, modify the useEffect for collection initialization
+
+  // Replace the existing useEffect for collection initialization with this:
   useEffect(() => {
-    // Initialize collection only if it's not already set
-    if ((!watch('collection') || watch('collection') === '') && collectionOptions.length > 0) {
+    // Initialize collection only if it's not already set from the product
+    if ((!watch('collection') || watch('collection') === '') && product?.collection) {
+      setValue('collection', product.collection);
+    } else if ((!watch('collection') || watch('collection') === '') && collectionOptions.length > 0) {
       // Set default collection if none is selected
       setValue('collection', collectionOptions[0]);
     }
-  }, [collectionOptions, setValue]);
+  }, [collectionOptions, setValue, product, watch]);
+
+  const categoryId = watch('categoryId');
+  const selectedCategory = categories.find(cat => cat.id === categoryId);
+
+  const isBedCategory = () => {
+    // Если категория не выбрана, возвращаем false
+    if (!selectedCategory) return false;
+
+    // Проверяем slug категории
+    const bedCategorySlugs = ['krovati', 'divany-krovati']; // Замените на реальные slug-и
+    return bedCategorySlugs.includes(selectedCategory.slug);
+  };
 
   const onSubmit = async (data: ProductFormValues) => {
+    console.log("Форма отправляется, данные:", data); // Добавьте это
+
     setIsSubmitting(true);
 
     try {
@@ -187,7 +221,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         features: product?.features || [],
         specifications: {
           ...data.specifications,
-          bedSize: data.specifications.bedSize as BedSize,
+          bedSize: isBedCategory() ? data.specifications.bedSize as BedSize : undefined,
         },
       };
 
@@ -222,7 +256,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     }
   };
 
-  // Handle image upload (simplified for now)
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -230,14 +263,19 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     setIsUploading(true);
 
     try {
+      // Get the product slug
+      const productSlug = watch('slug') || generateSlug(watch('name') || 'product');
+      const productName = watch('name') || 'Product'; // Получаем название товара
+
       // Create a slug from the collection title
-      const folderSlug = generateSlug(selectedCollection);
+      const folderSlug = selectedCollection || 'products';
 
       // Create FormData to send files
       const formData = new FormData();
 
-      // Add the folder slug
+      // Add the folder slug and product slug
       formData.append('folderSlug', folderSlug);
+      formData.append('productSlug', productSlug);
 
       // Add all files
       Array.from(files).forEach(file => {
@@ -245,17 +283,22 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       });
 
       // Send to server
-      const response = await axios.post('/api/upload-images', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+      const response = await fetch('/api/upload-images', {
+        method: 'POST',
+        body: formData,
       });
 
-      // Add the uploaded images to state
-      const newImages: ProductImage[] = response.data.uploadedImages.map(
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Add the uploaded images to state, используя название товара вместо имени файла для alt
+      const newImages: ProductImage[] = data.uploadedImages.map(
         (img: { url: string, filename: string }, index: number) => ({
           url: img.url,
-          alt: img.filename,
+          alt: productName, // Используем название товара вместо img.filename
           isMain: index === 0 && images.length === 0
         })
       );
@@ -430,7 +473,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
               </label>
               <input
                 type="number"
-                {...register(`dimensions.${dimension}` as any, { valueAsNumber: true })}
+                {...register(`specifications.dimensions.${dimension}` as any, { valueAsNumber: true })}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
               />
             </div>
@@ -527,22 +570,24 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       </div>
 
       {/* Bed Size */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-lg font-medium mb-4">Bed Size</h2>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Size</label>
-          <select
-            {...register("specifications.bedSize")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
-          >
-            <option value="180x200">180x200</option>
-            <option value="160x200">160x200</option>
-            <option value="140x200">140x200</option>
-            <option value="120x200">120x200</option>
-            <option value="90x200">90x200</option>
-          </select>
+      {isBedCategory() && (
+        <div className="bg-white shadow rounded-lg p-6">
+          <h2 className="text-lg font-medium mb-4">Bed Size</h2>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Size</label>
+            <select
+              {...register("specifications.bedSize")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            >
+              <option value="180x200">180x200</option>
+              <option value="160x200">160x200</option>
+              <option value="140x200">140x200</option>
+              <option value="120x200">120x200</option>
+              <option value="90x200">90x200</option>
+            </select>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Content Specifications */}
       <div className="bg-white shadow rounded-lg p-6">
@@ -662,15 +707,55 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
           {isUploading && <span>Uploading...</span>}
         </div>
 
-        {/* Display uploaded images */}
-        <div className="image-preview">
-          {images.map((image, index) => (
-            <div key={index} className={`image-item ${image.isMain ? 'main-image' : ''}`}>
-              <img src={image.url} alt={image.alt} width="100" />
-              <p>{image.alt}</p>
-              {image.isMain && <span className="main-badge">Main</span>}
+        {/* Отображение загруженных изображений */}
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {images.length > 0 ? (
+            images.map((image, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={image.url}
+                  alt={image.alt || 'Изображение продукта'}
+                  className="h-24 w-full object-cover rounded-md"
+                  onError={(e) => {
+                    console.error(`Ошибка загрузки изображения: ${image.url}`);
+                    e.currentTarget.src = '/images/placeholder.jpg'; // Замените на путь к вашему изображению-заглушке
+                  }}
+                />
+                {image.isMain && (
+                  <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-md">
+                    Основное
+                  </span>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log('Удаление изображения:', image);
+                    setImages(images.filter((_, i) => i !== index));
+                  }}
+                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
+                >
+                  ✕
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const updatedImages = images.map((img, i) => ({
+                      ...img,
+                      isMain: i === index,
+                    }));
+                    setImages(updatedImages);
+                  }}
+                  className="absolute bottom-0 left-0 bg-blue-500 text-white p-1 text-xs rounded-tr-md"
+                >
+                  Сделать основным
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-4 text-gray-500">
+              Нет загруженных изображений
             </div>
-          ))}
+          )}
         </div>
 
       </div>
@@ -687,6 +772,8 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
+          onClick={() => console.log("Submit button clicked, errors:", errors)}
+
           className="bg-blue-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           {isSubmitting ? 'Saving...' : product ? 'Update Product' : 'Create Product'}

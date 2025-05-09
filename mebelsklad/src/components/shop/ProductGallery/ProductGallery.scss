@@ -1,0 +1,24 @@
+.product-gallery {
+    width: 60%;
+    margin-bottom: 40px;
+}
+
+.product-slide {
+    position: relative;
+    aspect-ratio: 3/2;
+    margin-bottom: 20px;
+
+    img {
+        object-fit: fill;
+    }
+}
+
+.product-thumbnails {
+    position: relative;
+    aspect-ratio: 3/2;
+    width: 100px;
+
+    img {
+        object-fit: fill;
+    }
+}

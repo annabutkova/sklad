@@ -4,12 +4,40 @@
     "name": "Спальня \"Александрия\"",
     "slug": "spalnya-alexandria",
     "categoryId": "CAT002",
-    "description": "Полный комплект для спальни в классическом стиле",
-    "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
+    "description": "Полный комплект для спальни в неоклассическом стиле",
+    "collection": "Александрия",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
     "images": [
       {
-        "url": "/images/spalni/alexandria/image.jpg",
-        "alt": "Спальня Александрия",
+        "url": "/uploads/Александрия/spalnya-alexandria.jpg",
+        "alt": "s-alecs-base.jpg",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/spalnya-alexandria-1.jpg",
+        "alt": "s-alecs-int.jpg",
         "isMain": true
       }
     ],
@@ -27,152 +55,70 @@
         "minQuantity": 0,
         "maxQuantity": 4,
         "required": false
-      }
-    ],
-    "specifications": {
-      "style": "Классический",
-      "mainColor": "Бежевый",
-      "roomSize": "от 16 м²"
-    }
-  },
-  {
-    "id": "SET002",
-    "name": "Спальня \"Александрия 222\"",
-    "slug": "spalnya-alexandria",
-    "categoryId": "CAT002",
-    "description": "Полный комплект для спальни в классическом стиле",
-    "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
-    "images": [
-      {
-        "url": "/images/spalni/alexandria/image.jpg",
-        "alt": "Спальня Александрия",
-        "isMain": true
-      }
-    ],
-    "items": [
-      {
-        "productId": "BED001",
-        "defaultQuantity": 2,
-        "minQuantity": 0,
-        "maxQuantity": 2,
-        "required": true
       },
       {
-        "productId": "WARD001",
-        "defaultQuantity": 4,
+        "productId": "PRODma04c7vb66DZ7",
+        "defaultQuantity": 1,
         "minQuantity": 0,
-        "maxQuantity": 4,
+        "maxQuantity": 10,
         "required": false
-      }
-    ],
-    "specifications": {
-      "style": "Классический",
-      "mainColor": "Бежевый",
-      "roomSize": "от 16 м²"
-    }
-  },
-  {
-    "id": "SETm9loazifC7RHW",
-    "name": "Спальня \"Александрия 222\" (Copy)",
-    "slug": "spalnya-alexandria-copy",
-    "categoryId": "CAT002",
-    "description": "Полный комплект для спальни в классическом стиле",
-    "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
-    "images": [
-      {
-        "url": "/images/spalni/alexandria/image.jpg",
-        "alt": "Спальня Александрия",
-        "isMain": true
-      }
-    ],
-    "items": [
-      {
-        "productId": "BED001",
-        "defaultQuantity": 2,
-        "minQuantity": 0,
-        "maxQuantity": 2,
-        "required": true
       },
       {
-        "productId": "WARD001",
-        "defaultQuantity": 4,
-        "minQuantity": 0,
-        "maxQuantity": 4,
-        "required": false
-      }
-    ],
-    "specifications": {
-      "style": "Классический",
-      "mainColor": "Бежевый",
-      "roomSize": "от 16 м²"
-    }
-  },
-  {
-    "id": "SETm9lob632JGRNV",
-    "name": "Спальня \"Александрия 222\" rgrtg",
-    "slug": "spalnya-alexandria-copy-copy",
-    "categoryId": "CAT002",
-    "description": "Полный комплект для спальни в классическом стиле",
-    "longDescription": "Создайте элегантное пространство для отдыха с комплектом \"Александрия\". Коллекция сочетает в себе классический стиль и современную функциональность.",
-    "images": [
-      {
-        "url": "/images/spalni/alexandria/image.jpg",
-        "alt": "Спальня Александрия",
-        "isMain": true
-      }
-    ],
-    "items": [
-      {
-        "productId": "BED001",
-        "defaultQuantity": 2,
-        "minQuantity": 0,
-        "maxQuantity": 2,
-        "required": true
-      },
-      {
-        "productId": "WARD001",
-        "defaultQuantity": 4,
-        "minQuantity": 0,
-        "maxQuantity": 4,
-        "required": false
-      }
-    ],
-    "specifications": {
-      "style": "Классический",
-      "mainColor": "Бежевый",
-      "roomSize": "от 16 м²"
-    }
-  },
-  {
-    "id": "SETm9zka5lqZA90D",
-    "name": "new",
-    "slug": "new",
-    "categoryId": "CAT002",
-    "description": "asasrtrtrb trt",
-    "longDescription": "",
-    "images": [
-      {
-        "url": "blob:http://localhost:3000/96a184b1-ebe2-4012-b23d-ff020270177d",
-        "alt": "Спальня Александрия (интерьер-1).jpg",
-        "isMain": true
-      }
-    ],
-    "items": [
-      {
-        "productId": "BED001",
+        "productId": "PRODmafpjzjx5XXFR",
         "defaultQuantity": 0,
         "minQuantity": 0,
         "maxQuantity": 10,
         "required": false
       },
       {
-        "productId": "PRODm7qkabz644A8U",
-        "defaultQuantity": 3,
+        "productId": "PRODmafqqpzo5KXI3",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmafr0q6wIQMLC",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmafr4ru3F0RRQ",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmafranqdTMEFY",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmafrf49jKLTY3",
+        "defaultQuantity": 0,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmafrj4q3BMPTO",
+        "defaultQuantity": 0,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmafrnzlaJNXRD",
+        "defaultQuantity": 1,
         "minQuantity": 0,
         "maxQuantity": 10,
         "required": false
       }
-    ],
-    "specifications": {}
+    ]
   }
 ]
