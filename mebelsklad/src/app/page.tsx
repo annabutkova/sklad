@@ -68,9 +68,7 @@ export default async function Home() {
   // already return the correct data types
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
-  const setCategories = categories.filter((cat) =>
-    sets.some((set) => set.categoryIds.includes(cat.id))
-  );
+  const setCategories = await jsonDataService.getSetCategories();
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
   const productCategories = categories.filter(
@@ -102,7 +100,7 @@ export default async function Home() {
                 className="set-category"
               >
                 <img
-                  src={category.imageUrl || "/images/placeholder.jpg"}
+                  src={category.images[0].url || "/images/placeholder.jpg"}
                   alt={category.name}
                   className="set-category-image"
                 />
@@ -124,7 +122,7 @@ export default async function Home() {
                 className="item-category"
               >
                 <img
-                  src={category.imageUrl || "/images/placeholder.jpg"}
+                  src={category.images[0].url || "/images/placeholder.jpg"}
                   alt={category.name}
                   className="item-category-image"
                 />

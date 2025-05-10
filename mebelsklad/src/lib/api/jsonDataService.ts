@@ -127,6 +127,29 @@ export class JsonDataService {
     await this.saveJsonFile(this.productSetsPath, updatedSets);
   }
 
+  async getSetCategories(): Promise<Category[]> {
+    const categories = await this.getAllCategories();
+    const sets = await this.getAllProductSets();
+
+    // Создаем Map для хранения уникальных категорий комплектов
+    const setCategoriesMap = new Map<string, Category>();
+
+    // Перебираем все комплекты и добавляем их категории в Map
+    sets.forEach(set => {
+      if (set.categoryIds) {
+        set.categoryIds.forEach(categoryId => {
+          const category = categories.find(c => c.id === categoryId);
+          if (category) {
+            setCategoriesMap.set(category.id, category);
+          }
+        });
+      }
+    });
+
+    // Возвращаем массив категорий комплектов
+    return Array.from(setCategoriesMap.values());
+  }
+
   // Get all catalog items (products and sets combined)
   async getAllCatalogItems(): Promise<(Product | ProductSet)[]> {
     const products = await this.getAllProducts();

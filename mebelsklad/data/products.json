@@ -111,7 +111,7 @@
   },
   {
     "id": "PRODmafqqpzo5KXI3",
-    "name": "Тумба \"Александрия\"",
+    "name": "Тумба прикроватная \"Александрия\"",
     "slug": "tumba-alexandriya",
     "categoryIds": [
       "CATmafqirdeX729Y"
@@ -157,14 +157,14 @@
     "features": [],
     "images": [
       {
-        "url": "/uploads/Александрия/tumba-alexandriya.jpg",
-        "alt": "Тумба \"Александрия\"",
-        "isMain": false
-      },
-      {
         "url": "/uploads/Александрия/tumba-alexandriya-1.jpg",
         "alt": "Тумба \"Александрия\"",
         "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/tumba-alexandriya.jpg",
+        "alt": "Тумба \"Александрия\"",
+        "isMain": false
       }
     ]
   },
@@ -216,14 +216,14 @@
     "features": [],
     "images": [
       {
-        "url": "/uploads/Александрия/komod-alexandriya.jpg",
-        "alt": "Комод \"Александрия\"",
-        "isMain": false
-      },
-      {
         "url": "/uploads/Александрия/komod-alexandriya-1.jpg",
         "alt": "Комод \"Александрия\"",
         "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/komod-alexandriya.jpg",
+        "alt": "Комод \"Александрия\"",
+        "isMain": false
       }
     ]
   },
@@ -277,12 +277,12 @@
       {
         "url": "/uploads/Александрия/shkaf-dlya-belya-alexandriya.jpg",
         "alt": "Шкаф для белья \"Александрия\"",
-        "isMain": false
+        "isMain": true
       },
       {
         "url": "/uploads/Александрия/shkaf-dlya-belya-alexandriya-1.jpg",
         "alt": "Шкаф для белья \"Александрия\"",
-        "isMain": true
+        "isMain": false
       }
     ]
   },
@@ -336,12 +336,12 @@
       {
         "url": "/uploads/Александрия/shkaf-dlya-odezhdy-alexandriya.jpg",
         "alt": "Шкаф для одежды \"Александрия\"",
-        "isMain": false
+        "isMain": true
       },
       {
         "url": "/uploads/Александрия/shkaf-dlya-odezhdy-alexandriya-1.jpg",
         "alt": "Шкаф для одежды \"Александрия\"",
-        "isMain": true
+        "isMain": false
       }
     ]
   },
@@ -574,6 +574,2336 @@
         "url": "/uploads/Александрия/krovat-alexandriya-90-sm-detskaya-1.jpg",
         "alt": "Кровать \"Александрия\" (90 см)",
         "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmagw3vzoDU8SV",
+    "name": "Письменный стол \"Александрия\"",
+    "slug": "pismennyy-stol-alexandriya",
+    "categoryIds": [
+      "CATmaguvtt0INCRA"
+    ],
+    "collection": "Александрия",
+    "price": 1870000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 125,
+        "height": 75,
+        "depth": 59,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/pismennyy-stol-alexandriya.jpg",
+        "alt": "Письменный стол \"Александрия\"",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/pismennyy-stol-alexandriya-1.jpg",
+        "alt": "Письменный стол \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmagw81xrO43XU",
+    "name": "Шкаф навесной \"Александрия\"",
+    "slug": "shkaf-navesnoy-alexandriya",
+    "categoryIds": [
+      "CATmaguvtt0INCRA",
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Александрия",
+    "price": 1430000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 125,
+        "height": 37,
+        "depth": 37,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 2,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-navesnoy-alexandriya-1.jpg",
+        "alt": "Шкаф навесной \"Александрия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-navesnoy-alexandriya.jpg",
+        "alt": "Шкаф навесной \"Александрия\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmagwaj5lKQICL",
+    "name": "Шкаф для одежды \"Александрия\"",
+    "slug": "shkaf-dlya-odezhdy-alexandriya",
+    "categoryIds": [
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Александрия",
+    "price": 5610000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 135,
+        "height": 223,
+        "depth": 60,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-dlya-odezhdy-alexandriya-2.jpg",
+        "alt": "Шкаф для одежды \"Александрия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-dlya-odezhdy-alexandriya-3.jpg",
+        "alt": "Шкаф для одежды \"Александрия\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmagweosrCJOTW",
+    "name": "Стеллаж \"Александрия\"",
+    "slug": "stellazh-alexandriya",
+    "categoryIds": [
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Александрия",
+    "price": 880000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 30,
+        "height": 223,
+        "depth": 60,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/stellazh-alexandriya.jpg",
+        "alt": "Стеллаж \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmagz1yreC377O",
+    "name": "ТВ-тумба \"Александрия\" (160 см)",
+    "slug": "tv-tumba-alexandriya-160-sm",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Александрия",
+    "price": 2750000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 61,
+        "depth": 46,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 2,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/tv-tumba-alexandriya-160-1.jpg",
+        "alt": "ТВ-тумба \"Александрия\" (160)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/tv-tumba-alexandriya-160.jpg",
+        "alt": "ТВ-тумба \"Александрия\" (160)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah28b7y8B1ZR",
+    "name": "ТВ-тумба \"Александрия\" (180 см)",
+    "slug": "tv-tumba-alexandriya-180-sm",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Александрия",
+    "price": 2970000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 180,
+        "height": 43,
+        "depth": 46,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 4,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/tv-tumba-alexandriya-180-1.jpg",
+        "alt": "ТВ-тумба \"Александрия\" (180)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/tv-tumba-alexandriya-180.jpg",
+        "alt": "ТВ-тумба \"Александрия\" (180)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah2apftDHMB7",
+    "name": "Шкаф-пенал со стеклом \"Александрия\"",
+    "slug": "shkaf-penal-alexandriya",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Александрия",
+    "price": 3410000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, стекло",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 55,
+        "height": 223,
+        "depth": 37,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 3,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-penal-alexandriya-1.jpg",
+        "alt": "Шкаф-пенал со стеклом \"Александрия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-penal-alexandriya.jpg",
+        "alt": "Шкаф-пенал со стеклом \"Александрия\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah2deaxBKZJK",
+    "name": "Полка навесная \"Александрия\"",
+    "slug": "polka-navesnaya-alexandriya",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Александрия",
+    "price": 230000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 125,
+        "height": 25,
+        "depth": 20,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/polka-navesnaya-alexandriya.jpg",
+        "alt": "Полка навесная \"Александрия\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmah2p2yj737D5",
+    "name": "Шкаф универсальный со стеклом \"Александрия\"",
+    "slug": "shkaf-universalnyy-alexandriya",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Александрия",
+    "price": 2750000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, стекло",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Сосна Санторини светлый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 151,
+        "depth": 37,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 4,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/shkaf-universalnyy-alexandriya-3.jpg",
+        "alt": "Шкаф универсальный со стеклом \"Александрия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Александрия/shkaf-universalnyy-alexandriya-2.jpg",
+        "alt": "Шкаф универсальный со стеклом \"Александрия\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah818w57MC42",
+    "name": "Кровать двойная \"Гамма 20\" с ПМ (160 см)",
+    "slug": "krovat-gamma-20-s-pm-160-sm",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Гамма",
+    "price": 3650000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 163,
+        "height": 90,
+        "depth": 0,
+        "length": 205
+      },
+      "bedSize": "160x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/krovat-gamma-20-s-pm-160-sm.jpg",
+        "alt": "Кровать \"Гамма 20\" с ПМ (160 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmah8dtt17EB0H",
+    "name": "Тумба прикроватная \"Гамма 20\"",
+    "slug": "tumba-gamma-20",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Гамма",
+    "price": 430000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 55,
+        "height": 40,
+        "depth": 35,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/tumba-gamma-20-3.jpg",
+        "alt": "Тумба прикроватная \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/tumba-gamma-20-4.jpg",
+        "alt": "Тумба прикроватная \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah8jxtwZF578",
+    "name": "Комод \"Гамма 20\"",
+    "slug": "komod-gamma-20",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Гамма",
+    "price": 1300000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 80,
+        "height": 77,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/komod-gamma-20.jpg",
+        "alt": "Комод \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/komod-gamma-20-1.jpg",
+        "alt": "Комод \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah8m8bqR1PNF",
+    "name": "Шкаф для белья \"Гамма 20\"",
+    "slug": "shkaf-dlya-belya-gamma-20",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Гамма",
+    "price": 2010000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 56,
+        "height": 220,
+        "depth": 49,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 1,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/shkaf-dlya-belya-gamma-20.jpg",
+        "alt": "Шкаф для белья \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/shkaf-dlya-belya-gamma-20-1.jpg",
+        "alt": "Шкаф для белья \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah8qyziULRT4",
+    "name": "Шкаф для одежды \"Гамма 20\"",
+    "slug": "shkaf-dlya-odezhdy-gamma-20",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Гамма",
+    "price": 2120000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 220,
+        "depth": 49,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 1,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/shkaf-dlya-odezhdy-gamma-20.jpg",
+        "alt": "Шкаф для одежды \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/shkaf-dlya-odezhdy-gamma-20-1.jpg",
+        "alt": "Шкаф для одежды \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah8upox051UJ",
+    "name": "Зеркало \"Гамма 20\"",
+    "slug": "zerkalo-gamma-20",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Гамма",
+    "price": 400000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 80,
+        "height": 70,
+        "depth": 2,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/zerkalo-gamma-20.jpg",
+        "alt": "Зеркало \"Гамма 20\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmah94lol3ABVM",
+    "name": "Кровать \"Гамма 20\" (90 см)",
+    "slug": "detskaya-krovat-gamma-20-90-sm",
+    "categoryIds": [
+      "CATmagsb9r62DTMW"
+    ],
+    "collection": "Гамма",
+    "price": 1420000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 93,
+        "height": 90,
+        "depth": 0,
+        "length": 205
+      },
+      "bedSize": "90x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/detskaya-krovat-gamma-20-90-sm.jpg",
+        "alt": "Кровать \"Гамма 20\" (90 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmah999g2C7A7L",
+    "name": "Письменный стол \"Гамма 20\"",
+    "slug": "pismennyy-stol-gamma-20",
+    "categoryIds": [
+      "CATmaguvtt0INCRA"
+    ],
+    "collection": "Гамма",
+    "price": 1150000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 77,
+        "depth": 60,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 3,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/pismennyy-stol-gamma-20.jpg",
+        "alt": "Письменный стол \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/pismennyy-stol-gamma-20-1.jpg",
+        "alt": "Письменный стол \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah9dr30UG2NQ",
+    "name": "Полка навесная \"Гамма 20\" (120 см)",
+    "slug": "polka-navesnaya-gamma-20-120-sm",
+    "categoryIds": [
+      "CATmaguvtt0INCRA",
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Гамма",
+    "price": 610000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 40,
+        "depth": 27,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/polka-navesnaya-gamma-20-120-sm.jpg",
+        "alt": "Полка навесная \"Гамма 20\" (120 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmah9gtulL918N",
+    "name": "Шкаф комбинированный \"Гамма 20\"",
+    "slug": "shkaf-kombinirovannyy-gamma-20",
+    "categoryIds": [
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Гамма",
+    "price": 3070000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 133,
+        "height": 220,
+        "depth": 49,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/shkaf-kombinirovannyy-gamma-20.jpg",
+        "alt": "Шкаф комбинированный \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/shkaf-kombinirovannyy-gamma-20-1.jpg",
+        "alt": "Шкаф комбинированный \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah9qq6mQ0H03",
+    "name": "Комод-витрина \"Гамма 20\"",
+    "slug": "komod-vitrina-gamma-20",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Гамма",
+    "price": 2590000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, стекло",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 151,
+        "height": 96,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 5,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/komod-vitrina-gamma-20.jpg",
+        "alt": "Комод-витрина \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/komod-vitrina-gamma-20-1.jpg",
+        "alt": "Комод-витрина \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmah9wy6u6R8WV",
+    "name": "ТВ-тумба \"Гамма 20\"",
+    "slug": "tv-tumba-gamma-20",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Гамма",
+    "price": 1180000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 46,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 4,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/tv-tumba-gamma-20.jpg",
+        "alt": "ТВ-тумба \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/tv-tumba-gamma-20-1.jpg",
+        "alt": "ТВ-тумба \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaha0q03MCLMP",
+    "name": "Пенал со стеклом \"Гамма 20\"",
+    "slug": "penal-gamma-20",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Гамма",
+    "price": 2120000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, стекло",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 64,
+        "height": 220,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/penal-gamma-20.jpg",
+        "alt": "Пенал со стеклом \"Гамма 20\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/penal-gamma-20-1.jpg",
+        "alt": "Пенал со стеклом \"Гамма 20\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaha2z4eVTHYC",
+    "name": "Полка навесная \"Гамма 20\" (160 см)",
+    "slug": "polka-navesnaya-gamma-20-160-sm",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Гамма",
+    "price": 670000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 40,
+        "depth": 27,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Гамма/polka-navesnaya-gamma-20-160-sm.jpg",
+        "alt": "Полка навесная \"Гамма 20\" (160 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmahadbtm9R9C7",
+    "name": "Кровать \"Денвер\" (160 см)",
+    "slug": "krovat-denver-160-sm",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Денвер",
+    "price": 1320000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 164,
+        "height": 66,
+        "depth": 0,
+        "length": 205
+      },
+      "bedSize": "160x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/krovat-denver-160-sm.jpg",
+        "alt": "Кровать \"Денвер\" (160 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmahagiic5QLV4",
+    "name": "Тумба прикроватная \"Денвер\"",
+    "slug": "tumba-denver",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Денвер",
+    "price": 220000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 31,
+        "depth": 35,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/tumba-denver.jpg",
+        "alt": "Тумба прикроватная \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/tumba-denver-1.jpg",
+        "alt": "Тумба прикроватная \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahajhaz9MGSO",
+    "name": "Комод \"Денвер\"",
+    "slug": "komod-denver",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6",
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Денвер",
+    "price": 990000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 80,
+        "height": 98,
+        "depth": 39,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 4,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/komod-denver.jpg",
+        "alt": "Комод \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/komod-denver-1.jpg",
+        "alt": "Комод \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahamn4fGOPMY",
+    "name": "Шкаф для белья \"Денвер\"",
+    "slug": "shkaf-dlya-belya-denver",
+    "categoryIds": [
+      "CAT004",
+      "CATmaguxb8vCEQNS",
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Денвер",
+    "price": 1100000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 205,
+        "depth": 46,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 5,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/shkaf-dlya-belya-denver.jpg",
+        "alt": "Шкаф для белья \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/shkaf-dlya-belya-denver-1.jpg",
+        "alt": "Шкаф для белья \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahap4ru61L0D",
+    "name": "Шкаф для одежды \"Денвер\"",
+    "slug": "shkaf-dlya-odezhdy-denver",
+    "categoryIds": [
+      "CAT004",
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Денвер",
+    "price": 1650000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 80,
+        "height": 205,
+        "depth": 46,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 2,
+        "polki": 1,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/shkaf-dlya-odezhdy-denver.jpg",
+        "alt": "Шкаф для одежды \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/shkaf-dlya-odezhdy-denver-1.jpg",
+        "alt": "Шкаф для одежды \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahavpb48L80Z",
+    "name": "Кровать \"Денвер\" (90 см)",
+    "slug": "detskaya-krovat-denver",
+    "categoryIds": [
+      "CATmagsb9r62DTMW"
+    ],
+    "collection": "Денвер",
+    "price": 2200000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 94,
+        "height": 60,
+        "depth": 0,
+        "length": 203
+      },
+      "bedSize": "90x200",
+      "content": {
+        "yashiki": 2,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/detskaya-krovat-denver.jpg",
+        "alt": "Кровать \"Денвер\" (90 см)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/detskaya-krovat-denver-1.jpg",
+        "alt": "Кровать \"Денвер\" (90 см)",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Денвер/detskaya-krovat-denver-2.jpg",
+        "alt": "Кровать \"Денвер\" (90 см)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahbcec4LOGM0",
+    "name": "Письменный стол \"Денвер\"",
+    "slug": "pismennyy-stol-denver",
+    "categoryIds": [
+      "CATmaguvtt0INCRA"
+    ],
+    "collection": "Денвер",
+    "price": 1100000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 75,
+        "depth": 50,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/pismennyy-stol-denver.jpg",
+        "alt": "Письменный стол \"Денвер\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmahbomp8RTMXO",
+    "name": "Книжная полка \"Денвер\"",
+    "slug": "knizhnaya-polka-denver",
+    "categoryIds": [
+      "CATmaguvtt0INCRA",
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Денвер",
+    "price": 220000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 80,
+        "height": 30,
+        "depth": 25,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/knizhnaya-polka-denver.jpg",
+        "alt": "Книжная полка \"Денвер\"",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmahbtrxvUF1RV",
+    "name": "ТВ-тумба \"Денвер\"",
+    "slug": "tv-tumba-denver",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Денвер",
+    "price": 1210000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 200,
+        "height": 35,
+        "depth": 35,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/tv-tumba-denver.jpg",
+        "alt": "ТВ-тумба \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/tv-tumba-denver-1.jpg",
+        "alt": "ТВ-тумба \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahc0ft2Y5U9P",
+    "name": "Шкаф навесной \"Денвер\"",
+    "slug": "shkaf-navesnoy-denver",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Денвер",
+    "price": 390000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 31,
+        "depth": 26,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 2,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/shkaf-navesnoy-denver.jpg",
+        "alt": "Шкаф навесной \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/shkaf-navesnoy-denver-1.jpg",
+        "alt": "Шкаф навесной \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmahyhf9dNUY69",
+    "name": "Кровать \"Габриэлла\" с ПМ (160 см)",
+    "slug": "krovat-gabriella-s-pm-160-sm",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Габриэлла",
+    "price": 4900000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": "Ткань велюр"
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": "Вудлайн кремовый, ткань велюр Тенерифе Хумус"
+        }
+      },
+      "dimensions": {
+        "width": 175,
+        "height": 103,
+        "depth": 0,
+        "length": 207
+      },
+      "bedSize": "160x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/krovat-gabriella-s-pm-160-sm.jpg",
+        "alt": "Кровать \"Габриэлла\" с ПМ (160 см)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Габриэлла/krovat-gabriella-s-pm-160-sm-1.jpg",
+        "alt": "Кровать \"Габриэлла\" с ПМ (160 см)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmai1ie2uBHSJQ",
+    "name": "Тумба прикроватная \"Габриэлла\"",
+    "slug": "tumba-gabriella",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Габриэлла",
+    "price": 900000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "Вудлайн кремовый, Сандал белый, Аруша венге патина",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 50,
+        "depth": 43,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 2,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/tumba-gabriella.jpg",
+        "alt": "Тумба прикроватная \"Габриэлла\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Габриэлла/tumba-gabriella-1.jpg",
+        "alt": "Тумба прикроватная \"Габриэлла\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmai2ot9uP4YR2",
+    "name": "Комод \"Габриэлла\"",
+    "slug": "komod-gabriella",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Габриэлла",
+    "price": 2700000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "Вудлайн кремовый, Сандал белый, Аруша венге патина",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 91,
+        "depth": 43,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 4,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/komod-gabriella.jpg",
+        "alt": "Комод \"Габриэлла\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Габриэлла/komod-gabriella-1.jpg",
+        "alt": "Комод \"Габриэлла\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmai723mzUMGUM",
+    "name": "Шкаф для белья \"Габриэлла\"",
+    "slug": "shkaf-dlya-belya-gabriella",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Габриэлла",
+    "price": 1900000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "Вудлайн кремовый, Сандал белый, Аруша венге патина",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 228,
+        "depth": 55,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 5,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/shkaf-dlya-belya-gabriella.jpg",
+        "alt": "Комод \"Габриэлла\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Габриэлла/shkaf-dlya-belya-gabriella-1.jpg",
+        "alt": "Комод \"Габриэлла\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmai76qbmHLE3F",
+    "name": "Шкаф для одежды \"Габриэлла\"",
+    "slug": "shkaf-dlya-odezhdy-gabriella",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Габриэлла",
+    "price": 5500000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "Вудлайн кремовый, Сандал белый, Аруша венге патина",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 228,
+        "depth": 55,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 11,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/shkaf-dlya-odezhdy-gabriella.jpg",
+        "alt": "Шкаф для одежды \"Габриэлла\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Габриэлла/shkaf-dlya-odezhdy-gabriella-1.jpg",
+        "alt": "Шкаф для одежды \"Габриэлла\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmai7gqp12NG2L",
+    "name": "Шкаф угловой \"Габриэлла\"",
+    "slug": "shkaf-uglovoy-gabriella",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Габриэлла",
+    "price": 2900000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "Вудлайн кремовый, Сандал белый, Аруша венге патина",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 82,
+        "height": 228,
+        "depth": 82,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/shkaf-uglovoy-gabriella.jpg",
+        "alt": "Шкаф для одежды \"Габриэлла\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Габриэлла/shkaf-uglovoy-gabriella-1.jpg",
+        "alt": "Шкаф для одежды \"Габриэлла\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmai7ms96TP9WN",
+    "name": "Зеркало навесное \"Габриэлла\"",
+    "slug": "zerkalo-gabriella",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Габриэлла",
+    "price": 700000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 50,
+        "height": 135,
+        "depth": 3,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/zerkalo-gabriella.jpg",
+        "alt": "Шкаф угловой \"Габриэлла\" (Copy)",
+        "isMain": true
       }
     ]
   }

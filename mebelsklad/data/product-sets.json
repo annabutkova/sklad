@@ -45,20 +45,6 @@
     ],
     "items": [
       {
-        "productId": "BED001",
-        "defaultQuantity": 1,
-        "minQuantity": 0,
-        "maxQuantity": 2,
-        "required": true
-      },
-      {
-        "productId": "WARD001",
-        "defaultQuantity": 2,
-        "minQuantity": 0,
-        "maxQuantity": 4,
-        "required": false
-      },
-      {
         "productId": "PRODma04c7vb66DZ7",
         "defaultQuantity": 1,
         "minQuantity": 0,
@@ -116,6 +102,734 @@
       },
       {
         "productId": "PRODmafrnzlaJNXRD",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmagwh8v49XRFF",
+    "name": "Детская \"Александрия\"",
+    "slug": "detskaya-alexandriya",
+    "categoryIds": [
+      "CATmags7erjHSG10"
+    ],
+    "description": "Полный комплект для детской в неоклассическом стиле",
+    "collection": "Александрия",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Александрия/detskaya-alexandria.jpg",
+        "alt": "d-alecs-base.jpg",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/detskaya-alexandria-1.jpg",
+        "alt": "d-alecs-int.jpg",
+        "isMain": true
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmaguyvpkXQEFX",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmagw3vzoDU8SV",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmagw81xrO43XU",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmagwaj5lKQICL",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmagweosrCJOTW",
+        "defaultQuantity": 0,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmah2k74hO95RZ",
+    "name": "Гостиная \"Александрия\"",
+    "slug": "gostinaya-alexandriya",
+    "categoryIds": [
+      "CAT005"
+    ],
+    "description": "Полный комплект для гостиной в неоклассическом стиле",
+    "collection": "Александрия",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "Сосна Санторини светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Александрия/gostinaya-alexandriya.jpg",
+        "alt": "g-alecs-base.jpg",
+        "isMain": false
+      },
+      {
+        "url": "/uploads/Александрия/gostinaya-alexandriya-1.jpg",
+        "alt": "g-alecs-int.jpg",
+        "isMain": true
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmagz1yreC377O",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah28b7y8B1ZR",
+        "defaultQuantity": 0,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah2apftDHMB7",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah2p2yj737D5",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah2deaxBKZJK",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmah8xn82H6DUP",
+    "name": "Спальня \"Гамма 20\"",
+    "slug": "spalnya-gamma-20",
+    "categoryIds": [
+      "CAT002"
+    ],
+    "description": "",
+    "collection": "Гамма",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Гамма/spalnya-gamma-20.jpg",
+        "alt": "s-gamma20-int.jpg",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/spalnya-gamma-20-1.jpg",
+        "alt": "s-gamma20-base.jpg",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmah818w57MC42",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah8dtt17EB0H",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah8jxtwZF578",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah8m8bqR1PNF",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah8qyziULRT4",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah8upox051UJ",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmah9l451RM3IS",
+    "name": "Детская \"Гамма 20\"",
+    "slug": "detskaya-gamma-20",
+    "categoryIds": [
+      "CATmags7erjHSG10"
+    ],
+    "description": "",
+    "collection": "Гамма",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Гамма/detskaya-gamma-20.jpg",
+        "alt": "d-gamma20-int.jpg",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/detskaya-gamma-20-1.jpg",
+        "alt": "d-gamma20-base.jpg",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmah94lol3ABVM",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah999g2C7A7L",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah9dr30UG2NQ",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah9gtulL918N",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmaha5vj4X46XL",
+    "name": "Гостиная \"Гамма 20\"",
+    "slug": "gostinaya-gamma-20",
+    "categoryIds": [
+      "CAT005"
+    ],
+    "description": "",
+    "collection": "Гамма",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Ясень Анкор светлый",
+          "fasad": "Ясень Анкор светлый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Гамма/gostinaya-gamma-20.jpg",
+        "alt": "g-gamma20-int.jpg",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Гамма/gostinaya-gamma-20-1.jpg",
+        "alt": "g-gamma20-base.jpg",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmah9wy6u6R8WV",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmah9qq6mQ0H03",
+        "defaultQuantity": 0,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaha0q03MCLMP",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaha2z4eVTHYC",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmahar391FW4D1",
+    "name": "Спальня \"Денвер\"",
+    "slug": "spalnya-denver",
+    "categoryIds": [
+      "CAT002"
+    ],
+    "description": "",
+    "collection": "Денвер",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Денвер/spalnya-denver.jpg",
+        "alt": "s-denver-int.jpg",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/spalnya-denver-1.jpg",
+        "alt": "s-denver-base.jpg",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmahadbtm9R9C7",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahagiic5QLV4",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahajhaz9MGSO",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahamn4fGOPMY",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahap4ru61L0D",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmahbqb5nAY1P5",
+    "name": "Детская \"Денвер\"",
+    "slug": "detskaya-denver",
+    "categoryIds": [
+      "CATmags7erjHSG10"
+    ],
+    "description": "",
+    "collection": "Денвер",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Денвер/detskaya-denver.jpg",
+        "alt": "d-denver-int.jpg",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/detskaya-denver-1.jpg",
+        "alt": "d-denver-base.jpg",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmahavpb48L80Z",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahbcec4LOGM0",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahbomp8RTMXO",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahamn4fGOPMY",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahap4ru61L0D",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmahc45181Q2X0",
+    "name": "Гостиная \"Денвер\"",
+    "slug": "gostinaya-denver",
+    "categoryIds": [
+      "CAT005"
+    ],
+    "description": "",
+    "collection": "Денвер",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "металл",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Денвер/gostinaya-denver.jpg",
+        "alt": "g-denver-int-2.jpg",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/gostinaya-denver-1.jpg",
+        "alt": "g-denver-base-1.jpg",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmahbtrxvUF1RV",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahc0ft2Y5U9P",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahbomp8RTMXO",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahamn4fGOPMY",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmahajhaz9MGSO",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmai957ncH76CY",
+    "name": "Спальня \"Габриэлла\"",
+    "slug": "spalnya-gabriella",
+    "categoryIds": [
+      "CAT002"
+    ],
+    "description": "",
+    "collection": "Габриэлла",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "Металл",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Вудлайн кремовый",
+          "fasad": "Вудлайн кремовый, Сандал белый, Аруша венге патина",
+          "ruchki": "Латунь",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/spalnya-gabriella.jpg",
+        "alt": "Спальня \"Денвер\" (Copy)",
+        "isMain": true
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmahyhf9dNUY69",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmai1ie2uBHSJQ",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmai2ot9uP4YR2",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmai76qbmHLE3F",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmai7ms96TP9WN",
         "defaultQuantity": 1,
         "minQuantity": 0,
         "maxQuantity": 10,

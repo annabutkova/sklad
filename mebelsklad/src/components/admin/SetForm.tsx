@@ -8,13 +8,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Product, ProductSet, Category, ProductImage, SetItem, Collection } from '@/types';
 import { generateSlug, generateId, formatPrice } from '@/lib/utils/format';
+import { useImageUpload } from '@/hooks/useImageUpload';
+import { updateEntityWithImages } from '@/lib/utils/entityUpdate';
+import ImageGallery from './ImageGallery';
 
 // Define validation schema for product sets
 const productSetSchema = z.object({
   id: z.string().min(1, "ID is required"),
   name: z.string().min(3, "Name must be at least 3 characters"),
   slug: z.string().min(3, "Slug is required"),
-  categoryId: z.string().min(1, "Category is required"),
+  categoryIds: z.array(z.string()).min(1, "At least one category is required"),
   description: z.string().optional(),
   collection: z.string(),
   inStock: z.boolean().default(true),
@@ -24,6 +27,7 @@ const productSetSchema = z.object({
       fasad: z.string().optional(),
       ruchki: z.string().optional(),
       obivka: z.string().optional(),
+      spinka: z.string().optional(),
     }).optional(),
     style: z.object({
       style: z.string().optional(),
@@ -32,6 +36,7 @@ const productSetSchema = z.object({
         fasad: z.string().optional(),
         ruchki: z.string().optional(),
         obivka: z.string().optional(),
+        spinka: z.string().optional(),
       }).optional(),
     }).optional(),
     warranty: z.object({
@@ -52,18 +57,23 @@ interface SetFormProps {
 
 export default function SetForm({ productSet, categories, products }: SetFormProps) {
   const router = useRouter();
-  // Правильная инициализация состояния images
-  const [images, setImages] = useState<ProductImage[]>(() => {
-    console.log('Инициализация изображений продукта:', productSet?.images);
-    return productSet?.images || [];
-  });
-
-  // После инициализации добавьте useEffect для отладки
-  useEffect(() => {
-    console.log('Текущие изображения:', images);
-  }, [images]);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    images,
+    setImages,
+    imageFiles,
+    imagePreviews,
+    isUploading,
+    handleImageSelect,
+    handleRemoveImage,
+    handleRemovePreview,
+    handleSetMainImage,
+    uploadAllImages
+  } = useImageUpload({
+    initialImages: productSet?.images || [],
+    entityName: productSet?.name || 'set'
+  });
 
   // State for managing set items
   const [selectedItems, setSelectedItems] = useState<SetItem[]>(
@@ -86,8 +96,35 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
     resolver: zodResolver(productSetSchema),
     defaultValues: productSet ? {
       ...productSet,
+      categoryIds: productSet.categoryIds || [],
+      collection: productSet.collection || '',
+      specifications: {
+        material: {
+          karkas: productSet.specifications?.material?.karkas || '',
+          fasad: productSet.specifications?.material?.fasad || '',
+          ruchki: productSet.specifications?.material?.ruchki || '',
+          obivka: productSet.specifications?.material?.obivka || '',
+          spinka: productSet.specifications?.material?.spinka || '',
+        },
+        style: {
+          style: productSet.specifications?.style?.style || '',
+          color: {
+            karkas: productSet.specifications?.style?.color?.karkas || '',
+            fasad: productSet.specifications?.style?.color?.fasad || '',
+            ruchki: productSet.specifications?.style?.color?.ruchki || '',
+            obivka: productSet.specifications?.style?.color?.obivka || '',
+            spinka: productSet.specifications?.style?.color?.spinka || '',
+          }
+        },
+        warranty: {
+          duration: productSet.specifications?.warranty?.duration || 0,
+          lifetime: productSet.specifications?.warranty?.lifetime || 0,
+          production: productSet.specifications?.warranty?.production || '',
+        }
+      }
     } : {
       id: generateId('SET'),
+      categoryIds: [],
       inStock: true,
       collection: '' as Collection,
       specifications: {
@@ -96,6 +133,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
           fasad: '',
           ruchki: '',
           obivka: '',
+          spinka: '',
         },
         style: {
           style: '',
@@ -104,6 +142,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             fasad: '',
             ruchki: '',
             obivka: '',
+            spinka: '',
           }
         },
         warranty: {
@@ -117,8 +156,6 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
 
   // Watch values for auto-calculations
   const name = watch('name');
-  const categoryId = watch('categoryId');
-  const collection = watch('collection');
 
   // Get all Collection enum values for the select dropdown
   const collectionOptions = Object.values(Collection);
@@ -246,15 +283,35 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         return;
       }
 
+      // Filter out items with non-existent product IDs
+      const validItems = selectedItems.filter(item => {
+        const productExists = products.some(p => p.id === item.productId);
+        if (!productExists) {
+          console.warn(`Product with ID ${item.productId} does not exist and will be removed from the set`);
+        }
+        return productExists;
+      });
+
+      if (validItems.length === 0) {
+        alert('All products in this set are invalid. Please add valid products.');
+        setIsSubmitting(false);
+        return;
+      }
+      // Make sure collection is properly set
+      let finalCollection = data.collection;
+      if (!finalCollection && collectionOptions.length > 0) {
+        finalCollection = collectionOptions[0];
+      }
+
       // Create the complete product set object
       const completeSet: ProductSet = {
         ...data,
+        categoryIds: data.categoryIds,
+        collection: finalCollection as Collection,
         images: images,
-        items: selectedItems,
+        items: validItems,
         specifications: data.specifications || {},
         inStock: true,
-        collection: data.collection as Collection,
-        categoryIds: []
       };
 
       console.log('Сохраняю набор с изображениями:', completeSet.images);
@@ -276,6 +333,37 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
       if (!response.ok) {
         throw new Error('Failed to save product set');
       }
+
+      // Get the saved product id
+      const savedSet = await response.json();
+      const setId = savedSet.id || productSet?.id || data.id;
+
+      // Upload images if any new files selected
+      if (imageFiles.length > 0) {
+        try {
+          // Загружаем изображения
+          const folderSlug = finalCollection || 'products';
+          const uploadedImages = await uploadAllImages(
+            setId,
+            data.slug,
+            folderSlug
+          );
+
+          // Обновляем продукт с новыми изображениями
+          if (uploadedImages.length > images.length) {
+            await updateEntityWithImages({
+              entityType: 'set',
+              entityId: setId,
+              images: uploadedImages,
+              entityData: completeSet
+            });
+          }
+        } catch (uploadError) {
+          console.error('Error uploading images:', uploadError);
+          alert('Product saved but failed to upload images. You can upload them later.');
+        }
+      }
+
 
       // Redirect to sets list
       router.push('/admin/sets');
@@ -413,24 +501,44 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             )}
           </div>
 
-          {/* Category */}
+          {/* Category Selection - Multi-select */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Category
+              Categories
             </label>
-            <select
-              {...register('categoryId')}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">Select a category</option>
+            <div className="mt-1">
               {categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
+                <div key={category.id} className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id={`category-${category.id}`}
+                    value={category.id}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      const categoryId = category.id;
+                      const currentCategoryIds = watch('categoryIds') || [];
+
+                      if (checked) {
+                        // Добавляем категорию, если её ещё нет
+                        if (!currentCategoryIds.includes(categoryId)) {
+                          setValue('categoryIds', [...currentCategoryIds, categoryId]);
+                        }
+                      } else {
+                        // Удаляем категорию
+                        setValue('categoryIds', currentCategoryIds.filter(id => id !== categoryId));
+                      }
+                    }}
+                    checked={(watch('categoryIds') || []).includes(category.id)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor={`category-${category.id}`} className="ml-2 block text-sm text-gray-900">
+                    {category.name}
+                  </label>
+                </div>
               ))}
-            </select>
-            {errors.categoryId && (
-              <p className="mt-1 text-sm text-red-600">{errors.categoryId.message}</p>
+            </div>
+            {errors.categoryIds && (
+              <p className="mt-1 text-sm text-red-600">{errors.categoryIds.message}</p>
             )}
           </div>
 
@@ -608,7 +716,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         </div>
       </div>
 
-      {/* Images */}
+      {/* Images section */}
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-lg font-medium mb-4">Images</h2>
 
@@ -618,64 +726,23 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
           </label>
           <input
             type="file"
-            onChange={handleImageUpload}
+            onChange={handleImageSelect}
             accept="image/*"
             multiple
+            disabled={isUploading}
             className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
         </div>
 
-        {/* Image preview */}
-        {/* Отображение загруженных изображений */}
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {images.length > 0 ? (
-            images.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image.url}
-                  alt={image.alt || 'Изображение продукта'}
-                  className="h-24 w-full object-cover rounded-md"
-                  onError={(e) => {
-                    console.error(`Ошибка загрузки изображения: ${image.url}`);
-                    e.currentTarget.src = '/images/placeholder.jpg'; // Замените на путь к вашему изображению-заглушке
-                  }}
-                />
-                {image.isMain && (
-                  <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-md">
-                    Основное
-                  </span>
-                )}
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log('Удаление изображения:', image);
-                    setImages(images.filter((_, i) => i !== index));
-                  }}
-                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
-                >
-                  ✕
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const updatedImages = images.map((img, i) => ({
-                      ...img,
-                      isMain: i === index,
-                    }));
-                    setImages(updatedImages);
-                  }}
-                  className="absolute bottom-0 left-0 bg-blue-500 text-white p-1 text-xs rounded-tr-md"
-                >
-                  Сделать основным
-                </button>
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-4 text-gray-500">
-              Нет загруженных изображений
-            </div>
-          )}
-        </div>
+        {/* Используем компонент ImageGallery */}
+        <ImageGallery
+          images={images}
+          previews={imagePreviews}
+          onRemoveImage={handleRemoveImage}
+          onRemovePreview={handleRemovePreview}
+          onSetMainImage={handleSetMainImage}
+          isUploading={isUploading}
+        />
       </div>
 
       {/* Products in the Set */}

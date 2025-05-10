@@ -9,11 +9,11 @@ const calculateSetPrice = (set: ProductSet, products: Product[]) => {
   return set.items.reduce((sum: number, item: { productId: string; defaultQuantity: number; }) => {
     const product = products.find((p: { id: string; }) => p.id === item.productId);
     if (!product) return sum;
-    
-    const productPrice = product.discount 
+
+    const productPrice = product.discount
       ? product.price - product.discount
       : product.price;
-      
+
     return sum + (productPrice * item.defaultQuantity);
   }, 0);
 };
@@ -81,7 +81,7 @@ export default async function AdminSetsPage() {
             {sets.map((set) => {
               // Calculate the total price of the set based on its items
               const totalPrice = calculateSetPrice(set, products);
-              
+
               return (
                 <tr key={set.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -107,7 +107,7 @@ export default async function AdminSetsPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
-                      {categoryMap[set.categoryId] || "Unknown"}
+                      {set.categoryIds.map((id) => categoryMap[id] || "Unknown").join(", ")}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

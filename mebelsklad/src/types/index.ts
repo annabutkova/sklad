@@ -22,8 +22,17 @@ export interface Product {
 
 export enum Collection {
   Alexandria = "Александрия",
-  Bora = "Бора",
+  Denver = "Денвер",
+  Gabriella = "Габриэлла",
+  Gamma = "Гамма",
+  Kamelia = "Камелия",
+  Lucia = "Лючия",
   Milan = "Милан",
+  Nicole = "Николь",
+  Oliver = "Оливер",
+  Riviera = "Ривьера",
+  Soho = "Сохо",
+  Fantasy = "Фантазия",
 }
 
 
@@ -52,6 +61,7 @@ export type Material = {
   fasad?: string;
   ruchki?: string;
   obivka?: string;
+  spinka?: string;
 }
 
 export type Style = {
@@ -61,6 +71,7 @@ export type Style = {
     fasad?: string;
     ruchki?: string;
     obivka?: string;
+    spinka?: string;
   };
 }
 
@@ -109,7 +120,7 @@ export interface Category {
   slug: string;
   parentId?: string;
   description?: string;
-  imageUrl?: string;
+  images: ProductImage[];
   children?: Category[];
 }
 

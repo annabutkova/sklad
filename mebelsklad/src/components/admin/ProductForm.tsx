@@ -1,13 +1,15 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Product, Category, ProductImage, BedSize, Collection } from '@/types';
 import { generateSlug, generateId } from '@/lib/utils/format';
+import { useImageUpload } from '@/hooks/useImageUpload';
+import ImageGallery from './ImageGallery';
+import { updateEntityWithImages } from '@/lib/utils/entityUpdate';
 
 // Updated product schema with the new types and collection field
 const productSchema = z.object({
@@ -26,6 +28,7 @@ const productSchema = z.object({
       fasad: z.string().optional(),
       ruchki: z.string().optional(),
       obivka: z.string().optional(),
+      spinka: z.string().optional(),
     }).optional(),
     style: z.object({
       style: z.string().optional(),
@@ -34,6 +37,7 @@ const productSchema = z.object({
         fasad: z.string().optional(),
         ruchki: z.string().optional(),
         obivka: z.string().optional(),
+        spinka: z.string().optional(),
       }).optional(),
     }).optional(),
     dimensions: z.object({
@@ -66,25 +70,30 @@ interface ProductFormProps {
 
 export default function ProductForm({ product, categories }: ProductFormProps) {
   const router = useRouter();
-  // Правильная инициализация состояния images
-  const [images, setImages] = useState<ProductImage[]>(() => {
-    return product?.images || [];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    images,
+    setImages,
+    imageFiles,
+    imagePreviews,
+    isUploading,
+    handleImageSelect,
+    handleRemoveImage,
+    handleRemovePreview,
+    handleSetMainImage,
+    uploadAllImages
+  } = useImageUpload({
+    initialImages: product?.images || [],
+    entityName: product?.name || 'product'
   });
 
-  // После инициализации добавьте useEffect для отладки
-  useEffect(() => {
-    console.log('Текущие изображения:', images);
-  }, [images]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-
-  // Set up form with react-hook-form
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
     defaultValues: product ? {
       ...product,
       categoryIds: product.categoryIds || [],
-      collection: '',
+      collection: product.collection || '',
       price: product.price || 0,
       discount: product.discount || 0,
       specifications: {
@@ -93,6 +102,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
           fasad: product.specifications?.material?.fasad || '',
           ruchki: product.specifications?.material?.ruchki || '',
           obivka: product.specifications?.material?.obivka || '',
+          spinka: product.specifications?.material?.spinka || '',
         },
         style: {
           style: product.specifications?.style?.style || '',
@@ -101,6 +111,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
             fasad: product.specifications?.style?.color?.fasad || '',
             ruchki: product.specifications?.style?.color?.ruchki || '',
             obivka: product.specifications?.style?.color?.obivka || '',
+            spinka: product.specifications?.style?.color?.spinka || '',
           }
         },
         dimensions: {
@@ -109,7 +120,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
           depth: product.specifications?.dimensions?.depth || 0,
           length: product.specifications?.dimensions?.length || 0,
         },
-
         bedSize: product.specifications?.bedSize,
         content: {
           yashiki: product.specifications?.content?.yashiki || 0,
@@ -135,6 +145,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
           fasad: '',
           ruchki: '',
           obivka: '',
+          spinka: '',
         },
         style: {
           style: '',
@@ -143,6 +154,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
             fasad: '',
             ruchki: '',
             obivka: '',
+            spinka: '',
           }
         },
         dimensions: { width: 0, height: 0, depth: 0, length: 0 },
@@ -163,10 +175,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
   });
 
   const collectionOptions = Object.values(Collection);
-  const selectedCollection = watch('collection');
-
-
-  // Watch the name field to auto-generate slug
   const name = watch('name');
 
   useEffect(() => {
@@ -176,11 +184,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     }
   }, [name, setValue, product]);
 
-  // Add a new separate useEffect specifically for collection initialization
-  // This should run only once on component mount
-  // In ProductForm.tsx, modify the useEffect for collection initialization
-
-  // Replace the existing useEffect for collection initialization with this:
+  // Initialize collection
   useEffect(() => {
     // Initialize collection only if it's not already set from the product
     if ((!watch('collection') || watch('collection') === '') && product?.collection) {
@@ -191,6 +195,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     }
   }, [collectionOptions, setValue, product, watch]);
 
+  // Функция для определения, является ли товар кроватью
   const isBedCategory = () => {
     // Get selected category IDs
     const categoryIds = watch('categoryIds') || [];
@@ -206,9 +211,28 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     });
   };
 
-  const onSubmit = async (data: ProductFormValues) => {
-    console.log("Форма отправляется, данные:", data); // Добавьте это
+  // Отслеживаем изменения категорий для очистки полей кровати
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === 'categoryIds') {
+        const isBed = isBedCategory();
 
+        // Если не кровать, очищаем специфичные поля
+        if (!isBed) {
+          // Устанавливаем пустое значение для размера кровати
+          setValue('specifications.bedSize', '');
+
+          // Очищаем материал и цвет спинки
+          setValue('specifications.material.spinka', '');
+          setValue('specifications.style.color.spinka', '');
+        }
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch, setValue]);
+
+  const onSubmit = async (data: ProductFormValues) => {
     setIsSubmitting(true);
 
     try {
@@ -218,26 +242,33 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         finalCollection = collectionOptions[0];
       }
 
-      // Create the complete product object
+      // Prepare the complete product object
       const completeProduct: Product = {
         ...data,
         categoryIds: data.categoryIds,
         collection: finalCollection as Collection,
-        images: images,
+        images: images, // Используем текущие изображения
         features: product?.features || [],
         specifications: {
           ...data.specifications,
           bedSize: isBedCategory() ? data.specifications.bedSize as BedSize : undefined,
+          material: {
+            ...data.specifications.material,
+            spinka: isBedCategory() ? data.specifications.material?.spinka : undefined
+          },
+          style: {
+            ...data.specifications.style,
+            color: {
+              ...data.specifications.style?.color,
+              spinka: isBedCategory() ? data.specifications.style?.color?.spinka : undefined
+            }
+          }
         },
       };
 
-      console.log('Saving product with collection:', completeProduct.collection);
-
-      // Save to API
+      // Save product to API
       const response = await fetch(
-        product
-          ? `/api/admin/products/${product.id}`
-          : '/api/admin/products',
+        product ? `/api/admin/products/${product.id}` : '/api/admin/products',
         {
           method: product ? 'PUT' : 'POST',
           headers: {
@@ -251,6 +282,36 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         throw new Error('Failed to save product');
       }
 
+      // Get the saved product id
+      const savedProduct = await response.json();
+      const productId = savedProduct.id || product?.id || data.id;
+
+      // Upload images if any new files selected
+      if (imageFiles.length > 0) {
+        try {
+          // Загружаем изображения
+          const folderSlug = finalCollection || 'products';
+          const uploadedImages = await uploadAllImages(
+            productId,
+            data.slug,
+            folderSlug
+          );
+
+          // Обновляем продукт с новыми изображениями
+          if (uploadedImages.length > images.length) {
+            await updateEntityWithImages({
+              entityType: 'product',
+              entityId: productId,
+              images: uploadedImages,
+              entityData: completeProduct
+            });
+          }
+        } catch (uploadError) {
+          console.error('Error uploading images:', uploadError);
+          alert('Product saved but failed to upload images. You can upload them later.');
+        }
+      }
+
       // Redirect to products list
       router.push('/admin/products');
       router.refresh();
@@ -259,62 +320,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
       alert('Failed to save product. Please try again.');
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    setIsUploading(true);
-
-    try {
-      // Get the product slug
-      const productSlug = watch('slug') || generateSlug(watch('name') || 'product');
-      const productName = watch('name') || 'Product'; // Получаем название товара
-
-      // Create a slug from the collection title
-      const folderSlug = selectedCollection || 'products';
-
-      // Create FormData to send files
-      const formData = new FormData();
-
-      // Add the folder slug and product slug
-      formData.append('folderSlug', folderSlug);
-      formData.append('productSlug', productSlug);
-
-      // Add all files
-      Array.from(files).forEach(file => {
-        formData.append('images', file);
-      });
-
-      // Send to server
-      const response = await fetch('/api/upload-images', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-
-      // Add the uploaded images to state, используя название товара вместо имени файла для alt
-      const newImages: ProductImage[] = data.uploadedImages.map(
-        (img: { url: string, filename: string }, index: number) => ({
-          url: img.url,
-          alt: productName, // Используем название товара вместо img.filename
-          isMain: index === 0 && images.length === 0
-        })
-      );
-
-      setImages([...images, ...newImages]);
-    } catch (error) {
-      console.error('Error uploading images:', error);
-      alert('Failed to upload images. Please try again.');
-    } finally {
-      setIsUploading(false);
     }
   };
 
@@ -543,6 +548,16 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
             />
           </div>
+          {isBedCategory() && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Spinka (для кроватей)</label>
+              <input
+                type="text"
+                {...register("specifications.material.spinka")}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -592,6 +607,16 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
             />
           </div>
+          {isBedCategory() && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Spinka Color (для кроватей)</label>
+              <input
+                type="text"
+                {...register("specifications.style.color.spinka")}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -605,6 +630,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
               {...register("specifications.bedSize")}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
             >
+              <option value="">Выберите размер</option>
               <option value="180x200">180x200</option>
               <option value="160x200">160x200</option>
               <option value="140x200">140x200</option>
@@ -714,76 +740,33 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         </div>
       </div>
 
-      {/* Images */}
-      {/* File upload input */}
-      <div className="form-group">
-        <label htmlFor="image-upload">Product Images</label>
+      {/* Images section */}
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-lg font-medium mb-4">Images</h2>
 
-        {/* File upload input */}
-        <div className="form-group">
-          <label htmlFor="image-upload">Product Images</label>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Upload Images
+          </label>
           <input
             type="file"
-            id="image-upload"
+            onChange={handleImageSelect}
             accept="image/*"
             multiple
-            onChange={handleImageUpload}
             disabled={isUploading}
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
-          {isUploading && <span>Uploading...</span>}
         </div>
 
-        {/* Отображение загруженных изображений */}
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {images.length > 0 ? (
-            images.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image.url}
-                  alt={image.alt || 'Изображение продукта'}
-                  className="h-24 w-full object-cover rounded-md"
-                  onError={(e) => {
-                    console.error(`Ошибка загрузки изображения: ${image.url}`);
-                    e.currentTarget.src = '/images/placeholder.jpg'; // Замените на путь к вашему изображению-заглушке
-                  }}
-                />
-                {image.isMain && (
-                  <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-md">
-                    Основное
-                  </span>
-                )}
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log('Удаление изображения:', image);
-                    setImages(images.filter((_, i) => i !== index));
-                  }}
-                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
-                >
-                  ✕
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const updatedImages = images.map((img, i) => ({
-                      ...img,
-                      isMain: i === index,
-                    }));
-                    setImages(updatedImages);
-                  }}
-                  className="absolute bottom-0 left-0 bg-blue-500 text-white p-1 text-xs rounded-tr-md"
-                >
-                  Сделать основным
-                </button>
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-4 text-gray-500">
-              Нет загруженных изображений
-            </div>
-          )}
-        </div>
-
+        {/* Используем компонент ImageGallery */}
+        <ImageGallery
+          images={images}
+          previews={imagePreviews}
+          onRemoveImage={handleRemoveImage}
+          onRemovePreview={handleRemovePreview}
+          onSetMainImage={handleSetMainImage}
+          isUploading={isUploading}
+        />
       </div>
 
       {/* Submit button */}
@@ -798,8 +781,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          onClick={() => console.log("Submit button clicked, errors:", errors)}
-
           className="bg-blue-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           {isSubmitting ? 'Saving...' : product ? 'Update Product' : 'Create Product'}

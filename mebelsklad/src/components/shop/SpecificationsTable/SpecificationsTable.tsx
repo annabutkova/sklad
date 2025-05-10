@@ -8,6 +8,7 @@ interface Specifications {
         fasad?: string;
         ruchki?: string;
         obivka?: string;
+        spinka?: string;
     };
     style?: {
         style?: string;
@@ -16,6 +17,7 @@ interface Specifications {
             fasad?: string;
             ruchki?: string;
             obivka?: string;
+            spinka?: string;
         };
     };
     dimensions?: {
@@ -107,7 +109,10 @@ const SpecificationsTable: React.FC<SpecificationsTableProps> = ({
                         <SpecificationRow label="Материал ручек" value={specifications.material.ruchki} />
                     )}
                     {specifications.material?.obivka && (
-                        <SpecificationRow label="Обивка" value={specifications.material.obivka} />
+                        <SpecificationRow label="Материал обивки" value={specifications.material.obivka} />
+                    )}
+                    {specifications.material?.spinka && (
+                        <SpecificationRow label="Материал спинки" value={specifications.material.spinka} />
                     )}
                 </>
             )}
@@ -130,6 +135,9 @@ const SpecificationsTable: React.FC<SpecificationsTableProps> = ({
                     )}
                     {specifications.style?.color?.obivka && (
                         <SpecificationRow label="Цвет обивки" value={specifications.style.color.obivka} />
+                    )}
+                    {specifications.style?.color?.spinka && (
+                        <SpecificationRow label="Цвет спинки" value={specifications.style.color.spinka} />
                     )}
                 </>
             )}
