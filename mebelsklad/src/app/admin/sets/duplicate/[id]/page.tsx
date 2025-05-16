@@ -27,5 +27,5 @@ export default async function DuplicateSetPage({
   await jsonDataService.saveProductSet(newSet);
 
   // Redirect to edit page for the new set
-  redirect(`/admin/sets/${newSet.id}`);
+  redirect(`/admin/sets/${newSet.id}?isDuplicate=true`);
 }

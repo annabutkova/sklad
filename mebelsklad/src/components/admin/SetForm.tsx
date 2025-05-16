@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -57,6 +57,9 @@ interface SetFormProps {
 
 export default function SetForm({ productSet, categories, products }: SetFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isDuplicate = searchParams.get('isDuplicate') === 'true';
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -376,57 +379,6 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    try {
-      // Get the set slug
-      const setSlug = watch('slug') || generateSlug(watch('name') || 'set');
-
-      // Create a slug from the collection title
-      const folderSlug = selectedCollection || 'sets';
-
-      // Create FormData to send files
-      const formData = new FormData();
-
-      // Add the folder slug and set slug
-      formData.append('folderSlug', folderSlug);
-      formData.append('productSlug', setSlug);
-
-      // Add all files
-      Array.from(files).forEach(file => {
-        formData.append('images', file);
-      });
-
-      // Send to server
-      const response = await fetch('/api/upload-images', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-
-      // Add the uploaded images to state
-      const newImages: ProductImage[] = data.uploadedImages.map(
-        (img: { url: string, filename: string }, index: number) => ({
-          url: img.url,
-          alt: img.filename,
-          isMain: index === 0 && images.length === 0
-        })
-      );
-
-      setImages([...images, ...newImages]);
-    } catch (error) {
-      console.error('Error uploading images:', error);
-      alert('Failed to upload images. Please try again.');
-    }
-  };
-
   // Get product details by ID
   const getProductById = (productId: string) => {
     return products.find(p => p.id === productId);
@@ -462,7 +414,14 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             </label>
             <input
               type="text"
-              {...register('name')}
+              {...register('name', {
+                onChange: (e) => {
+                  if (!productSet || isDuplicate) {
+                    const newName = e.target.value;
+                    setValue('slug', generateSlug(newName));
+                  }
+                }
+              })}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
             {errors.name && (

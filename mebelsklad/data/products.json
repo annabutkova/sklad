@@ -2906,5 +2906,1631 @@
         "isMain": true
       }
     ]
+  },
+  {
+    "id": "PRODmaiownvbKHCDH",
+    "name": "Кровать \"Милан\" с ПМ (160 см)",
+    "slug": "krovat-milan-s-pm-160-sm",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Милан",
+    "price": 3930000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 164,
+        "height": 100,
+        "depth": 0,
+        "length": 207
+      },
+      "bedSize": "160x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Габриэлла/krovat-milan-s-pm-160-sm.jpg",
+        "alt": "Кровать \"Габриэлла\" с ПМ (160 см) (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmaip1xhy0HS5Y",
+    "name": "Тумба прикроватная \"Милан\"",
+    "slug": "tumba-prikrovatnaya-milan",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Милан",
+    "price": 670000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 50,
+        "height": 48,
+        "depth": 38,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/tumba-prikrovatnaya-milan.jpg",
+        "alt": "Кровать \"Милан\" с ПМ (160 см) (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/tumba-prikrovatnaya-milan-1.jpg",
+        "alt": "Кровать \"Милан\" с ПМ (160 см) (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaip65rwXCSSL",
+    "name": "Комод с 4-мя ящиками \"Милан\"",
+    "slug": "komod-milan-s-4-mya-yashikami",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Милан",
+    "price": 1390000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 60,
+        "height": 89,
+        "depth": 40,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 4,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/komod-milan.jpg",
+        "alt": "Тумба прикроватная \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/komod-milan-1.jpg",
+        "alt": "Тумба прикроватная \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaip8rctXGC7S",
+    "name": "Шкаф 4-дверный \"Милан\"",
+    "slug": "shkaf-4-dvernyy-milan",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Милан",
+    "price": 6240000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 180,
+        "height": 220,
+        "depth": 56,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 8,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/shkaf-4-dvernyy-milan.jpg",
+        "alt": "Комод \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/shkaf-4-dvernyy-milan-1.jpg",
+        "alt": "Комод \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaipxgri6GB9T",
+    "name": "Кровать \"Милан\" с ящиком (90 см)",
+    "slug": "krovat-milan-s-yaschikom-90-sm",
+    "categoryIds": [
+      "CATmagsb9r62DTMW"
+    ],
+    "collection": "Милан",
+    "price": 1740000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 96,
+        "height": 90,
+        "depth": 0,
+        "length": 203
+      },
+      "bedSize": "90x200",
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/krovat-milan-s-yaschikom-90-sm.jpg",
+        "alt": "Кровать \"Милан\" с ПМ (160 см) (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmaiq0cprA5FIV",
+    "name": "Стол \"Милан\"",
+    "slug": "stol-milan",
+    "categoryIds": [
+      "CATmaguvtt0INCRA"
+    ],
+    "collection": "Милан",
+    "price": 810000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 113,
+        "height": 103,
+        "depth": 49,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 4,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/stol-milan.jpg",
+        "alt": "Тумба прикроватная \"Милан\" (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmaiq7exgEMB88",
+    "name": "Шкаф навесной \"Милан\"",
+    "slug": "shkaf-navesnoy-milan",
+    "categoryIds": [
+      "CATmaguvtt0INCRA",
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Милан",
+    "price": 700000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 35,
+        "depth": 26,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 3,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/shkaf-navesnoy-milan.jpg",
+        "alt": "Комод \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/shkaf-navesnoy-milan-1.jpg",
+        "alt": "Комод \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaiqbgqfC8IH8",
+    "name": "Шкаф 3-дверный \"Милан\"",
+    "slug": "shkaf-3-dvernyy-milan",
+    "categoryIds": [
+      "CATmaguxb8vCEQNS",
+      "CAT004"
+    ],
+    "collection": "Милан",
+    "price": 4970000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 140,
+        "height": 220,
+        "depth": 56,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 7,
+        "shtanga": 1
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/shkaf-3-dvernyy-milan.jpg",
+        "alt": "Шкаф 4-дверный \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/shkaf-3-dvernyy-milan-1.jpg",
+        "alt": "Шкаф 4-дверный \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaiqg93dLZL0K",
+    "name": "Кровать \"Милан\" выкатная (90 см + 80 см)",
+    "slug": "krovat-milan-vykatnaya-90-sm-80-sm",
+    "categoryIds": [
+      "CATmagsb9r62DTMW"
+    ],
+    "collection": "Милан",
+    "price": 2080000,
+    "discount": 0,
+    "description": "Ширина дополнительного спального места — 80 см",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 96,
+        "height": 90,
+        "depth": 0,
+        "length": 203
+      },
+      "bedSize": "90x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/krovat-milan-vykatnaya-90-sm-80-sm.jpg",
+        "alt": "Кровать \"Милан\" с ящиком (90 см) (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmaiqodef5J82O",
+    "name": "Комод с 3-мя ящиками \"Милан\"",
+    "slug": "komod-milan-s-3-mya-yashikami",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Милан",
+    "price": 1510000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 76,
+        "depth": 40,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 2,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/komod-milan-s-3-mya-yashikami.jpg",
+        "alt": "Комод \"Милан\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/komod-milan-s-3-mya-yashikami-1.jpg",
+        "alt": "Комод \"Милан\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmairjckx7YMXS",
+    "name": "Пенал \"Милан\"",
+    "slug": "penal-milan",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Милан",
+    "price": 1740000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 50,
+        "height": 191,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/penal-milan.jpg",
+        "alt": "Шкаф 3-дверный \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/penal-milan-1.jpg",
+        "alt": "Шкаф 3-дверный \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmairnwi1LYYZ8",
+    "name": "ТВ-тумба \"Милан\"",
+    "slug": "tv-tumba-milan",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Милан",
+    "price": 1280000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 160,
+        "height": 37,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 4,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/tv-tumba-milan.jpg",
+        "alt": "Пенал \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/tv-tumba-milan-1.jpg",
+        "alt": "Пенал \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmairrllw8FI4M",
+    "name": "Тумба \"Милан\"",
+    "slug": "tumba-v-gostinuyu-milan",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Милан",
+    "price": 1850000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 90,
+        "height": 129,
+        "depth": 42,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 6,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/tumba-v-gostinuyu-milan.jpg",
+        "alt": "ТВ-тумба \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/tumba-v-gostinuyu-milan-1.jpg",
+        "alt": "ТВ-тумба \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmairuzmcLX537",
+    "name": "Полка навесная \"Милан\"",
+    "slug": "polka-navesnaya-milan",
+    "categoryIds": [
+      "CATmagyzi07WI96Q"
+    ],
+    "collection": "Милан",
+    "price": 190000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 22,
+        "depth": 20,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/polka-navesnaya-milan.jpg",
+        "alt": "Тумба \"Милан\" (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmais0a28I8S38",
+    "name": "Обувница \"Милан\"",
+    "slug": "obuvnitsa-milan",
+    "categoryIds": [
+      "CATmah4e1osUQLXL"
+    ],
+    "collection": "Милан",
+    "price": 580000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 52,
+        "height": 76,
+        "depth": 17,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 2,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/obuvnitsa-milan.jpg",
+        "alt": "Полка навесная \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/obuvnitsa-milan-1.jpg",
+        "alt": "Полка навесная \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmais61mjHWWW9",
+    "name": "Шкаф 2-дверный \"Милан\"",
+    "slug": "shkaf-2-dvernyy-milan",
+    "categoryIds": [
+      "CATmah4e1osUQLXL"
+    ],
+    "collection": "Милан",
+    "price": 3590000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 220,
+        "depth": 56,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/shkaf-2-dvernyy-milan.jpg",
+        "alt": "Шкаф 3-дверный \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/shkaf-2-dvernyy-milan-1.jpg",
+        "alt": "Шкаф 3-дверный \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmais7xip3HEJH",
+    "name": "Шкаф 1-дверный \"Милан\"",
+    "slug": "shkaf-1-dvernyy-milan",
+    "categoryIds": [
+      "CATmah4e1osUQLXL"
+    ],
+    "collection": "Милан",
+    "price": 2150000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 55,
+        "height": 220,
+        "depth": 40,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 6,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/shkaf-1-dvernyy-milan.jpg",
+        "alt": "Шкаф 2-дверный \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/shkaf-1-dvernyy-milan-1.jpg",
+        "alt": "Шкаф 2-дверный \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmais9g7iTA16H",
+    "name": "Вешалка \"Милан\" исп.1",
+    "slug": "veshalka-milan-isp1",
+    "categoryIds": [
+      "CATmah4e1osUQLXL"
+    ],
+    "collection": "Милан",
+    "price": 3240000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 210,
+        "depth": 40,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 4,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/veshalka-milan-isp1.jpg",
+        "alt": "Шкаф 1-дверный \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/veshalka-milan-isp1-1.jpg",
+        "alt": "Шкаф 1-дверный \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaisc2hc4CQLJ",
+    "name": "Вешалка \"Милан\" исп.2",
+    "slug": "veshalka-milan-isp2",
+    "categoryIds": [
+      "CATmah4e1osUQLXL"
+    ],
+    "collection": "Милан",
+    "price": 3120000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 100,
+        "height": 220,
+        "depth": 40,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 8,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Милан/veshalka-milan-isp2.jpg",
+        "alt": "Вешалка \"Милан\" исп.1 (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/veshalka-milan-isp2-1.jpg",
+        "alt": "Вешалка \"Милан\" исп.1 (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaislwixMZ88K",
+    "name": "Кровать \"Лючия\" (160 см)",
+    "slug": "krovat-lyuchiya-160-sm",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Лючия",
+    "price": 2550000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 168,
+        "height": 86,
+        "depth": 0,
+        "length": 213
+      },
+      "bedSize": "160x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/krovat-lyuchiya-160-sm.jpg",
+        "alt": "Вешалка \"Милан\" исп.2 (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmait0fvp3559B",
+    "name": "Тумба прикроватная \"Лючия\"",
+    "slug": "tumba-prikrovatnaya-lyuchiya",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Лючия",
+    "price": 660000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 61,
+        "height": 45,
+        "depth": 36,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/tumba-prikrovatnaya-lyuchiya.jpg",
+        "alt": "Кровать \"Лючия\" (160 см) (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/tumba-prikrovatnaya-lyuchiya-1.jpg",
+        "alt": "Кровать \"Лючия\" (160 см) (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmait3ckxW189Y",
+    "name": "Комод \"Лючия\"",
+    "slug": "komod-lyuchiya",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Лючия",
+    "price": 1950000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 137,
+        "height": 78,
+        "depth": 38,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/komod-lyuchiya.jpg",
+        "alt": "Тумба прикроватная \"Лючия\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/komod-lyuchiya-1.jpg",
+        "alt": "Тумба прикроватная \"Лючия\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmait4tunKZ6WJ",
+    "name": "Шкаф для одежды \"Лючия\"",
+    "slug": "shkaf-dlya-odezhdy-lyuchiya",
+    "categoryIds": [
+      "CAT004"
+    ],
+    "collection": "Лючия",
+    "price": 6000000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 197,
+        "height": 230,
+        "depth": 58,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 2,
+        "shtanga": 2
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/shkaf-dlya-odezhdy-lyuchiya.jpg",
+        "alt": "Комод \"Лючия\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/shkaf-dlya-odezhdy-lyuchiya-1.jpg",
+        "alt": "Комод \"Лючия\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmait8dy516P4B",
+    "name": "Зеркало \"Лючия\"",
+    "slug": "zerkalo-lyuchiya",
+    "categoryIds": [
+      "CATmafqlpl0LVNP6"
+    ],
+    "collection": "Лючия",
+    "price": 900000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Зеркало",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 130,
+        "height": 70,
+        "depth": 2,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/zerkalo-lyuchiya.jpg",
+        "alt": "Шкаф для одежды \"Лючия\" (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmaitcy7vW4CY7",
+    "name": "Кровать \"Лючия\" (90 см)",
+    "slug": "krovat-lyuchiya-90-sm",
+    "categoryIds": [
+      "CATmagsb9r62DTMW"
+    ],
+    "collection": "Лючия",
+    "price": 2000000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "dimensions": {
+        "width": 97,
+        "height": 86,
+        "depth": 0,
+        "length": 213
+      },
+      "bedSize": "90x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/krovat-lyuchiya-90-sm.jpg",
+        "alt": "Кровать \"Лючия\" (160 см) (Copy)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmaitit0aS8IN2",
+    "name": "Письменный стол \"Лючия\"",
+    "slug": "pismennyy-stol-lyuchiya",
+    "categoryIds": [
+      "CATmaguvtt0INCRA"
+    ],
+    "collection": "Лючия",
+    "price": 1700000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 120,
+        "height": 75,
+        "depth": 60,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 3,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/pismennyy-stol-lyuchiya.jpg",
+        "alt": "Кровать \"Лючия\" (90 см) (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/pismennyy-stol-lyuchiya-1.jpg",
+        "alt": "Кровать \"Лючия\" (90 см) (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaitl45sEA9MG",
+    "name": "Шкаф 3-дверный \"Лючия\"",
+    "slug": "shkaf-3-dvernyy-lyuchiya",
+    "categoryIds": [
+      "CAT004",
+      "CATmaguxb8vCEQNS"
+    ],
+    "collection": "Лючия",
+    "price": 5000000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП, зеркало",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 152,
+        "height": 230,
+        "depth": 58,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 2,
+        "shtanga": 2
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/shkaf-3-dvernyy-lyuchiya.jpg",
+        "alt": "Шкаф для одежды \"Лючия\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/shkaf-3-dvernyy-lyuchiya-1.jpg",
+        "alt": "Шкаф для одежды \"Лючия\" (Copy)",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmaitnjmcY7WN2",
+    "name": "Полка навесная \"Лючия\"",
+    "slug": "polka-navesnaya-lyuchiya",
+    "categoryIds": [
+      "CATmaguxb8vCEQNS",
+      "CATmaguvtt0INCRA"
+    ],
+    "collection": "Лючия",
+    "price": 300000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 107,
+        "height": 25,
+        "depth": 19,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Лючия/polka-navesnaya-lyuchiya.jpg",
+        "alt": "Письменный стол \"Лючия\" (Copy)",
+        "isMain": true
+      }
+    ]
   }
 ]

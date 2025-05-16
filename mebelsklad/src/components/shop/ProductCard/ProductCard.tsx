@@ -6,18 +6,30 @@ import { Product } from "@/types";
 import { formatPrice } from "@/lib/utils/format";
 import "./ProductCard.scss";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
 
   const mainImage =
     product.images.find((img) => img.isMain) || product.images[0];
 
+  const secondaryImage = product.images && product.images.length > 1
+    ? product.images.find(img => !img.isMain) || product.images[1]
+    : null;
+
+  // URL изображения по умолчанию, если нет изображений
+  //const defaultImageUrl = '/images/placeholder.jpg';
+
   return (
-    <div className="product-card">
+    <div className="product-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Link href={`/product/${product.slug}`} className="product-link">
         {product.discount !== 0 && (
           <div className="product-label product-discount-label">
@@ -34,9 +46,20 @@ export default function ProductCard({ product }: ProductCardProps) {
           width={0}
           height={0}
           sizes="100vw"
-          className={"product-img"}
-          style={{ width: "100%", height: "auto" }}
+          className={`product-img ${isHovered && secondaryImage ? 'product-img--is-hidden' : 'product-img--is-visible'}`}
         />
+
+        {secondaryImage && (
+          <Image
+            src={secondaryImage.url}
+            alt={secondaryImage.alt || product.name}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className={`product-img product-img--secondary ${isHovered ? 'product-img--is-visible' : 'product-img--is-hidden'}`}
+          />
+        )}
+
         <h3 className="product-title">{product.name}</h3>
 
         {product.discount && product.discount > 0 ? (

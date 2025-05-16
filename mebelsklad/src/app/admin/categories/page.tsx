@@ -9,7 +9,7 @@ function CategoryRow({
   depth = 0,
   categoryMap
 }: {
-  category: any;
+  category: Category;
   depth?: number;
   categoryMap: Record<string, string>;
 }) {

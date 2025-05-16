@@ -8,14 +8,14 @@ export async function GET(
   try {
     const categories = await jsonDataService.getAllCategories();
     const category = categories.find(c => c.id === params.id);
-    
+
     if (!category) {
       return NextResponse.json(
         { error: 'Category not found' },
         { status: 404 }
       );
     }
-    
+
     return NextResponse.json(category);
   } catch (error) {
     return NextResponse.json(
@@ -31,14 +31,14 @@ export async function PUT(
 ) {
   try {
     const category = await request.json();
-    
+
     if (params.id !== category.id) {
       return NextResponse.json(
         { error: 'Category ID mismatch' },
         { status: 400 }
       );
     }
-    
+
     await jsonDataService.saveCategory(category);
     return NextResponse.json({ success: true, category });
   } catch (error) {

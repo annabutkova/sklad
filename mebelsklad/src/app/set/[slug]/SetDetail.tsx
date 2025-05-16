@@ -37,6 +37,18 @@ export default function SetDetail({ set, setProducts, relatedProducts, relatedSe
   const [defaultPrice, setDefaultPrice] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
 
+  const colors = [
+    set.specifications?.style?.color?.karkas,
+    set.specifications?.style?.color?.fasad,
+  ];
+
+  const allColorValues = colors
+    .flatMap(colorStr => (colorStr ?? '').split(/,\s*/))
+    .map(color => color.trim())
+    .filter(color => color !== '');
+
+  // Удаляем дубликаты
+  const uniqueColors = [...new Set(allColorValues)];
 
   // Initialize selected quantities with default values
   useEffect(() => {
@@ -196,10 +208,7 @@ export default function SetDetail({ set, setProducts, relatedProducts, relatedSe
               <li className="product-page_list-item">
                 <span className="product-page_list-option">цвет</span>
                 <span className="product-page_list-value">
-                  {[
-                    set.specifications.style.color.karkas && `${set.specifications.style.color.karkas}`,
-                    set.specifications.style.color.fasad && `${set.specifications.style.color.fasad}`
-                  ].filter(Boolean).join(', ')}
+                  {uniqueColors.join(', ')}
                 </span>
               </li>
             )}

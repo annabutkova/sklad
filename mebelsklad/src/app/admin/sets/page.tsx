@@ -1,5 +1,6 @@
 // src/app/admin/sets/page.tsx
 import Link from "next/link";
+import Image from "next/image";
 import { jsonDataService } from "@/lib/api/jsonDataService";
 import { formatPrice } from "@/lib/utils/format";
 import { Product, ProductSet } from "@/types";
@@ -87,15 +88,14 @@ export default async function AdminSetsPage() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0">
-                        {set.images && set.images.length > 0 ? (
-                          <img
-                            className="h-10 w-10 rounded object-cover"
-                            src={set.images[0].url}
-                            alt={set.name}
-                          />
-                        ) : (
-                          <div className="h-10 w-10 rounded bg-gray-200"></div>
-                        )}
+                        <Image
+                          className="h-10 w-10 rounded object-cover"
+                          src={set.images[0].url}
+                          alt={set.name}
+                          width={40}
+                          height={40}
+                        />
+                        <div className="h-10 w-10 rounded bg-gray-200"></div>
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">

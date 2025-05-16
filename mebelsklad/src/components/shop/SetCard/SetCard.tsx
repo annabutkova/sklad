@@ -13,12 +13,17 @@ interface SetCardProps {
 }
 
 export default function SetCard({ set, allProducts = [] }: SetCardProps) {
-  // Make sure we're only dealing with items of type 'set'
-  if (set.type !== "set") {
-    console.warn(`SetCard received an item that's not a set: ${set.id}`);
-  }
+  const [isHovered, setIsHovered] = useState(false);
 
   const mainImage = set.images.find((img) => img.isMain) || set.images[0];
+
+  const secondaryImage = set.images && set.images.length > 1
+    ? set.images.find(img => !img.isMain) || set.images[1]
+    : null;
+
+  // URL изображения по умолчанию, если нет изображений
+  //const defaultImageUrl = '/images/placeholder.jpg';
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   // Calculate the total price based on the products and their quantities
@@ -40,7 +45,10 @@ export default function SetCard({ set, allProducts = [] }: SetCardProps) {
   }, [set.items, allProducts]);
 
   return (
-    <div className="product-card">
+    <div className="product-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* View set button */}
       <Link href={`/set/${set.slug}`} className="product-link">
         <Image
@@ -49,9 +57,19 @@ export default function SetCard({ set, allProducts = [] }: SetCardProps) {
           width={0}
           height={0}
           sizes="100vw"
-          className={"product-img"}
-          style={{ width: "100%", height: "auto" }}
+          className={`product-img ${isHovered && secondaryImage ? 'product-img--is-hidden' : 'product-img--is-visible'}`}
         />
+
+        {secondaryImage && (
+          <Image
+            src={secondaryImage.url}
+            alt={secondaryImage.alt || set.name}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className={`product-img product-img--secondary ${isHovered ? 'product-img--is-visible' : 'product-img--is-hidden'}`}
+          />
+        )}
 
         {/* Set info */}
         <h3 className="product-title">{set.name}</h3>

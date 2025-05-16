@@ -836,5 +836,607 @@
         "required": false
       }
     ]
+  },
+  {
+    "id": "SETmaipgdylBWG61",
+    "name": "Спальня \"Милан\"",
+    "slug": "spalnya-milan",
+    "categoryIds": [
+      "CAT002"
+    ],
+    "description": "",
+    "collection": "Милан",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Милан/spalnya-milan.jpg",
+        "alt": "Спальня \"Габриэлла\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/spalnya-milan-1.jpg",
+        "alt": "Спальня \"Габриэлла\" (Copy)",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmaiownvbKHCDH",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaip1xhy0HS5Y",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaip65rwXCSSL",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaip8rctXGC7S",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmaiqwxi31HY5Z",
+    "name": "Детская \"Милан\" №1",
+    "slug": "detskaya-milan-1",
+    "categoryIds": [
+      "CATmags7erjHSG10"
+    ],
+    "description": "",
+    "collection": "Милан",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Милан/detskaya-milan-1.jpg",
+        "alt": "Спальня \"Милан\" (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/detskaya-milan-1-1.jpg",
+        "alt": "Спальня \"Милан\" (Copy)",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmaipxgri6GB9T",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaiq0cprA5FIV",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaiq7exgEMB88",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaiqbgqfC8IH8",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmair01pa95FM8",
+    "name": "Детская \"Милан\" №2",
+    "slug": "detskaya-milan-2",
+    "categoryIds": [
+      "CATmags7erjHSG10"
+    ],
+    "description": "",
+    "collection": "Милан",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Милан/detskaya-milan-2.jpg",
+        "alt": "Детская \"Милан\" №1 (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/detskaya-milan-2-1.jpg",
+        "alt": "Детская \"Милан\" №1 (Copy)",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmaiqg93dLZL0K",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaiq0cprA5FIV",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaiq7exgEMB88",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaiqbgqfC8IH8",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmairwwbq8EQNS",
+    "name": "Гостиная \"Милан\"",
+    "slug": "gostinaya-milan",
+    "categoryIds": [
+      "CAT005"
+    ],
+    "description": "",
+    "collection": "Милан",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Милан/gostinaya-milan.jpg",
+        "alt": "Детская \"Милан\" №2 (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/gostinaya-milan-1.jpg",
+        "alt": "Детская \"Милан\" №2 (Copy)",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmairjckx7YMXS",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmairnwi1LYYZ8",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmairrllw8FI4M",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmairuzmcLX537",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmaisf7tyZEFQ4",
+    "name": "Прихожая \"Милан\" исп.1",
+    "slug": "prihozhaya-milan-isp1",
+    "categoryIds": [
+      "CAT005"
+    ],
+    "description": "",
+    "collection": "Милан",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Милан/prihozhaya-milan-isp1.jpg",
+        "alt": "Прихожая \"Милан\" исп.1",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/prihozhaya-milan-isp1-1.jpg",
+        "alt": "Прихожая \"Милан\" исп.1",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmais7xip3HEJH",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmais9g7iTA16H",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmais0a28I8S38",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmaisj0zkOI3KZ",
+    "name": "Прихожая \"Милан\" исп.2",
+    "slug": "prihozhaya-milan-isp2",
+    "categoryIds": [
+      "CAT005"
+    ],
+    "description": "",
+    "collection": "Милан",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "МДФ",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Дуб золотой",
+          "fasad": "Белый матовый",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Милан/prihozhaya-milan-isp2.jpg",
+        "alt": "Прихожая \"Милан\" исп.1 (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Милан/prihozhaya-milan-isp2-1.jpg",
+        "alt": "Прихожая \"Милан\" исп.1 (Copy)",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmais61mjHWWW9",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaisc2hc4CQLJ",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmaitae4wGLN0P",
+    "name": "Спальня \"Лючия\"",
+    "slug": "spalnya-lyuchiya",
+    "categoryIds": [
+      "CAT002"
+    ],
+    "description": "",
+    "collection": "Лючия",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Лючия/spalnya-lyuchiya.jpg",
+        "alt": "Прихожая \"Милан\" исп.2 (Copy)",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/spalnya-lyuchiya-1.jpg",
+        "alt": "Прихожая \"Милан\" исп.2 (Copy)",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmaislwixMZ88K",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmait0fvp3559B",
+        "defaultQuantity": 2,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmait3ckxW189Y",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmait4tunKZ6WJ",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmait8dy516P4B",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "SETmaitpw28MB05H",
+    "name": "Детская \"Лючия\"",
+    "slug": "detskaya-lyuchiya",
+    "categoryIds": [
+      "CATmags7erjHSG10"
+    ],
+    "description": "",
+    "collection": "Лючия",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": "",
+        "spinka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Бетон пайн белый, Венге",
+          "fasad": "Бетон пайн белый, Венге",
+          "ruchki": "",
+          "obivka": "",
+          "spinka": ""
+        }
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "images": [
+      {
+        "url": "/uploads/Лючия/detskaya-lyuchiya.jpg",
+        "alt": "Детская \"Лючия\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Лючия/detskaya-lyuchiya-1.jpg",
+        "alt": "Детская \"Лючия\"",
+        "isMain": false
+      }
+    ],
+    "items": [
+      {
+        "productId": "PRODmaitcy7vW4CY7",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaitit0aS8IN2",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaitnjmcY7WN2",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      },
+      {
+        "productId": "PRODmaitl45sEA9MG",
+        "defaultQuantity": 1,
+        "minQuantity": 0,
+        "maxQuantity": 10,
+        "required": false
+      }
+    ]
   }
 ]

@@ -65,7 +65,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Search Results</h1>
       <p className="text-gray-600 mb-8">
-        Found {totalResults} result{totalResults !== 1 ? 's' : ''} for "{searchTerm}"
+        Found {totalResults} result{totalResults !== 1 ? 's' : ''} for {searchTerm}
       </p>
 
       {totalResults === 0 ? (

@@ -1,4 +1,4 @@
-import { ProductImage } from '@/types';
+import { Category, Product, ProductImage, ProductSet } from '@/types';
 
 export type EntityType = 'product' | 'set' | 'category';
 
@@ -6,7 +6,7 @@ interface UpdateEntityWithImagesOptions {
     entityType: EntityType;
     entityId: string;
     images: ProductImage[];
-    entityData: any; // Данные сущности для обновления
+    entityData: Product | ProductSet | Category; // Данные сущности для обновления
 }
 
 export async function updateEntityWithImages({

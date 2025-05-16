@@ -42,14 +42,12 @@ interface Specifications {
 interface SpecificationsTableProps {
     specifications: Specifications;
     className?: string;
-    headerClassName?: string;
     sectionHeaderClassName?: string;
 }
 
 const SpecificationsTable: React.FC<SpecificationsTableProps> = ({
     specifications,
     className = "product-page_table",
-    headerClassName = "product-page_subheader",
     sectionHeaderClassName = "text-lg font-semibold text-gray-800 mt-4 mb-2"
 }) => {
     const hasData = (
@@ -142,7 +140,7 @@ const SpecificationsTable: React.FC<SpecificationsTableProps> = ({
                 </>
             )}
 
-            {specifications.dimensions &&
+            {hasDimensionsData && specifications.dimensions &&
                 ((typeof specifications.dimensions.width === 'number' && specifications.dimensions.width > 0) &&
                     (typeof specifications.dimensions.height === 'number' && specifications.dimensions.height > 0) &&
                     ((typeof specifications.dimensions.depth === 'number' && specifications.dimensions.depth > 0) ||
@@ -161,6 +159,9 @@ const SpecificationsTable: React.FC<SpecificationsTableProps> = ({
                         )}
                         {typeof specifications.dimensions.length === 'number' && specifications.dimensions.length > 0 && (
                             <SpecificationRow label="Длина, см" value={specifications.dimensions.length} />
+                        )}
+                        {specifications.bedSize && (
+                            <SpecificationRow label="Размер спального места (Ш х Д), см" value={specifications.bedSize} />
                         )}
                     </>
                 )}

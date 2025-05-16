@@ -47,6 +47,18 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   const relatedSets = await jsonDataService.getProductSetsByCollection(product.collection);
 
+  const colors = [
+    product.specifications?.style?.color?.karkas,
+    product.specifications?.style?.color?.fasad,
+  ];
+
+  const allColorValues = colors
+    .flatMap(colorStr => (colorStr ?? '').split(/,\s*/))
+    .map(color => color.trim())
+    .filter(color => color !== '');
+
+  // Удаляем дубликаты
+  const uniqueColors = [...new Set(allColorValues)];
 
   return (
     <div className="main">
@@ -106,10 +118,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <li className="product-page_list-item">
                 <span className="product-page_list-option">цвет</span>
                 <span className="product-page_list-value">
-                  {[
-                    product.specifications.style.color.karkas && `${product.specifications.style.color.karkas}`,
-                    product.specifications.style.color.fasad && `${product.specifications.style.color.fasad}`
-                  ].filter(Boolean).join(', ')}
+                  {uniqueColors.join(', ')}
                 </span>
               </li>
             )}

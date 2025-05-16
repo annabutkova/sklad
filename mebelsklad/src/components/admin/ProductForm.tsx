@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -70,6 +70,9 @@ interface ProductFormProps {
 
 export default function ProductForm({ product, categories }: ProductFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isDuplicate = searchParams.get('isDuplicate') === 'true';
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -176,13 +179,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
 
   const collectionOptions = Object.values(Collection);
   const name = watch('name');
-
-  useEffect(() => {
-    // Auto-generate slug for new products
-    if (name && !product) {
-      setValue('slug', generateSlug(name));
-    }
-  }, [name, setValue, product]);
 
   // Initialize collection
   useEffect(() => {
@@ -336,13 +332,21 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
             </label>
             <input
               type="text"
-              {...register('name')}
+              {...register('name', {
+                onChange: (e) => {
+                  if (!product || isDuplicate) {
+                    const newName = e.target.value;
+                    setValue('slug', generateSlug(newName));
+                  }
+                }
+              })}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
             )}
           </div>
+
 
           {/* Product ID */}
           <div>

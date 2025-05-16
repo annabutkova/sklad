@@ -1,5 +1,6 @@
 // src/app/admin/products/page.tsx
 import Link from "next/link";
+import Image from "next/image";
 import { jsonDataService } from "@/lib/api/jsonDataService";
 import { formatPrice } from "@/lib/utils/format";
 
@@ -68,7 +69,7 @@ export default async function AdminProductsPage() {
                   <div className="flex items-center">
                     <div className="h-10 w-10 flex-shrink-0">
                       {product.images && product.images.length > 0 ? (
-                        <img
+                        <Image
                           className="h-10 w-10 rounded object-cover"
                           src={product.images[0].url}
                           alt={product.name}
@@ -109,8 +110,8 @@ export default async function AdminProductsPage() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${product.inStock
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
                       }`}
                   >
                     {product.inStock ? "In Stock" : "Out of Stock"}
