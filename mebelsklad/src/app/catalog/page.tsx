@@ -1,6 +1,6 @@
 // src/app/catalog/page.tsx
+"use client";
 import { Suspense } from "react";
-import { jsonDataService } from "@/lib/api/jsonDataService";
 import { Category, Product, ProductSet } from "@/types";
 import ProductCard from "@/components/shop/ProductCard/ProductCard";
 import CategorySidebar from "@/components/shop/CategorySidebar/CategorySidebar";
@@ -8,6 +8,7 @@ import SortSelector from "@/components/shop/SortSelector/SortSelector";
 import SetCard from "@/components/shop/SetCard/SetCard";
 import "./catalog.scss";
 import { getProductsEnding } from "@/lib/utils/format";
+import { clientApi } from "@/lib/api/clientApi";
 
 interface CatalogPageProps {
   searchParams: {
@@ -25,10 +26,10 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   const sortOption = params.sort || "name-asc";
   const contentType = params.type || "all"; // 'all', 'products', or 'sets'
 
-  const categories = await jsonDataService.getAllCategories();
-  const categoryTree = await jsonDataService.getCategoryTree();
-  const allProducts = await jsonDataService.getAllProducts();
-  const allSets = await jsonDataService.getAllProductSets();
+  const categories = await clientApi.getAllCategories();
+  const categoryTree = await clientApi.getCategoryTree();
+  const allProducts = await clientApi.getAllProducts();
+  const allSets = await clientApi.getAllProductSets();
 
   // No need to filter by type property anymore - we'll use the API functions
   // that already return the correct data types

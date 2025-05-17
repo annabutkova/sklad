@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "copydata": "mkdir -p public/data && cp -r data/* public/data/"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

@@ -1,0 +1,61 @@
+{
+  "customer": {
+    "name": "ania",
+    "phone": "0000000000",
+    "address": ""
+  },
+  "items": [
+    {
+      "id": "PRODmafrf49jKLTY3",
+      "name": "Шкаф угловой \"Александрия\"",
+      "quantity": 1,
+      "price": 3740000,
+      "configuration": null
+    },
+    {
+      "id": "PRODma04c7vb66DZ7",
+      "name": "Кровать \"Александрия\" с ПМ (180 см)",
+      "quantity": 1,
+      "price": 6050000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmafqqpzo5KXI3",
+      "name": "Тумба \"Александрия\"",
+      "quantity": 2,
+      "price": 930000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmafr0q6wIQMLC",
+      "name": "Комод \"Александрия\"",
+      "quantity": 1,
+      "price": 2670000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmafr4ru3F0RRQ",
+      "name": "Шкаф для белья \"Александрия\"",
+      "quantity": 2,
+      "price": 2590000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmafranqdTMEFY",
+      "name": "Шкаф для одежды \"Александрия\"",
+      "quantity": 1,
+      "price": 4840000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmafrnzlaJNXRD",
+      "name": "Зеркало \"Александрия\"",
+      "quantity": 1,
+      "price": 730000,
+      "configuration": null
+    }
+  ],
+  "subtotal": 25070000,
+  "notes": "",
+  "createdAt": "2025-05-09T13:50:25.697Z"
+}

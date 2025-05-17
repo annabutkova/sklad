@@ -1,0 +1,20 @@
+{
+  "customer": {
+    "name": "anna",
+    "phone": "+998909335149",
+    "address": "efrg entered address"
+  },
+  "items": [
+    {
+      "id": "BED001",
+      "name": "Кровать \"Александрия\"",
+      "type": "product",
+      "quantity": 2,
+      "price": 5000000,
+      "configuration": null
+    }
+  ],
+  "subtotal": 10000000,
+  "notes": "",
+  "createdAt": "2025-03-16T21:44:15.671Z"
+}

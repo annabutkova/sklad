@@ -1,19 +1,18 @@
 // src/app/product/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { jsonDataService } from '@/lib/api/jsonDataService';
 import { formatPrice } from '@/lib/utils/format';
 import AddToCartButton from '@/components/shop/AddToCartButton/AddToCartButton';
 import ProductCard from '@/components/shop/ProductCard/ProductCard';
 import './style.scss';
-import SpecificationRow from '@/components/shop/SpecificationsTable/SpecificationRow';
 import ProductGallery from '@/components/shop/ProductGallery/ProductGallery';
 import SpecificationsTable from '@/components/shop/SpecificationsTable/SpecificationsTable';
 import SetCard from '@/components/shop/SetCard/SetCard';
+import { clientApi } from '@/lib/api/clientApi';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const product = await jsonDataService.getProductBySlug(paramsData.slug);
+  const product = await clientApi.getProductBySlug(paramsData.slug);
 
   if (!product) {
     return {
@@ -29,23 +28,23 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const product = await jsonDataService.getProductBySlug(paramsData.slug);
+  const product = await clientApi.getProductBySlug(paramsData.slug);
 
   if (!product) {
     notFound();
   }
 
   // Get category information
-  const categories = await jsonDataService.getAllCategories();
+  const categories = await clientApi.getAllCategories();
   const productCategories = categories.filter(c =>
     product.categoryIds && product.categoryIds.includes(c.id)
   );
 
   // Get related products
-  const relatedProducts = await jsonDataService.getProductsByCollection(product.collection);
-  const allProducts = await jsonDataService.getAllProducts();
+  const relatedProducts = await clientApi.getProductsByCollection(product.collection);
+  const allProducts = await clientApi.getAllProducts();
 
-  const relatedSets = await jsonDataService.getProductSetsByCollection(product.collection);
+  const relatedSets = await clientApi.getProductSetsByCollection(product.collection);
 
   const colors = [
     product.specifications?.style?.color?.karkas,

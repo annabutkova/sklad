@@ -1,8 +1,8 @@
 // src/app/search/page.tsx
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { jsonDataService } from '@/lib/api/jsonDataService';
 import ProductCard from '@/components/shop/ProductCard/ProductCard';
+import { clientApi } from '@/lib/api/clientApi';
 
 interface SearchPageProps {
   searchParams: {
@@ -38,8 +38,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   }
 
   // Get all products
-  const products = await jsonDataService.getAllProducts();
-  const sets = await jsonDataService.getAllProductSets();
+  const products = await clientApi.getAllProducts();
+  const sets = await clientApi.getAllProductSets();
 
   // Search in products
   const matchingProducts = products.filter(product => {

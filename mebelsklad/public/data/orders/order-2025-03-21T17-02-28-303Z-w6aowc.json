@@ -1,0 +1,28 @@
+{
+  "customer": {
+    "name": "gkg",
+    "phone": "+99890999999",
+    "address": "hkjjk"
+  },
+  "items": [
+    {
+      "id": "BED001",
+      "name": "Кровать \"Александрия\"",
+      "type": "product",
+      "quantity": 2,
+      "price": 5000000,
+      "configuration": null
+    },
+    {
+      "id": "WARD001",
+      "name": "Шкаф \"Александрия\"",
+      "type": "product",
+      "quantity": 4,
+      "price": 7800000,
+      "configuration": null
+    }
+  ],
+  "subtotal": 41200000,
+  "notes": "",
+  "createdAt": "2025-03-21T17:02:28.117Z"
+}

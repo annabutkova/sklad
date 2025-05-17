@@ -1,9 +1,9 @@
 // src/app/admin/sets/page.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { jsonDataService } from "@/lib/api/jsonDataService";
 import { formatPrice } from "@/lib/utils/format";
 import { Product, ProductSet } from "@/types";
+import { categoriesApi, productsApi, setsApi } from "@/lib/api/serverApi";
 
 // Helper function to calculate set price from items
 const calculateSetPrice = (set: ProductSet, products: Product[]) => {
@@ -20,9 +20,9 @@ const calculateSetPrice = (set: ProductSet, products: Product[]) => {
 };
 
 export default async function AdminSetsPage() {
-  const sets = await jsonDataService.getAllProductSets();
-  const categories = await jsonDataService.getAllCategories();
-  const products = await jsonDataService.getAllProducts();
+  const sets = await setsApi.getAllSets();
+  const categories = await categoriesApi.getAllCategories();
+  const products = await productsApi.getAllProducts();
 
   // Create a map of category IDs to names for easy lookup
   const categoryMap = categories.reduce((map, category) => {

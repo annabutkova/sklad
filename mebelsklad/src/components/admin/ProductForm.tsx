@@ -7,9 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Product, Category, ProductImage, BedSize, Collection } from '@/types';
 import { generateSlug, generateId } from '@/lib/utils/format';
-import { useImageUpload } from '@/hooks/useImageUpload';
-import ImageGallery from './ImageGallery';
-import { updateEntityWithImages } from '@/lib/utils/entityUpdate';
+import { clientApi } from '@/lib/api/clientApi';
 
 // Updated product schema with the new types and collection field
 const productSchema = z.object({
@@ -73,23 +71,20 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
   const searchParams = useSearchParams();
   const isDuplicate = searchParams.get('isDuplicate') === 'true';
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [images, setImages] = useState<ProductImage[]>(product?.images || []);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
-  const {
-    images,
-    setImages,
-    imageFiles,
-    imagePreviews,
-    isUploading,
-    handleImageSelect,
-    handleRemoveImage,
-    handleRemovePreview,
-    handleSetMainImage,
-    uploadAllImages
-  } = useImageUpload({
-    initialImages: product?.images || [],
-    entityName: product?.name || 'product'
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
+
+  // Освобождаем URL-ы превью при размонтировании компонента
+  useEffect(() => {
+    return () => {
+      imagePreviews.forEach(url => URL.revokeObjectURL(url));
+    };
+  }, [imagePreviews]);
 
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
@@ -178,7 +173,6 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
   });
 
   const collectionOptions = Object.values(Collection);
-  const name = watch('name');
 
   // Initialize collection
   useEffect(() => {
@@ -228,6 +222,44 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
     return () => subscription.unsubscribe();
   }, [watch, setValue]);
 
+  // Функция для обработки загруженных изображений без отправки на сервер
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    // Сохраняем файлы для последующей загрузки
+    const newFiles = Array.from(files);
+    setImageFiles(prev => [...prev, ...newFiles]);
+
+    // Создаём URL превью для отображения
+    const newPreviews = newFiles.map(file => URL.createObjectURL(file));
+    setImagePreviews(prev => [...prev, ...newPreviews]);
+  };
+
+
+  // Функция для удаления существующего изображения
+  const handleRemoveImage = (index: number) => {
+    setImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  // Функция для удаления превью
+  const handleRemovePreview = (index: number) => {
+    // Освобождаем URL объекта
+    URL.revokeObjectURL(imagePreviews[index]);
+
+    // Удаляем превью и соответствующий файл
+    setImagePreviews(prev => prev.filter((_, i) => i !== index));
+    setImageFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
+  // Функция для установки главного изображения
+  const handleSetMainImage = (index: number) => {
+    setImages(prev => prev.map((img, i) => ({
+      ...img,
+      isMain: i === index
+    })));
+  };
+
   const onSubmit = async (data: ProductFormValues) => {
     setIsSubmitting(true);
 
@@ -262,49 +294,52 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         },
       };
 
-      // Save product to API
-      const response = await fetch(
-        product ? `/api/admin/products/${product.id}` : '/api/admin/products',
-        {
-          method: product ? 'PUT' : 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(completeProduct),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to save product');
+      // Save or update product using the client API
+      let savedProduct;
+      if (product) {
+        // Updating existing product
+        savedProduct = await clientApi.updateProduct(product.id, completeProduct);
+      } else {
+        // Creating new product
+        savedProduct = await clientApi.saveProduct(completeProduct);
       }
-
-      // Get the saved product id
-      const savedProduct = await response.json();
-      const productId = savedProduct.id || product?.id || data.id;
 
       // Upload images if any new files selected
       if (imageFiles.length > 0) {
         try {
           // Загружаем изображения
           const folderSlug = finalCollection || 'products';
-          const uploadedImages = await uploadAllImages(
-            productId,
-            data.slug,
-            folderSlug
+          const uploadedImages = await clientApi.uploadImages(
+            imageFiles,
+            folderSlug,
+            savedProduct.slug
           );
 
+          // Создаём массив с новыми изображениями
+          const newImages = uploadedImages.map((img, index) => ({
+            url: img.url,
+            alt: savedProduct.name,
+            isMain: index === 0 && images.length === 0
+          }));
+
+          // Объединяем с существующими изображениями
+          const allImages = [...images, ...newImages];
+
           // Обновляем продукт с новыми изображениями
-          if (uploadedImages.length > images.length) {
-            await updateEntityWithImages({
-              entityType: 'product',
-              entityId: productId,
-              images: uploadedImages,
-              entityData: completeProduct
-            });
-          }
+          await clientApi.saveProduct({
+            ...savedProduct,
+            images: allImages
+          });
         } catch (uploadError) {
           console.error('Error uploading images:', uploadError);
           alert('Product saved but failed to upload images. You can upload them later.');
+        } finally {
+          setIsUploading(false);
+          // Очищаем файлы после загрузки
+          setImageFiles([]);
+          // Освобождаем URL объекты для превью
+          imagePreviews.forEach(url => URL.revokeObjectURL(url));
+          setImagePreviews([]);
         }
       }
 
@@ -754,23 +789,78 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
           </label>
           <input
             type="file"
-            onChange={handleImageSelect}
+            onChange={handleImageUpload}
             accept="image/*"
             multiple
             disabled={isUploading}
             className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
+          {isUploading && <div className="mt-2 text-sm text-blue-600">Uploading images...</div>}
         </div>
 
-        {/* Используем компонент ImageGallery */}
-        <ImageGallery
-          images={images}
-          previews={imagePreviews}
-          onRemoveImage={handleRemoveImage}
-          onRemovePreview={handleRemovePreview}
-          onSetMainImage={handleSetMainImage}
-          isUploading={isUploading}
-        />
+        {/* Отображение изображений */}
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Существующие изображения */}
+          {images.map((image, index) => (
+            <div key={`image-${index}`} className="relative">
+              <img
+                src={image.url}
+                alt={image.alt || 'Product image'}
+                className="h-24 w-full object-cover rounded-md"
+                onError={(e) => {
+                  console.error(`Error loading image: ${image.url}`);
+                  e.currentTarget.src = '/images/placeholder.jpg';
+                }}
+              />
+              {image.isMain && (
+                <span className="absolute top-0 left-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl-md">
+                  Main
+                </span>
+              )}
+              <button
+                type="button"
+                onClick={() => handleRemoveImage(index)}
+                className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
+              >
+                ✕
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSetMainImage(index)}
+                className="absolute bottom-0 left-0 bg-blue-500 text-white p-1 text-xs rounded-tr-md"
+              >
+                Set as main
+              </button>
+            </div>
+          ))}
+
+          {/* Превью новых файлов */}
+          {imagePreviews.map((preview, index) => (
+            <div key={`preview-${index}`} className="relative">
+              <img
+                src={preview}
+                alt={`Preview ${index + 1}`}
+                className="h-24 w-full object-cover rounded-md opacity-70"
+              />
+              <span className="absolute top-0 left-0 bg-yellow-500 text-white text-xs px-2 py-1 rounded-bl-md">
+                Pending upload
+              </span>
+              <button
+                type="button"
+                onClick={() => handleRemovePreview(index)}
+                className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-bl-md"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+
+          {images.length === 0 && imagePreviews.length === 0 && (
+            <div className="col-span-full text-center py-4 text-gray-500">
+              No images uploaded
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Submit button */}
@@ -784,7 +874,7 @@ export default function ProductForm({ product, categories }: ProductFormProps) {
         </button>
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isUploading}
           className="bg-blue-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           {isSubmitting ? 'Saving...' : product ? 'Update Product' : 'Create Product'}

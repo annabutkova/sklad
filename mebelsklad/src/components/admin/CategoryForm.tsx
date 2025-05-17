@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Category, ProductImage } from '@/types';
+import { Category } from '@/types';
 import { generateSlug, generateId } from '@/lib/utils/format';
 import React from 'react';
 import { useImageUpload } from '@/hooks/useImageUpload';

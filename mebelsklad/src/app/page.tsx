@@ -1,10 +1,9 @@
 // src/app/page.tsx
 import Link from "next/link";
 import { Metadata } from "next";
-import { jsonDataService } from "@/lib/api/jsonDataService";
 import ProductCard from "@/components/shop/ProductCard/ProductCard";
-import SetCard from "@/components/shop/SetCard/SetCard";
 import HomeSlider from "@/components/home/HomeSlider";
+import { clientApi } from "@/lib/api/clientApi";
 
 export const metadata: Metadata = {
   title: "Мебель Склад | Готовая мебель из России",
@@ -60,15 +59,15 @@ const advantages = [
 ];
 
 export default async function Home() {
-  const products = await jsonDataService.getAllProducts();
-  const sets = await jsonDataService.getAllProductSets();
-  const categories = await jsonDataService.getAllCategories();
+  const products = await clientApi.getAllProducts();
+  const sets = await clientApi.getAllProductSets();
+  const categories = await clientApi.getAllCategories();
 
   // No need to filter by type since the getAllProducts and getAllProductSets
   // already return the correct data types
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
-  const setCategories = await jsonDataService.getSetCategories();
+  const setCategories = await clientApi.getSetCategories();
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
   const productCategories = categories.filter(
@@ -78,7 +77,6 @@ export default async function Home() {
       products.some((product) => product.categoryIds.includes(cat.id))
   );
 
-  // Get featured products (with discount or marked as featured)
   const featuredProducts = products
     .filter((p) => p.discount)
     .slice(0, 4);

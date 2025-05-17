@@ -1,14 +1,13 @@
 // src/app/set/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-import { jsonDataService } from '@/lib/api/jsonDataService';
 import SetDetail, { SetDetailProps } from './SetDetail';
 import "./style.scss";
+import { clientApi } from '@/lib/api/clientApi';
 
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const set = await jsonDataService.getProductSetBySlug(paramsData.slug);
+  const set = await clientApi.getProductSetBySlug(paramsData.slug);
 
   if (!set) {
     return {
@@ -24,17 +23,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function SetPage({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const set = await jsonDataService.getProductSetBySlug(paramsData.slug);
+  const set = await clientApi.getProductSetBySlug(paramsData.slug);
 
   if (!set) {
     notFound();
   }
 
   // Get all products to have full product details
-  const products = await jsonDataService.getAllProducts();
+  const products = await clientApi.getAllProducts();
 
-  const relatedProducts = await jsonDataService.getProductsByCollection(set.collection);
-  const relatedSets = await jsonDataService.getProductSetsByCollection(set.collection);
+  const relatedProducts = await clientApi.getProductsByCollection(set.collection);
+  const relatedSets = await clientApi.getProductSetsByCollection(set.collection);
 
   // Filter products to only include those in the set
   const setProducts = set.items

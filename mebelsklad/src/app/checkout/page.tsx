@@ -1,9 +1,9 @@
 // src/app/checkout/page.tsx
 import { Metadata } from 'next';
-import { jsonDataService } from '@/lib/api/jsonDataService';
 import CheckoutForm from './CheckoutForm';
 import "./style.scss";
 import Link from 'next/link';
+import { clientApi } from '@/lib/api/clientApi';
 
 export const metadata: Metadata = {
   title: 'Checkout | Furniture Shop',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function CheckoutPage() {
   // We'll fetch products and sets to display the order summary
-  const products = await jsonDataService.getAllProducts();
+  const products = await clientApi.getAllProducts();
 
   return (
     <div className="main">

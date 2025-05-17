@@ -1,11 +1,11 @@
 // src/app/admin/dashboard/page.tsx
 import Link from 'next/link';
-import { jsonDataService } from '@/lib/api/jsonDataService';
+import { categoriesApi, productsApi, setsApi } from '@/lib/api/serverApi';
 
 export default async function AdminDashboard() {
-  const products = await jsonDataService.getAllProducts();
-  const sets = await jsonDataService.getAllProductSets();
-  const categories = await jsonDataService.getAllCategories();
+  const products = await productsApi.getAllProducts();
+  const sets = await setsApi.getAllSets();
+  const categories = await categoriesApi.getAllCategories();
 
   return (
     <div>
@@ -49,20 +49,20 @@ export default async function AdminDashboard() {
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
         <div className="space-y-2">
-          <Link 
-            href="/admin/products/new" 
+          <Link
+            href="/admin/products/new"
             className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Add New Product
           </Link>
-          <Link 
-            href="/admin/sets/new" 
+          <Link
+            href="/admin/sets/new"
             className="ml-4 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
             Create New Set
           </Link>
-          <Link 
-            href="/admin/categories/new" 
+          <Link
+            href="/admin/categories/new"
             className="ml-4 inline-block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
           >
             Add New Category

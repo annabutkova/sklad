@@ -1,0 +1,40 @@
+{
+  "customer": {
+    "name": "авава",
+    "phone": "+998946719908",
+    "address": ""
+  },
+  "items": [
+    {
+      "id": "PRODmairjckx7YMXS",
+      "name": "Пенал \"Милан\"",
+      "quantity": 1,
+      "price": 1740000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmairrllw8FI4M",
+      "name": "Тумба \"Милан\"",
+      "quantity": 1,
+      "price": 1850000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmairuzmcLX537",
+      "name": "Полка навесная \"Милан\"",
+      "quantity": 1,
+      "price": 190000,
+      "configuration": null
+    },
+    {
+      "id": "PRODmahyhf9dNUY69",
+      "name": "Кровать \"Габриэлла\" с ПМ (160 см)",
+      "quantity": 1,
+      "price": 4900000,
+      "configuration": null
+    }
+  ],
+  "subtotal": 8680000,
+  "notes": "",
+  "createdAt": "2025-05-11T17:32:00.550Z"
+}

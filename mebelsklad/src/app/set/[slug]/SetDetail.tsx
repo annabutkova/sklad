@@ -2,17 +2,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ProductSet, Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/utils/format";
 import "./style.scss";
 import ProductGallery from "@/components/shop/ProductGallery/ProductGallery";
-import SpecificationRow from "@/components/shop/SpecificationsTable/SpecificationRow";
 import ProductCard from "@/components/shop/ProductCard/ProductCard";
 import SpecificationsTable from "@/components/shop/SpecificationsTable/SpecificationsTable";
-import { jsonDataService } from "@/lib/api/jsonDataService";
 import SetCard from "@/components/shop/SetCard/SetCard";
 
 export interface SetDetailProps {

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jsonDataService } from '@/lib/api/jsonDataService';
+import { setsApi } from '@/lib/api/serverApi';
 
 export async function GET(request: NextRequest) {
   try {
-    const sets = await jsonDataService.getAllProductSets();
+    const sets = await setsApi.getAllSets();
     return NextResponse.json(sets);
   } catch (error) {
     return NextResponse.json(
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const set = await request.json();
-    await jsonDataService.saveProductSet(set);
+    await setsApi.saveSet(set);
     return NextResponse.json({ success: true, set });
   } catch (error) {
     return NextResponse.json(

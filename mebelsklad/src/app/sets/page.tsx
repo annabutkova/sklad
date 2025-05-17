@@ -1,8 +1,8 @@
 // src/app/sets/page.tsx
 import { Metadata } from "next";
 import Link from "next/link";
-import { jsonDataService } from "@/lib/api/jsonDataService";
 import SetCard from "@/components/shop/SetCard/SetCard";
+import { clientApi } from "@/lib/api/clientApi";
 
 export const metadata: Metadata = {
   title: "Furniture Collections | Furniture Shop",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function SetsPage() {
-  const sets = await jsonDataService.getAllProductSets();
+  const sets = await clientApi.getAllProductSets();
 
   return (
     <div className="container mx-auto px-4 py-8">

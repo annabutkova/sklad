@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jsonDataService } from '@/lib/api/jsonDataService';
+import { setsApi } from '@/lib/api/serverApi';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const set = await jsonDataService.getProductSetById(params.id);
-    
+    const set = await setsApi.getSetById(params.id);
+
     if (!set) {
       return NextResponse.json(
         { error: 'Product set not found' },
         { status: 404 }
       );
     }
-    
+
     return NextResponse.json(set);
   } catch (error) {
     return NextResponse.json(
@@ -30,15 +30,15 @@ export async function PUT(
 ) {
   try {
     const set = await request.json();
-    
+
     if (params.id !== set.id) {
       return NextResponse.json(
         { error: 'Product set ID mismatch' },
         { status: 400 }
       );
     }
-    
-    await jsonDataService.saveProductSet(set);
+
+    await setsApi.saveSet(set);
     return NextResponse.json({ success: true, set });
   } catch (error) {
     return NextResponse.json(
@@ -53,7 +53,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    await jsonDataService.deleteProductSet(params.id);
+    await setsApi.deleteSet(params.id);
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(

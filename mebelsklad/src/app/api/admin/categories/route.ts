@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jsonDataService } from '@/lib/api/jsonDataService';
+import { categoriesApi } from '@/lib/api/serverApi';
 
 export async function GET(request: NextRequest) {
   try {
-    const categories = await jsonDataService.getAllCategories();
+    const categories = await categoriesApi.getAllCategories();
     return NextResponse.json(categories);
   } catch (error) {
     return NextResponse.json(
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const category = await request.json();
-    await jsonDataService.saveCategory(category);
+    await categoriesApi.saveCategory(category);
     return NextResponse.json({ success: true, category });
   } catch (error) {
     return NextResponse.json(

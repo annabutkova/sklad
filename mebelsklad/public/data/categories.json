@@ -1,0 +1,197 @@
+[
+  {
+    "id": "CAT001",
+    "name": "Мебель",
+    "slug": "mebel",
+    "description": "Вся мебель для дома",
+    "images": [
+      {
+        "url": "/images/categories/furniture.jpg",
+        "alt": "Мебель",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CAT002",
+    "name": "Спальня",
+    "slug": "spalnya",
+    "parentId": "CAT001",
+    "description": "Мебель для спальни",
+    "images": [
+      {
+        "url": "/uploads/categories/spalnya-1.jpg",
+        "alt": "Спальня",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CAT003",
+    "name": "Кровати в спальню",
+    "slug": "krovati",
+    "parentId": "CAT002",
+    "description": "Комфортные кровати",
+    "images": [
+      {
+        "url": "/uploads/categories/krovati-1.jpg",
+        "alt": "Кровати в спальню",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CAT004",
+    "name": "Шкафы в спальню",
+    "slug": "shkafy",
+    "parentId": "CAT002",
+    "description": "Вместительные шкафы",
+    "images": [
+      {
+        "url": "/uploads/categories/shkafy-1.jpg",
+        "alt": "Шкафы в спальню",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CAT005",
+    "name": "Гостиная",
+    "slug": "gostinaya",
+    "parentId": "CAT001",
+    "description": "Мебель для гостиной",
+    "images": [
+      {
+        "url": "/uploads/categories/gostinaya-1.jpg",
+        "alt": "Гостиная",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmafqirdeX729Y",
+    "name": "Прикроватные тумбы",
+    "slug": "tumby",
+    "parentId": "CAT002",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/tumby-1.jpg",
+        "alt": "Прикроватные тумбы",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmafqlpl0LVNP6",
+    "name": "Комоды",
+    "slug": "komody",
+    "parentId": "CAT002",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/komody-1.jpg",
+        "alt": "Комоды",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmags7erjHSG10",
+    "name": "Детская",
+    "slug": "detskaya",
+    "parentId": "CAT001",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/detskie.jpg",
+        "alt": "Детская",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmagsb9r62DTMW",
+    "name": "Кровати в детскую",
+    "slug": "detskie-krovati",
+    "parentId": "CATmags7erjHSG10",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/detskie-krovati.jpg",
+        "alt": "Кровати в детскую",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmaguvtt0INCRA",
+    "name": "Письменные столы",
+    "slug": "pismennye-stoly",
+    "parentId": "CATmags7erjHSG10",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/pismennye-stoly.jpg",
+        "alt": "Письменные столы",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmaguxb8vCEQNS",
+    "name": "Шкафы в детскую",
+    "slug": "shkafy-v-detskuyu",
+    "parentId": "CATmags7erjHSG10",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/shaky-v-detskuyu.jpg",
+        "alt": "Шкафы в детскую",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmagyzi07WI96Q",
+    "name": "Мебель в гостиную",
+    "slug": "mebel-v-gostinuyu",
+    "parentId": "CAT005",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/mebel-v-gostinuyu.jpg",
+        "alt": "Мебель в гостиную",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmah4crea4LJ8M",
+    "name": "Прихожая",
+    "slug": "prihozhaya",
+    "parentId": "CAT001",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/prihozhaya.jpg",
+        "alt": "Прихожая",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "CATmah4e1osUQLXL",
+    "name": "Мебель в прихожую",
+    "slug": "mebel-v-prihozhuyu",
+    "parentId": "CATmah4crea4LJ8M",
+    "description": "",
+    "images": [
+      {
+        "url": "/uploads/categories/mebel-v-prihozhuyu.jpg",
+        "alt": "Мебель в прихожую",
+        "isMain": true
+      }
+    ]
+  }
+]

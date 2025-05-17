@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jsonDataService } from '@/lib/api/jsonDataService';
+import { categoriesApi } from '@/lib/api/serverApi';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const categories = await jsonDataService.getAllCategories();
+    const categories = await categoriesApi.getAllCategories();
     const category = categories.find(c => c.id === params.id);
 
     if (!category) {
@@ -39,7 +39,7 @@ export async function PUT(
       );
     }
 
-    await jsonDataService.saveCategory(category);
+    await categoriesApi.saveCategory(category);
     return NextResponse.json({ success: true, category });
   } catch (error) {
     return NextResponse.json(
@@ -54,7 +54,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    await jsonDataService.deleteCategory(params.id);
+    await categoriesApi.deleteCategory(params.id);
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(

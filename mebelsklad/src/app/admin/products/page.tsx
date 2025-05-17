@@ -1,12 +1,12 @@
 // src/app/admin/products/page.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { jsonDataService } from "@/lib/api/jsonDataService";
 import { formatPrice } from "@/lib/utils/format";
+import { categoriesApi, productsApi } from "@/lib/api/serverApi";
 
 export default async function AdminProductsPage() {
-  const products = await jsonDataService.getAllProducts();
-  const categories = await jsonDataService.getAllCategories();
+  const products = await productsApi.getAllProducts();
+  const categories = await categoriesApi.getAllCategories();
 
   // Create a map of category IDs to names for easy lookup
   const categoryMap = categories.reduce((map, category) => {

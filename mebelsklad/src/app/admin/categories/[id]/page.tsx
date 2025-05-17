@@ -1,15 +1,13 @@
 // src/app/admin/categories/[id]/page.tsx
-
-"use client"
 import { notFound } from 'next/navigation';
-import { jsonDataService } from '@/lib/api/jsonDataService';
 import CategoryForm from '@/components/admin/CategoryForm';
 
 import { useParams } from 'next/navigation';
+import { categoriesApi } from '@/lib/api/serverApi';
 
 export default async function EditCategoryPage() {
   const params = useParams();
-  const categories = await jsonDataService.getAllCategories();
+  const categories = await categoriesApi.getAllCategories();
   const category = categories.find(c => c.id === params.id);
 
   if (!category) {

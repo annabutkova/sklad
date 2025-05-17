@@ -1,9 +1,9 @@
 // src/app/cart/page.tsx
 import { Metadata } from 'next';
-import { jsonDataService } from '@/lib/api/jsonDataService';
 import CartContents from './CartContents';
 import "./style.scss";
 import Link from 'next/link';
+import { clientApi } from '@/lib/api/clientApi';
 
 export const metadata: Metadata = {
   title: 'Корзина | Mebelsklad',
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CartPage() {
-  const products = await jsonDataService.getAllProducts();
-  const sets = await jsonDataService.getAllProductSets();
+  const products = await clientApi.getAllProducts();
+  const sets = await clientApi.getAllProductSets();
 
   return (
     <div className="main">
