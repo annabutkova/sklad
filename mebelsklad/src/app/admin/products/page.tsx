@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils/format";
-import { categoriesApi, productsApi } from "@/lib/api/serverApi";
+import { categoriesApi, productsApi } from "@/lib/api/mongoApi";
 
 export default async function AdminProductsPage() {
   const products = await productsApi.getAllProducts();
@@ -73,6 +73,8 @@ export default async function AdminProductsPage() {
                           className="h-10 w-10 rounded object-cover"
                           src={product.images[0].url}
                           alt={product.name}
+                          width={100}
+                          height={80}
                         />
                       ) : (
                         <div className="h-10 w-10 rounded bg-gray-200"></div>

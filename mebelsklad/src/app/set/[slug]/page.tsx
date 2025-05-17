@@ -2,12 +2,11 @@
 import { notFound } from 'next/navigation';
 import SetDetail, { SetDetailProps } from './SetDetail';
 import "./style.scss";
-import { clientApi } from '@/lib/api/clientApi';
-
+import { productsApi, setsApi } from '@/lib/api/mongoApi';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const set = await clientApi.getProductSetBySlug(paramsData.slug);
+  const set = await setsApi.getSetBySlug(paramsData.slug);
 
   if (!set) {
     return {
@@ -23,17 +22,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function SetPage({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const set = await clientApi.getProductSetBySlug(paramsData.slug);
+  const set = await setsApi.getSetBySlug(paramsData.slug);
 
   if (!set) {
     notFound();
   }
 
   // Get all products to have full product details
-  const products = await clientApi.getAllProducts();
+  const products = await productsApi.getAllProducts();
 
-  const relatedProducts = await clientApi.getProductsByCollection(set.collection);
-  const relatedSets = await clientApi.getProductSetsByCollection(set.collection);
+  const relatedProducts = await productsApi.getProductsByCollection(set.collection);
+  const relatedSets = await setsApi.getSetsByCollection(set.collection);
 
   // Filter products to only include those in the set
   const setProducts = set.items

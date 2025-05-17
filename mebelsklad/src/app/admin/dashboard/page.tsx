@@ -1,6 +1,6 @@
 // src/app/admin/dashboard/page.tsx
 import Link from 'next/link';
-import { categoriesApi, productsApi, setsApi } from '@/lib/api/serverApi';
+import { categoriesApi, productsApi, setsApi } from '@/lib/api/mongoApi';
 
 export default async function AdminDashboard() {
   const products = await productsApi.getAllProducts();

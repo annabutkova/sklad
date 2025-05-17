@@ -1,6 +1,6 @@
 // src/app/admin/products/new/page.tsx
 import ProductForm from '@/components/admin/ProductForm';
-import { categoriesApi } from '@/lib/api/serverApi';
+import { categoriesApi } from '@/lib/api/mongoApi';
 
 export default async function NewProductPage() {
   const categories = await categoriesApi.getAllCategories();

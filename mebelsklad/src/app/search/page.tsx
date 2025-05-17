@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import ProductCard from '@/components/shop/ProductCard/ProductCard';
-import { clientApi } from '@/lib/api/clientApi';
+import { productsApi, setsApi } from '@/lib/api/mongoApi';
 
 interface SearchPageProps {
   searchParams: {
@@ -38,8 +38,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   }
 
   // Get all products
-  const products = await clientApi.getAllProducts();
-  const sets = await clientApi.getAllProductSets();
+  const products = await productsApi.getAllProducts();
+  const sets = await setsApi.getAllSets();
 
   // Search in products
   const matchingProducts = products.filter(product => {

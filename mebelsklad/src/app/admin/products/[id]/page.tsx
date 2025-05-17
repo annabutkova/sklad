@@ -1,6 +1,6 @@
 // src/app/admin/products/[id]/page.tsx
 import { notFound } from 'next/navigation';
-import { productsApi, categoriesApi } from '@/lib/api/serverApi';
+import { productsApi, categoriesApi } from '@/lib/api/mongoApi';
 import ProductForm from '@/components/admin/ProductForm';
 
 type Props = {

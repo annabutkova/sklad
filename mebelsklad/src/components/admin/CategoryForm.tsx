@@ -1,19 +1,17 @@
-// src/components/admin/CategoryForm.tsx
 "use client"
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Category } from '@/types';
 import { generateSlug, generateId } from '@/lib/utils/format';
-import React from 'react';
 import { useImageUpload } from '@/hooks/useImageUpload';
-import ImageGallery from './ImageGallery';
-import { updateEntityWithImages } from '@/lib/utils/entityUpdate';
+import ImageGallery from '@/components/admin/ImageGallery';
+import { saveCategory, updateCategory, uploadImages } from '@/lib/api/httpClient';
 
-// Обновленная схема валидации для категорий с images
+// Схема валидации для категорий
 const categorySchema = z.object({
   id: z.string().min(1, "ID is required"),
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -39,11 +37,12 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
     imageFiles,
     imagePreviews,
     isUploading,
+    setIsUploading,
     handleImageSelect,
     handleRemoveImage,
     handleRemovePreview,
     handleSetMainImage,
-    uploadAllImages
+    resetUploadState
   } = useImageUpload({
     initialImages: category?.images || [],
     entityName: category?.name || 'category'
@@ -59,15 +58,13 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
     }
   });
 
-  // Watch the name field to auto-generate slug
-  const name = watch('name');
-
   // Auto-generate slug when name changes (for new categories)
-  React.useEffect(() => {
+  useEffect(() => {
+    const name = watch('name');
     if (name && !category) {
       setValue('slug', generateSlug(name));
     }
-  }, [name, setValue, category]);
+  }, [watch('name'), setValue, category]);
 
   // Handle form submission
   const onSubmit = async (data: CategoryFormValues) => {
@@ -80,51 +77,45 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
         images: images,
       };
 
-      // Save to API
-      const response = await fetch(
-        category
-          ? `/api/admin/categories/${category.id}`
-          : '/api/admin/categories',
-        {
-          method: category ? 'PUT' : 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(completeCategory),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to save category');
+      // Save to MongoDB via API
+      let savedCategory;
+      if (category) {
+        savedCategory = await updateCategory(category.id, completeCategory);
+      } else {
+        savedCategory = await saveCategory(completeCategory);
       }
-
-      // Get the saved category id
-      const savedCategory = await response.json();
-      const categoryId = savedCategory.id || category?.id || data.id;
 
       // Upload images if any new files selected
       if (imageFiles.length > 0) {
         try {
+          setIsUploading(true);
           // Загружаем изображения
-          const folderSlug = 'categories';
-          const uploadedImages = await uploadAllImages(
-            categoryId,
-            data.slug,
-            folderSlug
+          const uploadedImages = await uploadImages(
+            imageFiles,
+            'categories',
+            savedCategory.slug
           );
 
+          // Создаём массив с новыми изображениями
+          const newImages = uploadedImages.map((img, index) => ({
+            url: img.url,
+            alt: savedCategory.name,
+            isMain: index === 0 && images.length === 0
+          }));
+
+          // Объединяем с существующими изображениями
+          const allImages = [...images, ...newImages];
+
           // Обновляем категорию с новыми изображениями
-          if (uploadedImages.length > images.length) {
-            await updateEntityWithImages({
-              entityType: 'category',
-              entityId: categoryId,
-              images: uploadedImages,
-              entityData: completeCategory
-            });
-          }
+          await updateCategory(savedCategory.id, {
+            ...savedCategory,
+            images: allImages
+          });
         } catch (uploadError) {
           console.error('Error uploading images:', uploadError);
           alert('Category saved but failed to upload images. You can upload them later.');
+        } finally {
+          resetUploadState();
         }
       }
 
@@ -256,7 +247,6 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
         />
       </div>
 
-
       {/* Submit button */}
       <div className="flex justify-end">
         <button
@@ -268,7 +258,7 @@ export default function CategoryForm({ category, categories }: CategoryFormProps
         </button>
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isUploading}
           className="bg-blue-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           {isSubmitting ? 'Saving...' : category ? 'Update Category' : 'Create Category'}

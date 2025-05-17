@@ -2,7 +2,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import SetCard from "@/components/shop/SetCard/SetCard";
-import { clientApi } from "@/lib/api/clientApi";
+import { setsApi } from "@/lib/api/mongoApi";
 
 export const metadata: Metadata = {
   title: "Furniture Collections | Furniture Shop",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function SetsPage() {
-  const sets = await clientApi.getAllProductSets();
+  const sets = await setsApi.getAllSets();
 
   return (
     <div className="container mx-auto px-4 py-8">

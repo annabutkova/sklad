@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CheckoutForm from './CheckoutForm';
 import "./style.scss";
 import Link from 'next/link';
-import { clientApi } from '@/lib/api/clientApi';
+import { productsApi } from '@/lib/api/mongoApi';
 
 export const metadata: Metadata = {
   title: 'Checkout | Furniture Shop',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function CheckoutPage() {
   // We'll fetch products and sets to display the order summary
-  const products = await clientApi.getAllProducts();
+  const products = await productsApi.getAllProducts();
 
   return (
     <div className="main">

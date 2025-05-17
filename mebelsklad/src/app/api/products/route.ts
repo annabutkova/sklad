@@ -1,6 +1,6 @@
 // src/app/api/products/route.ts
 import { NextResponse } from 'next/server';
-import { productsApi } from '@/lib/api/serverApi';
+import { productsApi } from '@/lib/api/mongoApi';
 
 export async function GET() {
     try {

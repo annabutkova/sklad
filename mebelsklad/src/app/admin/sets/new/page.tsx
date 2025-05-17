@@ -1,6 +1,6 @@
 // src/app/admin/sets/new/page.tsx
 import SetForm from '@/components/admin/SetForm';
-import { categoriesApi, productsApi } from '@/lib/api/serverApi';
+import { categoriesApi, productsApi } from '@/lib/api/mongoApi';
 
 export default async function NewSetPage() {
   const categories = await categoriesApi.getAllCategories();

@@ -1,5 +1,4 @@
 // src/app/catalog/page.tsx
-"use client";
 import { Suspense } from "react";
 import { Category, Product, ProductSet } from "@/types";
 import ProductCard from "@/components/shop/ProductCard/ProductCard";
@@ -8,7 +7,7 @@ import SortSelector from "@/components/shop/SortSelector/SortSelector";
 import SetCard from "@/components/shop/SetCard/SetCard";
 import "./catalog.scss";
 import { getProductsEnding } from "@/lib/utils/format";
-import { clientApi } from "@/lib/api/clientApi";
+import { categoriesApi, productsApi, setsApi } from "@/lib/api/mongoApi";
 
 interface CatalogPageProps {
   searchParams: {
@@ -26,10 +25,10 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   const sortOption = params.sort || "name-asc";
   const contentType = params.type || "all"; // 'all', 'products', or 'sets'
 
-  const categories = await clientApi.getAllCategories();
-  const categoryTree = await clientApi.getCategoryTree();
-  const allProducts = await clientApi.getAllProducts();
-  const allSets = await clientApi.getAllProductSets();
+  const categories = await categoriesApi.getAllCategories();
+  const categoryTree = await categoriesApi.getCategoryTree();
+  const allProducts = await productsApi.getAllProducts();
+  const allSets = await setsApi.getAllSets();
 
   // No need to filter by type property anymore - we'll use the API functions
   // that already return the correct data types

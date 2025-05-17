@@ -1,6 +1,6 @@
 // src/app/api/sets/route.ts
 import { NextResponse } from 'next/server';
-import { setsApi } from '@/lib/api/serverApi';
+import { setsApi } from '@/lib/api/mongoApi';
 
 export async function GET() {
     try {

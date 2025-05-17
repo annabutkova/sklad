@@ -1,9 +1,11 @@
 // src/app/admin/categories/[id]/page.tsx
+"use client"
+
 import { notFound } from 'next/navigation';
 import CategoryForm from '@/components/admin/CategoryForm';
 
 import { useParams } from 'next/navigation';
-import { categoriesApi } from '@/lib/api/serverApi';
+import { categoriesApi } from '@/lib/api/mongoApi';
 
 export default async function EditCategoryPage() {
   const params = useParams();

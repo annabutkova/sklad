@@ -4532,5 +4532,233 @@
         "isMain": true
       }
     ]
+  },
+  {
+    "id": "PRODmasg2ide8IXK8",
+    "name": "Кровать \"Александрия\" с ПМ (180 см) (Copy)",
+    "slug": "krovat-alexandriya-s-pm-180-sm-copy",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Александрия",
+    "price": 6050000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 197,
+        "height": 109,
+        "depth": 0,
+        "length": 207
+      },
+      "bedSize": "180x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/krovat-alexandriya-s-pm-180-sm.jpg",
+        "alt": "Кровать \"Александрия\" с ПМ (180 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmasg3esaR4HKJ",
+    "name": "Кровать \"Александрия\" с ПМ (180 см) (Copy)",
+    "slug": "krovat-alexandriya-s-pm-180-sm-copy",
+    "categoryIds": [
+      "CAT003"
+    ],
+    "collection": "Александрия",
+    "price": 6050000,
+    "discount": 0,
+    "description": "Элегантная кровать с изысканным дизайном, идеально подходит для классических интерьеров.",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Неоклассика",
+        "color": {
+          "karkas": "Бежевый",
+          "fasad": "",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 197,
+        "height": 109,
+        "depth": 0,
+        "length": 207
+      },
+      "bedSize": "180x200",
+      "content": {
+        "yashiki": 0,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Александрия/krovat-alexandriya-s-pm-180-sm.jpg",
+        "alt": "Кровать \"Александрия\" с ПМ (180 см)",
+        "isMain": true
+      }
+    ]
+  },
+  {
+    "id": "PRODmasg3guuG2LVQ",
+    "name": "Тумба прикроватная \"Денвер\" (Copy)",
+    "slug": "tumba-denver-copy",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Денвер",
+    "price": 220000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 31,
+        "depth": 35,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/tumba-denver.jpg",
+        "alt": "Тумба прикроватная \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/tumba-denver-1.jpg",
+        "alt": "Тумба прикроватная \"Денвер\"",
+        "isMain": false
+      }
+    ]
+  },
+  {
+    "id": "PRODmasg3jd7CJA4V",
+    "name": "Тумба прикроватная \"Денвер\" (Copy) (Copy)",
+    "slug": "tumba-denver-copy-copy",
+    "categoryIds": [
+      "CATmafqirdeX729Y"
+    ],
+    "collection": "Денвер",
+    "price": 220000,
+    "discount": 0,
+    "description": "",
+    "inStock": true,
+    "specifications": {
+      "material": {
+        "karkas": "ЛДСП",
+        "fasad": "ЛДСП",
+        "ruchki": "",
+        "obivka": ""
+      },
+      "style": {
+        "style": "Современный",
+        "color": {
+          "karkas": "Графит серый",
+          "fasad": "Графит серый",
+          "ruchki": "",
+          "obivka": ""
+        }
+      },
+      "dimensions": {
+        "width": 40,
+        "height": 31,
+        "depth": 35,
+        "length": 0
+      },
+      "content": {
+        "yashiki": 1,
+        "polki": 0,
+        "shtanga": 0
+      },
+      "warranty": {
+        "duration": 18,
+        "lifetime": 8,
+        "production": "Россия"
+      }
+    },
+    "features": [],
+    "images": [
+      {
+        "url": "/uploads/Денвер/tumba-denver.jpg",
+        "alt": "Тумба прикроватная \"Денвер\"",
+        "isMain": true
+      },
+      {
+        "url": "/uploads/Денвер/tumba-denver-1.jpg",
+        "alt": "Тумба прикроватная \"Денвер\"",
+        "isMain": false
+      }
+    ]
   }
 ]

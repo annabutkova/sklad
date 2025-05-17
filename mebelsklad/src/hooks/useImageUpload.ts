@@ -1,29 +1,16 @@
+// src/hooks/useImageUpload.ts
 import { useState, useEffect } from 'react';
 import { ProductImage } from '@/types';
 
 interface UseImageUploadOptions {
     initialImages?: ProductImage[];
-    entityName?: string; // 'product', 'set', 'category' и т.д.
-}
-
-interface UseImageUploadResult {
-    images: ProductImage[];
-    setImages: React.Dispatch<React.SetStateAction<ProductImage[]>>;
-    imageFiles: File[];
-    imagePreviews: string[];
-    isUploading: boolean;
-    handleImageSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleRemoveImage: (index: number) => void;
-    handleRemovePreview: (index: number) => void;
-    handleSetMainImage: (index: number) => void;
-    uploadAllImages: (entityId: string, slug: string, folderSlug: string) => Promise<ProductImage[]>;
-    resetUploadState: () => void;
+    entityName?: string;
 }
 
 export function useImageUpload({
     initialImages = [],
     entityName = 'entity'
-}: UseImageUploadOptions = {}): UseImageUploadResult {
+}: UseImageUploadOptions = {}) {
     const [images, setImages] = useState<ProductImage[]>(initialImages);
     const [imageFiles, setImageFiles] = useState<File[]>([]);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
@@ -70,68 +57,10 @@ export function useImageUpload({
         })));
     };
 
-    // Загрузка всех файлов
-    const uploadAllImages = async (
-        entityId: string,
-        slug: string,
-        folderSlug: string
-    ): Promise<ProductImage[]> => {
-        if (imageFiles.length === 0) {
-            return images; // Возвращаем существующие изображения, если новых нет
-        }
-
-        setIsUploading(true);
-
-        try {
-            // Создаём FormData
-            const formData = new FormData();
-            formData.append('folderSlug', folderSlug);
-            formData.append('productSlug', slug);
-
-            // Добавляем все файлы
-            imageFiles.forEach(file => {
-                formData.append('images', file);
-            });
-
-            // Отправляем на сервер
-            const response = await fetch('/api/upload-images', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
-            }
-
-            const data = await response.json();
-
-            // Создаём массив изображений с правильными URL
-            const uploadedImages: ProductImage[] = data.uploadedImages.map(
-                (img: { url: string, filename: string }, index: number) => ({
-                    url: img.url,
-                    alt: entityName, // Можно использовать название сущности или другое значение
-                    isMain: index === 0 && images.length === 0
-                })
-            );
-
-            // Объединяем с существующими изображениями
-            const allImages = [...images, ...uploadedImages];
-            setImages(allImages);
-            return allImages;
-        } catch (error) {
-            console.error('Error uploading images:', error);
-            throw error;
-        } finally {
-            setIsUploading(false);
-            resetUploadState();
-        }
-    };
-
     // Сброс состояния загрузки
     const resetUploadState = () => {
-        // Очищаем файлы после загрузки
+        setIsUploading(false);
         setImageFiles([]);
-        // Освобождаем URL объекты для превью
         imagePreviews.forEach(url => URL.revokeObjectURL(url));
         setImagePreviews([]);
     };
@@ -142,11 +71,11 @@ export function useImageUpload({
         imageFiles,
         imagePreviews,
         isUploading,
+        setIsUploading,
         handleImageSelect,
         handleRemoveImage,
         handleRemovePreview,
         handleSetMainImage,
-        uploadAllImages,
         resetUploadState
     };
 }

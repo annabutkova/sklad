@@ -1,7 +1,7 @@
 // src/app/admin/sets/duplicate/[id]/page.tsx
 import { notFound, redirect } from "next/navigation";
 import { generateId } from "@/lib/utils/format";
-import { setsApi } from "@/lib/api/serverApi";
+import { setsApi } from "@/lib/api/mongoApi";
 
 type Props = {
   params: { id: string };

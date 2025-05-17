@@ -20,9 +20,9 @@ export default function RootLayout({
     <html lang="ru">
       <body>
         <CartProvider>
-            <Header />
-            <>{children}</>
-            <Footer />
+          <Header />
+          <>{children}</>
+          <Footer />
         </CartProvider>
       </body>
     </html>

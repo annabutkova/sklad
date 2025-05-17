@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { productsApi } from '@/lib/api/serverApi';
+import { productsApi } from '@/lib/api/mongoApi';
 
 export async function GET(
   request: NextRequest,

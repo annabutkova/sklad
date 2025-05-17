@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import ProductCard from "@/components/shop/ProductCard/ProductCard";
 import HomeSlider from "@/components/home/HomeSlider";
-import { clientApi } from "@/lib/api/clientApi";
+import { categoriesApi, productsApi, setsApi } from "@/lib/api/mongoApi";
 
 export const metadata: Metadata = {
   title: "Мебель Склад | Готовая мебель из России",
@@ -59,15 +59,15 @@ const advantages = [
 ];
 
 export default async function Home() {
-  const products = await clientApi.getAllProducts();
-  const sets = await clientApi.getAllProductSets();
-  const categories = await clientApi.getAllCategories();
+  const products = await productsApi.getAllProducts();
+  const sets = await setsApi.getAllSets();
+  const categories = await categoriesApi.getAllCategories();
 
   // No need to filter by type since the getAllProducts and getAllProductSets
   // already return the correct data types
 
   // Get top-level categories for furniture sets (Спальня, Детская, etc.)
-  const setCategories = await clientApi.getSetCategories();
+  const setCategories = await setsApi.getSetCategories();
 
   // Get product-specific categories (Кровати, Шкафы, etc.)
   const productCategories = categories.filter(

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CartContents from './CartContents';
 import "./style.scss";
 import Link from 'next/link';
-import { clientApi } from '@/lib/api/clientApi';
+import { productsApi, setsApi } from '@/lib/api/mongoApi';
 
 export const metadata: Metadata = {
   title: 'Корзина | Mebelsklad',
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CartPage() {
-  const products = await clientApi.getAllProducts();
-  const sets = await clientApi.getAllProductSets();
+  const products = await productsApi.getAllProducts();
+  const sets = await setsApi.getAllSets();
 
   return (
     <div className="main">

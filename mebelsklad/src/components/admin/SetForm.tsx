@@ -1,4 +1,3 @@
-// src/components/admin/SetForm.tsx
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -6,11 +5,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Product, ProductSet, Category, ProductImage, SetItem, Collection } from '@/types';
+import { Product, ProductSet, Category, ProductImage, Collection } from '@/types';
 import { generateSlug, generateId, formatPrice } from '@/lib/utils/format';
 import { useImageUpload } from '@/hooks/useImageUpload';
-import { updateEntityWithImages } from '@/lib/utils/entityUpdate';
-import ImageGallery from './ImageGallery';
+import ImageGallery from '@/components/admin/ImageGallery';
+import { saveSet, updateSet, uploadImages } from '@/lib/api/httpClient';
 
 // Define validation schema for product sets
 const productSetSchema = z.object({
@@ -62,31 +61,36 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Используем хук для управления изображениями
   const {
     images,
-    setImages,
     imageFiles,
     imagePreviews,
     isUploading,
+    setIsUploading,
     handleImageSelect,
     handleRemoveImage,
     handleRemovePreview,
     handleSetMainImage,
-    uploadAllImages
+    resetUploadState
   } = useImageUpload({
     initialImages: productSet?.images || [],
     entityName: productSet?.name || 'set'
   });
 
   // State for managing set items
-  const [selectedItems, setSelectedItems] = useState<SetItem[]>(
-    productSet?.items || []
-  );
+  const [selectedItems, setSelectedItems] = useState<Array<{
+    productId: string;
+    defaultQuantity: number;
+    minQuantity: number;
+    maxQuantity: number;
+    required: boolean;
+  }>>(productSet?.items || []);
 
   // Search functionality
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Collection filter - важно: инициализируем из productSet, если он есть
+  // Collection filter
   const [selectedCollection, setSelectedCollection] = useState<string>(
     productSet?.collection || ''
   );
@@ -94,7 +98,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
   // Calculate total price based on selected items and quantities
   const [calculatedPrice, setCalculatedPrice] = useState<number>(0);
 
-  // Set up form with react-hook-form
+  // Setup form with react-hook-form
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProductSetFormValues>({
     resolver: zodResolver(productSetSchema),
     defaultValues: productSet ? {
@@ -157,11 +161,9 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
     }
   });
 
-  // Watch values for auto-calculations
-  const name = watch('name');
-
   // Get all Collection enum values for the select dropdown
   const collectionOptions = Object.values(Collection);
+
   // Initialize collection from productSet
   useEffect(() => {
     // Initialize collection from existing set if available
@@ -176,10 +178,11 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
 
   // Auto-generate slug when name changes (for new sets)
   useEffect(() => {
-    if (name && !productSet) {
+    const name = watch('name');
+    if (name && !productSet && !isDuplicate) {
       setValue('slug', generateSlug(name));
     }
-  }, [name, setValue, productSet]);
+  }, [watch('name'), setValue, productSet, isDuplicate]);
 
   // Pre-select all products from the same collection when collection changes
   useEffect(() => {
@@ -273,7 +276,6 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
     setValue('collection', value);
   };
 
-
   // Handle form submission
   const onSubmit = async (data: ProductSetFormValues) => {
     setIsSubmitting(true);
@@ -300,13 +302,14 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         setIsSubmitting(false);
         return;
       }
+
       // Make sure collection is properly set
       let finalCollection = data.collection;
       if (!finalCollection && collectionOptions.length > 0) {
         finalCollection = collectionOptions[0];
       }
 
-      // Create the complete product set object
+      // Create the complete set object
       const completeSet: ProductSet = {
         ...data,
         categoryIds: data.categoryIds,
@@ -317,63 +320,55 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
         inStock: true,
       };
 
-      console.log('Сохраняю набор с изображениями:', completeSet.images);
-
-      // Save to API
-      const response = await fetch(
-        productSet
-          ? `/api/admin/sets/${productSet.id}`
-          : '/api/admin/sets',
-        {
-          method: productSet ? 'PUT' : 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(completeSet),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to save product set');
+      // Save to MongoDB via API
+      let savedSet;
+      if (productSet) {
+        savedSet = await updateSet(productSet.id, completeSet);
+      } else {
+        savedSet = await saveSet(completeSet);
       }
-
-      // Get the saved product id
-      const savedSet = await response.json();
-      const setId = savedSet.id || productSet?.id || data.id;
 
       // Upload images if any new files selected
       if (imageFiles.length > 0) {
         try {
+          setIsUploading(true);
           // Загружаем изображения
-          const folderSlug = finalCollection || 'products';
-          const uploadedImages = await uploadAllImages(
-            setId,
-            data.slug,
-            folderSlug
+          const folderSlug = finalCollection || 'sets';
+          const uploadedImages = await uploadImages(
+            imageFiles,
+            folderSlug,
+            savedSet.slug
           );
 
-          // Обновляем продукт с новыми изображениями
-          if (uploadedImages.length > images.length) {
-            await updateEntityWithImages({
-              entityType: 'set',
-              entityId: setId,
-              images: uploadedImages,
-              entityData: completeSet
-            });
-          }
+          // Создаём массив с новыми изображениями
+          const newImages = uploadedImages.map((img, index) => ({
+            url: img.url,
+            alt: savedSet.name,
+            isMain: index === 0 && images.length === 0
+          }));
+
+          // Объединяем с существующими изображениями
+          const allImages = [...images, ...newImages];
+
+          // Обновляем набор с новыми изображениями
+          await updateSet(savedSet.id, {
+            ...savedSet,
+            images: allImages
+          });
         } catch (uploadError) {
           console.error('Error uploading images:', uploadError);
-          alert('Product saved but failed to upload images. You can upload them later.');
+          alert('Set saved but failed to upload images. You can upload them later.');
+        } finally {
+          resetUploadState();
         }
       }
-
 
       // Redirect to sets list
       router.push('/admin/sets');
       router.refresh();
     } catch (error) {
-      console.error('Error saving product set:', error);
-      alert('Failed to save product set. Please try again.');
+      console.error('Error saving set:', error);
+      alert('Failed to save set. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -414,14 +409,7 @@ export default function SetForm({ productSet, categories, products }: SetFormPro
             </label>
             <input
               type="text"
-              {...register('name', {
-                onChange: (e) => {
-                  if (!productSet || isDuplicate) {
-                    const newName = e.target.value;
-                    setValue('slug', generateSlug(newName));
-                  }
-                }
-              })}
+              {...register('name')}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
             {errors.name && (

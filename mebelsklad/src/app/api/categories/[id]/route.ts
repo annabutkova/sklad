@@ -1,6 +1,6 @@
 // src/app/api/categories/[id]/route.ts
 import { NextResponse } from 'next/server';
-import { categoriesApi } from '@/lib/api/serverApi';
+import { categoriesApi } from '@/lib/api/mongoApi';
 
 export async function GET(
     request: Request,

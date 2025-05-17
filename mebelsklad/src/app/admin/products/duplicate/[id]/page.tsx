@@ -1,6 +1,6 @@
 // src/app/admin/products/duplicate/[id]/page.tsx
 import { notFound, redirect } from 'next/navigation';
-import { productsApi } from '@/lib/api/serverApi';
+import { productsApi } from '@/lib/api/mongoApi';
 import { generateId } from '@/lib/utils/format';
 
 type Props = {

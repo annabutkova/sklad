@@ -8,11 +8,11 @@ import './style.scss';
 import ProductGallery from '@/components/shop/ProductGallery/ProductGallery';
 import SpecificationsTable from '@/components/shop/SpecificationsTable/SpecificationsTable';
 import SetCard from '@/components/shop/SetCard/SetCard';
-import { clientApi } from '@/lib/api/clientApi';
+import { categoriesApi, productsApi, setsApi } from '@/lib/api/mongoApi';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const product = await clientApi.getProductBySlug(paramsData.slug);
+  const product = await productsApi.getProductBySlug(paramsData.slug);
 
   if (!product) {
     return {
@@ -28,23 +28,23 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const paramsData = await params;
-  const product = await clientApi.getProductBySlug(paramsData.slug);
+  const product = await productsApi.getProductBySlug(paramsData.slug);
 
   if (!product) {
     notFound();
   }
 
   // Get category information
-  const categories = await clientApi.getAllCategories();
+  const categories = await categoriesApi.getAllCategories();
   const productCategories = categories.filter(c =>
     product.categoryIds && product.categoryIds.includes(c.id)
   );
 
   // Get related products
-  const relatedProducts = await clientApi.getProductsByCollection(product.collection);
-  const allProducts = await clientApi.getAllProducts();
+  const relatedProducts = await productsApi.getProductsByCollection(product.collection);
+  const allProducts = await productsApi.getAllProducts();
 
-  const relatedSets = await clientApi.getProductSetsByCollection(product.collection);
+  const relatedSets = await setsApi.getSetsByCollection(product.collection);
 
   const colors = [
     product.specifications?.style?.color?.karkas,

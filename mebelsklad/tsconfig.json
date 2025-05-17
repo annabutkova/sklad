@@ -33,7 +33,8 @@
     "**/*.tsx",
     "mebelsklad/.next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/lib/db/mongodb.оы"
   ],
   "exclude": [
     "node_modules"

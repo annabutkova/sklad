@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils/format";
 import { Product, ProductSet } from "@/types";
-import { categoriesApi, productsApi, setsApi } from "@/lib/api/serverApi";
+import { categoriesApi, productsApi, setsApi } from "@/lib/api/mongoApi";
 
 // Helper function to calculate set price from items
 const calculateSetPrice = (set: ProductSet, products: Product[]) => {

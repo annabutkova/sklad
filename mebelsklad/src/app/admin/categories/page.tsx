@@ -1,7 +1,7 @@
 // src/app/admin/categories/page.tsx
 import Link from 'next/link';
 import { Category } from '@/types';
-import { categoriesApi } from '@/lib/api/serverApi';
+import { getAllCategories, getCategoryTree } from '@/lib/actions/serverActions';
 
 // Helper function to render a category with indentation based on depth
 function CategoryRow({
@@ -57,8 +57,8 @@ function CategoryRow({
 }
 
 export default async function AdminCategoriesPage() {
-  const flatCategories = await categoriesApi.getAllCategories();
-  const categories = await categoriesApi.getCategoryTree();
+  const flatCategories = await getAllCategories();
+  const categories = await getCategoryTree();
 
   // Create a map of category IDs to names for easy lookup
   const categoryMap = flatCategories.reduce((map, category) => {

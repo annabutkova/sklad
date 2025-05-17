@@ -1,7 +1,7 @@
 // src/app/admin/sets/[id]/page.tsx
 import { notFound } from 'next/navigation';
 import SetForm from '@/components/admin/SetForm';
-import { categoriesApi, productsApi, setsApi } from '@/lib/api/serverApi';
+import { categoriesApi, productsApi, setsApi } from '@/lib/api/mongoApi';
 
 
 type Props = {
